@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-BeginPackage["GenMDS`"]
+BeginPackage["MDS`"]
 
 MDS::usage = 
 	"MDS[delta, dim] performs MDS in 2 or 3 dimensions on the given distance matrix.\nMDS[delta, dim, accuracy] does the same, with a given argument to N."
@@ -10,7 +10,7 @@ MDS::dimerr =
 
 Begin["`Private`"]
 
-MDS[delta_List?MatrixQ, dim_Integer?Positive, accuracy_Integer: 20]:=
+MDS[delta_List?MatrixQ, dim_Integer?Positive, accuracy_Integer: 15]:=
 	Module[{n, deltasq, deltatotals, sumOfDelta, bMatr, eigenvals, eigenvecs, solpts},
 		n = Length[delta];
 		

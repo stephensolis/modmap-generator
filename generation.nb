@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     69681,       1312]
-NotebookOptionsPosition[     68180,       1263]
-NotebookOutlinePosition[     68568,       1280]
-CellTagsIndexPosition[     68525,       1277]
+NotebookDataLength[     70214,       1322]
+NotebookOptionsPosition[     68712,       1273]
+NotebookOutlinePosition[     69100,       1290]
+CellTagsIndexPosition[     69057,       1287]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -38,8 +38,9 @@ Cell[BoxData[
      RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"Needs", "[", "\"\<GenCGR`\>\"", "]"}], ";", " ", 
-    RowBox[{"Needs", "[", "\"\<GenDistances`\>\"", "]"}], ";"}], 
+    RowBox[{"Needs", "[", "\"\<CGR`\>\"", "]"}], ";", " ", 
+    RowBox[{"Needs", "[", "\"\<CPUDistances`\>\"", "]"}], ";", " ", 
+    RowBox[{"Needs", "[", "\"\<GPUDistances`\>\"", "]"}], ";"}], 
    "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"(*", " ", "directories", " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
@@ -62,7 +63,7 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{
         RowBox[{"NotebookDirectory", "[", "]"}], ",", " ", "\"\<output\>\""}],
-        "}"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+        "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", " ", 
     RowBox[{"generation", " ", "settings"}], " ", "*)"}], "\n", 
    RowBox[{
@@ -74,9 +75,9 @@ Cell[BoxData[
       " ", "-", " ", 
      RowBox[{
       RowBox[{"note", " ", "~", "6.5"}], "MB", " ", "RAM", " ", "required", 
-      " ", "per", " ", "CGR"}]}], "*)"}], "\n", "\n", 
+      " ", "per", " ", "CGR"}]}], "*)"}], "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", " ", 
-    RowBox[{"CGR", " ", "settings"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"CGR", " ", "settings"}], " ", "*)"}], "\n", 
    RowBox[{
     RowBox[{"k", " ", "=", " ", "9"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
@@ -92,7 +93,7 @@ Cell[BoxData[
     RowBox[{"accuracy", " ", "=", " ", "15"}], ";"}], " ", 
    RowBox[{"(*", 
     RowBox[{"the", " ", "argument", " ", "to", " ", 
-     RowBox[{"N", "[", "]"}]}], "*)"}], "\n", "\[IndentingNewLine]", 
+     RowBox[{"N", "[", "]"}]}], "*)"}], "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", " ", 
     RowBox[{"descriptors", " ", "settings"}], " ", "*)"}], 
    "\[IndentingNewLine]", 
@@ -127,39 +128,43 @@ Cell[BoxData[
     RowBox[{"cpuKernels", " ", "=", " ", 
      RowBox[{"LaunchKernels", "[", "$ProcessorCount", "]"}]}], ";"}], " ", 
    RowBox[{"(*", " ", 
-    RowBox[{"cpu", " ", "kernels"}], " ", "*)"}], "\n", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"ParallelNeeds", "[", "\"\<GenCGR`\>\"", "]"}], ";", " ", 
-    RowBox[{"ParallelNeeds", "[", "\"\<GenDistances`\>\"", "]"}], ";"}], "\n", 
+    RowBox[{"cpu", " ", "kernels"}], " ", "*)"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"gpu", " ", "setup"}], "*)"}], "\n", 
    RowBox[{
     RowBox[{"MapIndexed", "[", 
      RowBox[{
       RowBox[{
-       RowBox[{"ParallelEvaluate", "[", 
+       RowBox[{"ParallelEvaluate", "[", "\n", "\t", 
         RowBox[{
          RowBox[{
-          RowBox[{"isCUDAkernel", " ", "=", " ", "True"}], ";", " ", 
+          RowBox[{"Needs", "[", "\"\<GPUDistances`\>\"", "]"}], ";", " ", 
+          "\n", "\t", 
+          RowBox[{"isCUDAkernel", " ", "=", " ", "True"}], ";", " ", "\n", 
+          "\t", 
           RowBox[{"$CUDADevice", " ", "=", " ", 
-           RowBox[{"First", "@", "#2"}]}], ";"}], ",", " ", "#1"}], "]"}], 
-       "&"}], ",", " ", "cudaKernels"}], "]"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"gpu", " ", "setup"}], "*)"}], "\n", 
-   RowBox[{
-    RowBox[{"ParallelEvaluate", "[", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"isCUDAkernel", " ", "=", " ", "False"}], ";"}], ",", " ", 
-      "cpuKernels"}], "]"}], ";"}], " ", 
+           RowBox[{"First", "@", "#2"}]}], ";"}], "\n", ",", " ", "#1"}], 
+        "]"}], "&"}], ",", " ", "cudaKernels"}], "]"}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{"cpu", " ", "setup"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"ParallelEvaluate", "[", "\n", "\t", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"isCUDAkernel", " ", "=", " ", "False"}], ";"}], "\n", ",", 
+      " ", "cpuKernels"}], "]"}], ";"}], "\n", 
+   RowBox[{"(*", 
+    RowBox[{"common", " ", "setup"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"ParallelNeeds", "[", "\"\<CGR`\>\"", "]"}], ";", " ", 
+    RowBox[{"ParallelNeeds", "[", "\"\<CPUDistances`\>\"", "]"}], ";"}], " ", 
+   "\n", 
    RowBox[{
     RowBox[{"DistributeDefinitions", "[", 
      RowBox[{
      "fastaDir", ",", " ", "workDir", ",", " ", "k", ",", " ", "cgrOrder", 
       ",", " ", "accuracy", ",", " ", "bins", ",", " ", "windowsizes", ",", 
-      " ", "steps"}], "]"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"common", " ", "variables"}], "*)"}]}]}]], "Code",
+      " ", "steps"}], "]"}], ";"}]}]}]], "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  CellChangeTimes->{
   3.6256172004702168`*^9, {3.62562306001648*^9, 3.6256230609383593`*^9}, {
@@ -203,7 +208,10 @@ Cell[BoxData[
    3.6399221165300255`*^9}, {3.639922191466833*^9, 3.6399221960532413`*^9}, {
    3.6399222388557596`*^9, 3.639922332423728*^9}, {3.639922504462894*^9, 
    3.6399225186961193`*^9}, 3.639923958957144*^9, {3.6399240156867375`*^9, 
-   3.6399241654345665`*^9}, {3.6399242480681143`*^9, 3.6399242694073524`*^9}}]
+   3.6399241654345665`*^9}, {3.6399242480681143`*^9, 
+   3.6399242694073524`*^9}, {3.641049027555664*^9, 3.641049058725586*^9}, {
+   3.641049406482422*^9, 3.6410494669560547`*^9}, {3.6410495791640625`*^9, 
+   3.641049613169922*^9}, {3.6410561461708984`*^9, 3.6410561663896484`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -271,7 +279,7 @@ Cell[BoxData[{
                     RowBox[{"Except", "[", "cgrOrder", "]"}], "->", 
                     "\"\<\>\""}]}], "]"}]}], ";", "\n", "\t\t\t\t", "\n", 
                   "\t\t\t", 
-                  RowBox[{"CGRgrayscale", "[", 
+                  RowBox[{"FCGR", "[", 
                    RowBox[{"seq", ",", " ", "cgrOrder", ",", " ", "k"}], 
                    "]"}]}], "\n", "\t\t", ")"}], "&"}], ",", " ", "files"}], 
               "]"}]}], ";", "\n", "\n", "\t\t", 
@@ -448,7 +456,8 @@ Cell[BoxData[{
    3.6338824243577356`*^9, 3.633882544165946*^9, {3.633886049257115*^9, 
    3.633886050239917*^9}, {3.6338922502122755`*^9, 3.6338922652215023`*^9}, {
    3.6340771581216617`*^9, 3.6340771726904945`*^9}, {3.634082674345172*^9, 
-   3.63408267466719*^9}, {3.6399243528949013`*^9, 3.639924393472974*^9}}]
+   3.63408267466719*^9}, {3.6399243528949013`*^9, 3.639924393472974*^9}, {
+   3.6410504522285156`*^9, 3.6410504528603516`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -581,7 +590,7 @@ Cell[BoxData[{
                 RowBox[{"N", "[", 
                  RowBox[{
                   RowBox[{"1", " ", "-", " ", 
-                   RowBox[{"CUDASSIM", "[", 
+                   RowBox[{"GPUSSIM", "[", 
                     RowBox[{"#1", ",", " ", "#2"}], "]"}]}], ",", " ", 
                   "accuracy"}], "]"}], "&"}], ",", " ", "cgrBlock1", ",", " ",
                 "cgrBlock2", ",", " ", "1"}], "]"}]}], ";"}], "\n", "\t\t", 
@@ -795,7 +804,8 @@ Cell[BoxData[{
    3.6338830237263885`*^9, 3.6338830243347893`*^9}, {3.6338835622355537`*^9, 
    3.633883667566939*^9}, {3.6338854094563904`*^9, 3.6338854645868874`*^9}, {
    3.6338860717055545`*^9, 3.6338860727819567`*^9}, {3.633892271414713*^9, 
-   3.633892272085514*^9}, {3.639924440710658*^9, 3.6399244877943563`*^9}}]
+   3.633892272085514*^9}, {3.639924440710658*^9, 3.6399244877943563`*^9}, {
+   3.6410500702998047`*^9, 3.6410500705302734`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1261,11 +1271,11 @@ nucleotide&rettype=gb&retmode=xml&id=\>\""}], ";"}], "\n", "\n",
    3.6399247822961044`*^9, 3.6399247855097103`*^9}}]
 }, Closed]]
 },
-WindowSize->{1440, 818},
+WindowSize->{1280, 942},
 WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 ShowSelection->True,
 ShowGroupOpener->True,
-FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+FrontEndVersion->"10.1 for Microsoft Windows (32-bit) (March 23, 2015)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -1282,34 +1292,34 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 418, 6, 49, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[1000, 30, 8196, 175, 693, "Code",
+Cell[1000, 30, 8629, 183, 873, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[9233, 210, 523, 7, 41, "Subsection",
+Cell[9666, 218, 523, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[9759, 219, 13952, 231, 693, "Code",
+Cell[10192, 227, 13998, 232, 693, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[23748, 455, 507, 7, 41, "Subsection",
+Cell[24227, 464, 507, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[24258, 464, 18618, 333, 1293, "Code",
+Cell[24737, 473, 18671, 334, 1293, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[42913, 802, 490, 7, 41, "Subsection",
+Cell[43445, 812, 490, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[43406, 811, 16197, 280, 813, "Code",
+Cell[43938, 821, 16197, 280, 813, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[59640, 1096, 557, 8, 41, "Subsection",
+Cell[60172, 1106, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[60200, 1106, 7964, 154, 633, "Code",
+Cell[60732, 1116, 7964, 154, 633, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]

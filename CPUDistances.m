@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-BeginPackage["GenDistances`", {"CUDALink`", "OpenCLLink`"}]
+BeginPackage["CPUDistances`"]
 
 Descriptor::usage = 
 	"Descriptor[img, winsizes, steps, histbins] gives the descriptor of a matrix, given the windowsizes, windowsteps and histogram bins"
@@ -9,10 +9,6 @@ Descriptor::lengtherr =
 
 SSIM::usage = 
 	"SSIM[img1, img2] gives the Structural Similarity distance between two images"
-CUDASSIM::usage = 
-	"CUDASSIM[img1, img2] gives the Structural Similarity distance between two images, using CUDA"
-OpenCLSSIM::usage = 
-	"OpenCLSSIM[img1, img2] gives the Structural Similarity distance between two images, using OpenCL"
 
 ApproxInfoDist::usage = 
 	"ApproxInfoDist[img1, img2] gives the Approximate Information distance between two images"
@@ -72,36 +68,6 @@ SSIM = Compile[{{img1, _Integer, 2}, {img2, _Integer, 2}},
 		Mean[Mean[ssimmap]]
 	]
 , RuntimeOptions -> "Speed"];
-
-CUDASSIMkernel = 
-	CUDAFunctionLoad[{FileNameJoin[{"gpu_kernels", "ssim.cu"}]}, "ssim", 
-						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Double", 2, "Output"}, "Integer32"}, 
-						{16, 16}];
-
-CUDASSIM[img1_, img2_]:=
-	Module[{ssimmap}, 
-		ssimmap = CUDAMemoryAllocate["Double", {Length@img1 - 10, Length@img1 - 10}];
-		
-		CUDASSIMkernel[img1, img2, ssimmap, Length@img1];
-		
-		ssimmap = CUDAMemoryGet[ssimmap];
-		Return[Mean[Mean[ssimmap]]];
-	];
-
-OpenCLSSIMkernel = 
-	OpenCLFunctionLoad[{FileNameJoin[{"gpu_kernels", "ssim.cl"}]}, "ssim", 
-						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Double", 2, "Output"}, "Integer32"}, 
-						{16, 16}];
-
-OpenCLSSIM[img1_, img2_]:=
-	Module[{ssimmap}, 
-		ssimmap = OpenCLMemoryAllocate["Double", {Length@img1 - 10, Length@img1 - 10}];
-		
-		OpenCLSSIMkernel[img1, img2, ssimmap, Length@img1];
-		
-		ssimmap = OpenCLMemoryGet[ssimmap];
-		Return[Mean[Mean[ssimmap]]];
-	];
 
 ApproxInfoDist[img1_List?MatrixQ, img2_List?MatrixQ]:=
 	Module[{x, y, xy},
