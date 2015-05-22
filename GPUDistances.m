@@ -18,13 +18,13 @@ Begin["`Private`"]
 (* load the kernels *)
 If[CUDAQ[], 
 	CUDASSIMkernel = CUDAFunctionLoad[{FileNameJoin[{"gpu_kernels", "ssim.cu"}]}, "ssim", 
-						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Double", 2, "Output"}, "Integer32"}, 
+						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Float", 1, "Output"}, "Integer32"}, 
 						{16, 16}];
 ];
 
 If[OpenCLQ[],
 	OpenCLSSIMkernel = OpenCLFunctionLoad[{FileNameJoin[{"gpu_kernels", "ssim.cl"}]}, "ssim", 
-						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Double", 2, "Output"}, "Integer32"}, 
+						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Float", 1, "Output"}, "Integer32"}, 
 						{16, 16}];
 ];
 
@@ -35,12 +35,11 @@ CUDASSIM[img1_, img2_]:=
 			Return[$Failed];
 		];
 		
-		ssimmap = CUDAMemoryAllocate["Double", {Length@img1 - 10, Length@img1 - 10}];
+		ssimmap = CUDAMemoryAllocate["Float", (Length@img1 - 10)^2];
 		
 		CUDASSIMkernel[img1, img2, ssimmap, Length@img1];
 		
-		ssimmap = CUDAMemoryGet[ssimmap];
-		Return[Mean[Mean[ssimmap]]];
+		Return[Mean[CUDAMemoryGet[ssimmap]]];
 	];
 
 OpenCLSSIM[img1_, img2_]:=
@@ -50,12 +49,11 @@ OpenCLSSIM[img1_, img2_]:=
 			Return[$Failed];
 		];
 		
-		ssimmap = OpenCLMemoryAllocate["Double", {Length@img1 - 10, Length@img1 - 10}];
+		ssimmap = OpenCLMemoryAllocate["Float", (Length@img1 - 10)^2];
 		
 		OpenCLSSIMkernel[img1, img2, ssimmap, Length@img1];
 		
-		ssimmap = OpenCLMemoryGet[ssimmap];
-		Return[Mean[Mean[ssimmap]]];
+		Return[Mean[OpenCLMemoryGet[ssimmap]]];
 	];
 
 
