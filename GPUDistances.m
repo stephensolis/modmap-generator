@@ -28,7 +28,7 @@ If[OpenCLQ[],
 						{16, 16}];
 ];
 
-CUDASSIM[img1_, img2_]:=
+CUDASSIM[img1_List?MatrixQ, img2_List?MatrixQ]:=
 	Module[{outmem},
 		If[!CUDAQ[],
 			Message[GPUDistances::nocuda];
@@ -39,10 +39,10 @@ CUDASSIM[img1_, img2_]:=
 		
 		CUDASSIMkernel[img1, img2, outmem, Length@img1];
 		
-		Return[Mean[CUDAMemoryGet[outmem]]];
+		Return[CUDATotal[outmem] / ((Length@img1 - 10)^2)];
 	];
 
-OpenCLSSIM[img1_, img2_]:=
+OpenCLSSIM[img1_List?MatrixQ, img2_List?MatrixQ]:=
 	Module[{outmem}, 
 		If[!OpenCLQ[],
 			Message[GPUDistances::noopencl];
