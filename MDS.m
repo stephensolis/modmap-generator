@@ -7,8 +7,12 @@ MDS::usage =
 MDS::dimerr = 
 	"Not enough positive eigenvalues for this dimension"
 	
-RMDS::usage = 
-	"RMDS[delta, dim] calls the cmdscale function in R to perform classical MDS on the given distance matrix and the given number of dimensions."
+RClassicalMDS::usage = 
+	"RClassicalMDS[delta, dim] calls the cmdscale function in R to perform classical MDS on the given distance matrix."
+
+RSMACOFMDS::usage = 
+	"RClassicalMDS[delta, dim] calls the smacofSym function from the smacof package in R to perform metric MDS on the given distance matrix."
+
 
 
 Begin["`Private`"]
@@ -34,14 +38,33 @@ MDS[delta_List?MatrixQ, dim_Integer?Positive, accuracy_Integer: 15]:=
 		Return[solpts];
 	];
 
-RMDS[delta_List?MatrixQ, dim_Integer?Positive]:=
+RClassicalMDS[delta_List?MatrixQ, dim_Integer?Positive]:=
 	Module[{result},
 		InstallR[];
 		
 		RSet["delta", delta];
 		RSet["dim", dim];
 		
-		result = REvaluate["cmdscale(delta, k=dim)"];
+		result = REvaluate["cmdscale(delta, k = dim)"];
+		
+		Return[First@result];
+	];
+
+RSMACOFMDS[delta_List?MatrixQ, dim_Integer?Positive]:=
+	Module[{result},
+		InstallR[];
+		
+		Check[
+			REvaluate["library(smacof)"];
+		,
+			REvaluate["install.packages(\"smacof\")"];
+			REvaluate["library(smacof)"];
+		];
+		
+		RSet["delta", delta];
+		RSet["dim", dim];
+		
+		result = REvaluate["smacofSym(delta, ndim = dim)$conf"];
 		
 		Return[First@result];
 	];
