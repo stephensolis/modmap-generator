@@ -11,8 +11,7 @@ RClassicalMDS::usage =
 	"RClassicalMDS[delta, dim] calls the cmdscale function in R to perform classical MDS on the given distance matrix."
 
 RSMACOFMDS::usage = 
-	"RClassicalMDS[delta, dim] calls the smacofSym function from the smacof package in R to perform metric MDS on the given distance matrix."
-
+	"RSMACOFMDS[delta, dim] calls the smacofSym function from the smacof package in R to perform metric MDS on the given distance matrix."
 
 
 Begin["`Private`"]
