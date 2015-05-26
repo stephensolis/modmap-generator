@@ -29,31 +29,31 @@ If[OpenCLQ[],
 ];
 
 CUDASSIM[img1_, img2_]:=
-	Module[{ssimmap},
+	Module[{outmem},
 		If[!CUDAQ[],
 			Message[GPUDistances::nocuda];
 			Return[$Failed];
 		];
 		
-		ssimmap = CUDAMemoryAllocate["Float", (Length@img1 - 10)^2];
+		outmem = CUDAMemoryAllocate["Float", (Length@img1 - 10)^2];
 		
-		CUDASSIMkernel[img1, img2, ssimmap, Length@img1];
+		CUDASSIMkernel[img1, img2, outmem, Length@img1];
 		
-		Return[Mean[CUDAMemoryGet[ssimmap]]];
+		Return[Mean[CUDAMemoryGet[outmem]]];
 	];
 
 OpenCLSSIM[img1_, img2_]:=
-	Module[{ssimmap}, 
+	Module[{outmem}, 
 		If[!OpenCLQ[],
 			Message[GPUDistances::noopencl];
 			Return[$Failed];
 		];
 		
-		ssimmap = OpenCLMemoryAllocate["Float", (Length@img1 - 10)^2];
+		outmem = OpenCLMemoryAllocate["Float", (Length@img1 - 10)^2];
 		
-		OpenCLSSIMkernel[img1, img2, ssimmap, Length@img1];
+		OpenCLSSIMkernel[img1, img2, outmem, Length@img1];
 		
-		Return[Mean[OpenCLMemoryGet[ssimmap]]];
+		Return[Mean[OpenCLMemoryGet[outmem]]];
 	];
 
 
