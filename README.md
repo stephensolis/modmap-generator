@@ -17,7 +17,7 @@ the following distances:
 - [Descriptors](http://arxiv.org/abs/1503.00162)
 - [Approximate Information Distance](http://arxiv.org/abs/cs/0111054)
 
-Also, SSIM may be accelerated with CUDA and OpenCL.
+The SSIM, Euclidean, and Manhattan distances may be accelerated with CUDA or OpenCL.
 
 Usage
 -----

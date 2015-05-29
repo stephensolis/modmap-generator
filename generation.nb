@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     70214,       1322]
-NotebookOptionsPosition[     68712,       1273]
-NotebookOutlinePosition[     69100,       1290]
-CellTagsIndexPosition[     69057,       1287]
+NotebookDataLength[     74283,       1400]
+NotebookOptionsPosition[     72781,       1351]
+NotebookOutlinePosition[     73169,       1368]
+CellTagsIndexPosition[     73126,       1365]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -509,15 +509,16 @@ Cell[BoxData[{
          RowBox[{"If", "[", 
           RowBox[{
            RowBox[{"i", " ", "\[Equal]", " ", "j"}], ",", " ", "\n", "\t\t\t", 
-           RowBox[{"descrBlock2", " ", "=", " ", "descrBlock1"}], "\n", 
-           "\t\t", ",", "\n", "\t\t\t", 
+           RowBox[{
+            RowBox[{"descrBlock2", " ", "=", " ", "descrBlock1"}], ";"}], 
+           "\n", "\t\t", ",", "\n", "\t\t\t", 
            RowBox[{
             RowBox[{"Get", "[", 
              RowBox[{"\"\<descr-temp_\>\"", " ", "<>", " ", 
               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}],
               "]"}], ";", "\n", "\t\t\t", 
-            RowBox[{"descrBlock2", " ", "=", " ", "descrBlock"}]}]}], "\n", 
-          "\t\t", "]"}], ";", "\n", "\n", "\t\t", 
+            RowBox[{"descrBlock2", " ", "=", " ", "descrBlock"}], ";"}]}], 
+          "\n", "\t\t", "]"}], ";", "\n", "\n", "\t\t", 
          RowBox[{"(*", "descriptors", "*)"}], "\n", "\t\t", 
          RowBox[{"distBlock", " ", "=", " ", 
           RowBox[{"Outer", "[", 
@@ -551,8 +552,9 @@ Cell[BoxData[{
          RowBox[{"If", "[", 
           RowBox[{
            RowBox[{"i", " ", "\[Equal]", " ", "j"}], ",", " ", "\n", "\t\t\t", 
-           RowBox[{"cgrBlock2", " ", "=", " ", "cgrBlock1"}], "\n", "\t\t", 
-           ",", "\n", "\t\t\t", 
+           RowBox[{
+            RowBox[{"cgrBlock2", " ", "=", " ", "cgrBlock1"}], ";"}], "\n", 
+           "\t\t", ",", "\n", "\t\t\t", 
            RowBox[{
             RowBox[{"Get", "[", 
              RowBox[{"\"\<cgrs_\>\"", " ", "<>", " ", 
@@ -579,22 +581,94 @@ Cell[BoxData[{
             "<>", " ", 
             RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}], 
            ",", " ", "distBlock"}], "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"(*", "DSSIM", "*)"}], "\n", "\t\t", 
          RowBox[{"If", "[", 
           RowBox[{"isCUDAkernel", ",", "\n", "\t\t\t", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "code", " ", "for", " ", "a", " ", "CUDA", " ", "kernel"}], " ", 
+            "*)"}], "\n", "\n", "\t\t\t", 
+           RowBox[{"(*", 
+            RowBox[{"load", " ", "CGRs", " ", "into", " ", "GPU"}], "*)"}], 
+           "\n", "\t\t\t", 
            RowBox[{
+            RowBox[{"gpuCGRBlock1", " ", "=", " ", 
+             RowBox[{"CUDAMemoryLoad", " ", "/@", " ", "cgrBlock1"}]}], ";", 
+            "\n", "\t\t\t", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"i", " ", "\[Equal]", " ", "j"}], ",", " ", "\n", 
+              "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"gpuCGRBlock2", " ", "=", " ", "gpuCGRBlock1"}], ";"}],
+               "\n", "\t\t\t", ",", "\n", "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"gpuCGRBlock2", " ", "=", " ", 
+                RowBox[{"CUDAMemoryLoad", " ", "/@", " ", "cgrBlock2"}]}], 
+               ";"}]}], "\n", "\t\t\t", "]"}], ";", "\n", "\n", "\t\t\t", 
+            RowBox[{"(*", "DSSIM", "*)"}], "\n", "\t\t\t", 
             RowBox[{"distBlock", " ", "=", " ", 
              RowBox[{"Outer", "[", 
               RowBox[{
                RowBox[{
-                RowBox[{"N", "[", 
-                 RowBox[{
-                  RowBox[{"1", " ", "-", " ", 
-                   RowBox[{"GPUSSIM", "[", 
-                    RowBox[{"#1", ",", " ", "#2"}], "]"}]}], ",", " ", 
-                  "accuracy"}], "]"}], "&"}], ",", " ", "cgrBlock1", ",", " ",
-                "cgrBlock2", ",", " ", "1"}], "]"}]}], ";"}], "\n", "\t\t", 
-           ",", "\n", "\t\t\t", 
+                RowBox[{"(", 
+                 RowBox[{"1", " ", "-", " ", 
+                  RowBox[{"CUDASSIM", "[", 
+                   RowBox[{"#1", ",", " ", "#2"}], "]"}]}], ")"}], "&"}], ",",
+                " ", "gpuCGRBlock1", ",", " ", "gpuCGRBlock2", ",", " ", 
+               "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-ssim_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
+            "\n", "\t\t\t", 
+            RowBox[{"(*", "euclidean", "*)"}], "\n", "\t\t\t", 
+            RowBox[{"distBlock", " ", "=", " ", 
+             RowBox[{"Outer", "[", 
+              RowBox[{
+              "CUDAEuclidean", ",", " ", "gpuCGRBlock1", ",", " ", 
+               "gpuCGRBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-euclid_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
+            "\n", "\t\t\t", 
+            RowBox[{"(*", "manhattan", "*)"}], "\n", "\t\t\t", 
+            RowBox[{"distBlock", " ", "=", " ", 
+             RowBox[{"Outer", "[", 
+              RowBox[{
+              "CUDAManhattan", ",", " ", "gpuCGRBlock1", ",", " ", 
+               "gpuCGRBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-manhat_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
+            "\t\t\t", "\n", "\t\t\t", 
+            RowBox[{"(*", 
+             RowBox[{"unload", " ", "CGRs", " ", "from", " ", "GPU"}], "*)"}],
+             "\n", "\t\t\t", 
+            RowBox[{"CUDAMemoryUnload", " ", "/@", " ", "gpuCGRBlock1"}], ";",
+             "\n", "\t\t\t", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"i", " ", "\[NotEqual]", " ", "j"}], ",", " ", "\n", 
+              "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"CUDAMemoryUnload", " ", "/@", " ", "gpuCGRBlock2"}], 
+               ";"}]}], "\n", "\t\t\t", "]"}], ";"}], "\n", "\t\t", ",", "\n",
+            "\t\t\t", 
+           RowBox[{"(*", " ", 
+            RowBox[{"code", " ", "for", " ", "a", " ", "CPU", " ", "kernel"}],
+             " ", "*)"}], "\n", "\n", "\t\t\t", 
+           RowBox[{"(*", "DSSIM", "*)"}], "\n", "\t\t\t", 
            RowBox[{
             RowBox[{"distBlock", " ", "=", " ", 
              RowBox[{"Outer", "[", 
@@ -606,58 +680,59 @@ Cell[BoxData[{
                    RowBox[{"SSIM", "[", 
                     RowBox[{"#1", ",", " ", "#2"}], "]"}]}], ",", " ", 
                   "accuracy"}], "]"}], "&"}], ",", " ", "cgrBlock1", ",", " ",
-                "cgrBlock2", ",", " ", "1"}], "]"}]}], ";"}]}], "\n", "\t\t", 
-          "]"}], ";", "\n", "\t\t", 
-         RowBox[{"DumpSave", "[", 
-          RowBox[{
-           RowBox[{"\"\<dist-ssim_\>\"", " ", "<>", " ", 
-            RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", " ", 
-            "<>", " ", 
-            RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-           ",", " ", "distBlock"}], "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"cgrBlock1", " ", "=", " ", 
-          RowBox[{"Flatten", " ", "/@", " ", "cgrBlock1"}]}], ";", "\n", 
-         "\t\t", 
-         RowBox[{"cgrBlock2", " ", "=", " ", 
-          RowBox[{"Flatten", " ", "/@", " ", "cgrBlock2"}]}], ";", "\n", "\n",
-          "\t\t", 
-         RowBox[{"(*", "euclidean", "*)"}], "\n", "\t\t", 
-         RowBox[{"distBlock", " ", "=", " ", 
-          RowBox[{"Outer", "[", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"N", "[", 
+                "cgrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-ssim_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
+            "\n", "\t\t\t", 
+            RowBox[{"cgrBlock1", " ", "=", " ", 
+             RowBox[{"Flatten", " ", "/@", " ", "cgrBlock1"}]}], ";", "\n", 
+            "\t\t\t", 
+            RowBox[{"cgrBlock2", " ", "=", " ", 
+             RowBox[{"Flatten", " ", "/@", " ", "cgrBlock2"}]}], ";", "\n", 
+            "\n", "\t\t\t", 
+            RowBox[{"(*", "euclidean", "*)"}], "\n", "\t\t\t", 
+            RowBox[{"distBlock", " ", "=", " ", 
+             RowBox[{"Outer", "[", 
               RowBox[{
-               RowBox[{"EuclideanDistance", "[", 
-                RowBox[{"#1", ",", " ", "#2"}], "]"}], ",", " ", "accuracy"}],
-               "]"}], "&"}], ",", " ", "cgrBlock1", ",", " ", "cgrBlock2", 
-            ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t", 
-         RowBox[{"DumpSave", "[", 
-          RowBox[{
-           RowBox[{"\"\<dist-euclid_\>\"", " ", "<>", " ", 
-            RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", " ", 
-            "<>", " ", 
-            RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-           ",", " ", "distBlock"}], "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"(*", "manhattan", "*)"}], "\n", "\t\t", 
-         RowBox[{"distBlock", " ", "=", " ", 
-          RowBox[{"Outer", "[", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"N", "[", 
+               RowBox[{
+                RowBox[{"N", "[", 
+                 RowBox[{
+                  RowBox[{"EuclideanDistance", "[", 
+                   RowBox[{"#1", ",", " ", "#2"}], "]"}], ",", " ", 
+                  "accuracy"}], "]"}], "&"}], ",", " ", "cgrBlock1", ",", " ",
+                "cgrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-euclid_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
+            "\n", "\t\t\t", 
+            RowBox[{"(*", "manhattan", "*)"}], "\n", "\t\t\t", 
+            RowBox[{"distBlock", " ", "=", " ", 
+             RowBox[{"Outer", "[", 
               RowBox[{
-               RowBox[{"ManhattanDistance", "[", 
-                RowBox[{"#1", ",", " ", "#2"}], "]"}], ",", " ", "accuracy"}],
-               "]"}], "&"}], ",", " ", "cgrBlock1", ",", " ", "cgrBlock2", 
-            ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t", 
-         RowBox[{"DumpSave", "[", 
-          RowBox[{
-           RowBox[{"\"\<dist-manhat_\>\"", " ", "<>", " ", 
-            RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", " ", 
-            "<>", " ", 
-            RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-           ",", " ", "distBlock"}], "]"}], ";"}]}], "\n", "\t", "]"}], "\n", 
-      ",", " ", 
+               RowBox[{
+                RowBox[{"N", "[", 
+                 RowBox[{
+                  RowBox[{"ManhattanDistance", "[", 
+                   RowBox[{"#1", ",", " ", "#2"}], "]"}], ",", " ", 
+                  "accuracy"}], "]"}], "&"}], ",", " ", "cgrBlock1", ",", " ",
+                "cgrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-manhat_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";"}]}], "\n",
+           "\t\t", "]"}], ";"}]}], "\n", "\t", "]"}], "\n", ",", " ", 
       RowBox[{"{", 
        RowBox[{"i", ",", " ", "1", ",", " ", "numBlocks"}], "}"}], ",", " ", 
       RowBox[{"{", 
@@ -805,8 +880,11 @@ Cell[BoxData[{
    3.633883667566939*^9}, {3.6338854094563904`*^9, 3.6338854645868874`*^9}, {
    3.6338860717055545`*^9, 3.6338860727819567`*^9}, {3.633892271414713*^9, 
    3.633892272085514*^9}, {3.639924440710658*^9, 3.6399244877943563`*^9}, {
-   3.6410500702998047`*^9, 3.6410500705302734`*^9}}]
-}, Closed]],
+   3.6410500702998047`*^9, 3.6410500705302734`*^9}, {3.641905689591797*^9, 
+   3.641905876114258*^9}, {3.641905946821289*^9, 3.641906092421875*^9}, {
+   3.6419061648271484`*^9, 3.6419062107558594`*^9}, {3.641906378022461*^9, 
+   3.6419064347265625`*^9}, 3.6419064854121094`*^9}]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -1305,21 +1383,21 @@ Cell[10192, 227, 13998, 232, 693, "Code",
 Cell[CellGroupData[{
 Cell[24227, 464, 507, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[24737, 473, 18671, 334, 1293, "Code",
+Cell[24737, 473, 22740, 412, 1853, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
-}, Closed]],
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[43445, 812, 490, 7, 41, "Subsection",
+Cell[47514, 890, 490, 7, 49, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[43938, 821, 16197, 280, 813, "Code",
+Cell[48007, 899, 16197, 280, 813, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[60172, 1106, 557, 8, 41, "Subsection",
+Cell[64241, 1184, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[60732, 1116, 7964, 154, 633, "Code",
+Cell[64801, 1194, 7964, 154, 633, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]

@@ -26,7 +26,7 @@ __device__ inline float correlate_two(int img1[26][26], int img2[26][26], int xI
 //call with block dimensions of 16*16
 __global__ void ssim(const int *img1, const int *img2, float *out, int N){
 	int xOffset = blockDim.x*blockIdx.x;
-    int yOffset = blockDim.y*blockIdx.y;
+	int yOffset = blockDim.y*blockIdx.y;
 	int xIndex = threadIdx.x;
 	int yIndex = threadIdx.y;
 	
