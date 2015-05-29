@@ -1,5 +1,5 @@
 //the Euclidean distance kernel - N is the side length of the images
-__kernel void euclidean(__global const int *vect1, __global const int *vect2, __global int *out, int N){
+__kernel void manhattan(__global const int *vect1, __global const int *vect2, __global int *out, int N){
 	int xIndex = get_global_id(0);
     int yIndex = get_global_id(1);
 	
