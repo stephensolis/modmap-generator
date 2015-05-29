@@ -28,29 +28,29 @@ Begin["`Private`"]
 If[CUDAQ[], 
 	CUDASSIMkernel = CUDAFunctionLoad[{FileNameJoin[{"gpu_kernels", "ssim.cu"}]}, "ssim", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Float", 1, "Output"}, "Integer32"}, 
-						{16, 16}];
+						{16, 16}, "CompileOptions"->{"-O3"}];
 	
 	CUDAEuclideankernel = CUDAFunctionLoad[{FileNameJoin[{"gpu_kernels", "euclidean.cu"}]}, "euclidean", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Integer32", 1, "Output"}, "Integer32"}, 
-						{16, 16}];
+						{16, 16}, "CompileOptions"->{"-O3"}];
 	
 	CUDAManhattankernel = CUDAFunctionLoad[{FileNameJoin[{"gpu_kernels", "manhattan.cu"}]}, "manhattan", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Integer32", 1, "Output"}, "Integer32"}, 
-						{16, 16}];
+						{16, 16}, "CompileOptions"->{"-O3"}];
 ];
 
 If[OpenCLQ[],
 	OpenCLSSIMkernel = OpenCLFunctionLoad[{FileNameJoin[{"gpu_kernels", "ssim.cl"}]}, "ssim", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Float", 1, "Output"}, "Integer32"}, 
-						{16, 16}];
+						{16, 16}, "CompileOptions"->{"-O3"}];
 	
 	OpenCLEuclideankernel = OpenCLFunctionLoad[{FileNameJoin[{"gpu_kernels", "euclidean.cl"}]}, "euclidean", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Integer32", 1, "Output"}, "Integer32"}, 
-						{16, 16}];
+						{16, 16}, "CompileOptions"->{"-O3"}];
 	
 	OpenCLManhattankernel = OpenCLFunctionLoad[{FileNameJoin[{"gpu_kernels", "manhattan.cl"}]}, "manhattan", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Integer32", 1, "Output"}, "Integer32"}, 
-						{16, 16}];
+						{16, 16}, "CompileOptions"->{"-O3"}];
 ];
 
 CUDASSIM[img1_CUDAMemory, img2_CUDAMemory]:=

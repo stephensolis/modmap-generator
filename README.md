@@ -8,7 +8,7 @@ This is a generator for Molecular Distance Maps, as seen in the following papers
 
 Some pre-generated Molecular Distance Maps may be seen [here](https://dl.dropboxusercontent.com/u/34456847/modmaps3D/index.html).
 
-It uses [CGR](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC330698/) and supports 
+It uses [FCGR](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC330698/) and supports 
 the following distances:
 
 - Euclidean

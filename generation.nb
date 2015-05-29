@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     74283,       1400]
-NotebookOptionsPosition[     72781,       1351]
-NotebookOutlinePosition[     73169,       1368]
-CellTagsIndexPosition[     73126,       1365]
+NotebookDataLength[     73992,       1394]
+NotebookOptionsPosition[     72490,       1345]
+NotebookOutlinePosition[     72878,       1362]
+CellTagsIndexPosition[     72835,       1359]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -268,17 +268,10 @@ Cell[BoxData[{
                RowBox[{
                 RowBox[{"(", "\n", "\t\t\t", 
                  RowBox[{
-                  RowBox[{"origSeq", " ", "=", " ", 
-                   RowBox[{"First", "@", 
-                    RowBox[{"Import", "[", "#", "]"}]}]}], ";", "\n", 
-                  "\t\t\t", 
                   RowBox[{"seq", " ", "=", " ", 
-                   RowBox[{"StringReplace", "[", 
-                    RowBox[{"origSeq", ",", " ", 
-                    RowBox[{
-                    RowBox[{"Except", "[", "cgrOrder", "]"}], "->", 
-                    "\"\<\>\""}]}], "]"}]}], ";", "\n", "\t\t\t\t", "\n", 
-                  "\t\t\t", 
+                   RowBox[{"First", "@", 
+                    RowBox[{"Import", "[", "#", "]"}]}]}], ";", "\t\t\t\t", 
+                  "\n", "\t\t\t", 
                   RowBox[{"FCGR", "[", 
                    RowBox[{"seq", ",", " ", "cgrOrder", ",", " ", "k"}], 
                    "]"}]}], "\n", "\t\t", ")"}], "&"}], ",", " ", "files"}], 
@@ -457,7 +450,8 @@ Cell[BoxData[{
    3.633886050239917*^9}, {3.6338922502122755`*^9, 3.6338922652215023`*^9}, {
    3.6340771581216617`*^9, 3.6340771726904945`*^9}, {3.634082674345172*^9, 
    3.63408267466719*^9}, {3.6399243528949013`*^9, 3.639924393472974*^9}, {
-   3.6410504522285156`*^9, 3.6410504528603516`*^9}}]
+   3.6410504522285156`*^9, 3.6410504528603516`*^9}, {3.6419157164716797`*^9, 
+   3.641915724758789*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -884,7 +878,7 @@ Cell[BoxData[{
    3.641905876114258*^9}, {3.641905946821289*^9, 3.641906092421875*^9}, {
    3.6419061648271484`*^9, 3.6419062107558594`*^9}, {3.641906378022461*^9, 
    3.6419064347265625`*^9}, 3.6419064854121094`*^9}]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -1376,28 +1370,28 @@ Cell[1000, 30, 8629, 183, 873, "Code",
 Cell[CellGroupData[{
 Cell[9666, 218, 523, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[10192, 227, 13998, 232, 693, "Code",
+Cell[10192, 227, 13707, 226, 653, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[24227, 464, 507, 7, 41, "Subsection",
+Cell[23936, 458, 507, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[24737, 473, 22740, 412, 1853, "Code",
+Cell[24446, 467, 22740, 412, 1853, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
-}, Open  ]],
+}, Closed]],
 Cell[CellGroupData[{
-Cell[47514, 890, 490, 7, 49, "Subsection",
+Cell[47223, 884, 490, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[48007, 899, 16197, 280, 813, "Code",
+Cell[47716, 893, 16197, 280, 813, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[64241, 1184, 557, 8, 41, "Subsection",
+Cell[63950, 1178, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[64801, 1194, 7964, 154, 633, "Code",
+Cell[64510, 1188, 7964, 154, 633, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
