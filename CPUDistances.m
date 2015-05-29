@@ -9,6 +9,8 @@ Descriptor::lengtherr =
 
 SSIM::usage = 
 	"SSIM[img1, img2] gives the Structural Similarity distance between two images"
+SSIMExact::usage = 
+	"SSIMExact[img1, img2] gives the Structural Similarity distance between two images, using a slower method which should be slightly more accurate"
 
 ApproxInfoDist::usage = 
 	"ApproxInfoDist[img1, img2] gives the Approximate Information distance between two images"
@@ -68,6 +70,28 @@ SSIM = Compile[{{img1, _Integer, 2}, {img2, _Integer, 2}},
 		Mean[Mean[ssimmap]]
 	]
 , RuntimeOptions -> "Speed"];
+
+SSIMExact[img1_List?MatrixQ, img2_List?MatrixQ]:=
+	Module[{w, c1, c2, m1, m2, m1sq, m2sq, m1m2, sigma1sq, sigma2sq, sigma12, ssimmap},
+		w = GaussianMatrix[{5, 1.5}];
+		c1 = 0.01^2;
+		c2 = 0.03^2;
+		
+		m1 = ListCorrelate[w, img1];
+		m2 = ListCorrelate[w, img2];
+		
+		m1sq = m1^2;
+		m2sq = m2^2;
+		m1m2 = m1*m2;
+		
+		sigma1sq = ListCorrelate[w, img1^2] - m1sq;
+		sigma2sq = ListCorrelate[w, img2^2] - m2sq;
+		sigma12 = ListCorrelate[w, img1*img2] - m1m2;
+		
+		ssimmap = ((c1 + 2*m1m2)*(c2 + 2*sigma12)) / ((c1 + m1sq + m2sq)*(c2 + sigma1sq + sigma2sq));
+		
+		Return[Mean[Mean[ssimmap]]];
+	];
 
 ApproxInfoDist[img1_List?MatrixQ, img2_List?MatrixQ]:=
 	Module[{x, y, xy},

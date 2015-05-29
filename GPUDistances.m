@@ -42,18 +42,18 @@ If[CUDAQ[],
 If[OpenCLQ[],
 	OpenCLSSIMkernel = OpenCLFunctionLoad[{FileNameJoin[{"gpu_kernels", "ssim.cl"}]}, "ssim", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Float", 1, "Output"}, "Integer32"}, 
-						{16, 16}, "CompileOptions"->{"-O3"}];
+						{16, 16}];
 	
 	OpenCLEuclideankernel = OpenCLFunctionLoad[{FileNameJoin[{"gpu_kernels", "euclidean.cl"}]}, "euclidean", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Integer32", 1, "Output"}, "Integer32"}, 
-						{16, 16}, "CompileOptions"->{"-O3"}];
+						{16, 16}];
 	
 	OpenCLManhattankernel = OpenCLFunctionLoad[{FileNameJoin[{"gpu_kernels", "manhattan.cl"}]}, "manhattan", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Integer32", 1, "Output"}, "Integer32"}, 
-						{16, 16}, "CompileOptions"->{"-O3"}];
+						{16, 16}];
 ];
 
-CUDASSIM[img1_CUDAMemory, img2_CUDAMemory]:=
+CUDASSIM[img1_, img2_]:=
 	Module[{outmem, result},
 		If[!CUDAQ[],
 			Message[GPUDistances::nocuda];
@@ -70,7 +70,7 @@ CUDASSIM[img1_CUDAMemory, img2_CUDAMemory]:=
 		Return[result];
 	];
 
-CUDAEuclidean[img1_CUDAMemory, img2_CUDAMemory]:=
+CUDAEuclidean[img1_, img2_]:=
 	Module[{outmem, result},
 		If[!CUDAQ[],
 			Message[GPUDistances::nocuda];
@@ -87,7 +87,7 @@ CUDAEuclidean[img1_CUDAMemory, img2_CUDAMemory]:=
 		Return[result];
 	];
 
-CUDAManhattan[img1_CUDAMemory, img2_CUDAMemory]:=
+CUDAManhattan[img1_, img2_]:=
 	Module[{outmem, result},
 		If[!CUDAQ[],
 			Message[GPUDistances::nocuda];
@@ -104,7 +104,7 @@ CUDAManhattan[img1_CUDAMemory, img2_CUDAMemory]:=
 		Return[result];
 	];
 
-OpenCLSSIM[img1_OpenCLMemory, img2_OpenCLMemory]:=
+OpenCLSSIM[img1_, img2_]:=
 	Module[{outmem, result}, 
 		If[!OpenCLQ[],
 			Message[GPUDistances::noopencl];
@@ -121,7 +121,7 @@ OpenCLSSIM[img1_OpenCLMemory, img2_OpenCLMemory]:=
 		Return[result];
 	];
 
-OpenCLEuclidean[img1_OpenCLMemory, img2_OpenCLMemory]:=
+OpenCLEuclidean[img1_, img2_]:=
 	Module[{outmem, result},
 		If[!OpenCLQ[],
 			Message[GPUDistances::noopencl];
@@ -138,7 +138,7 @@ OpenCLEuclidean[img1_OpenCLMemory, img2_OpenCLMemory]:=
 		Return[result];
 	];
 
-OpenCLManhattan[img1_OpenCLMemory, img2_OpenCLMemory]:=
+OpenCLManhattan[img1_, img2_]:=
 	Module[{outmem, result},
 		If[!OpenCLQ[],
 			Message[GPUDistances::noopencl];
