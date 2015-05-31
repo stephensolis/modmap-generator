@@ -42,44 +42,46 @@ If[CUDAQ[],
 If[OpenCLQ[],
 	OpenCLSSIMkernel = OpenCLFunctionLoad[{FileNameJoin[{"gpu_kernels", "ssim.cl"}]}, "ssim", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Float", 1, "Output"}, "Integer32"}, 
-						{16, 16}];
+						{16, 16}, "CompileOptions"->{"-O3"}];
 	
 	OpenCLEuclideankernel = OpenCLFunctionLoad[{FileNameJoin[{"gpu_kernels", "euclidean.cl"}]}, "euclidean", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Integer32", 1, "Output"}, "Integer32"}, 
-						{16, 16}];
+						{16, 16}, "CompileOptions"->{"-O3"}];
 	
 	OpenCLManhattankernel = OpenCLFunctionLoad[{FileNameJoin[{"gpu_kernels", "manhattan.cl"}]}, "manhattan", 
 						{{"Integer32", 2, "Input"}, {"Integer32", 2, "Input"}, {"Integer32", 1, "Output"}, "Integer32"}, 
-						{16, 16}];
+						{16, 16}, "CompileOptions"->{"-O3"}];
 ];
 
-CUDASSIM[img1_, img2_]:=
-	Module[{outmem, result},
+CUDASSIM[img1_CUDAMemory, img2_CUDAMemory]:=
+	Module[{len, outmem, result},
 		If[!CUDAQ[],
 			Message[GPUDistances::nocuda];
 			Return[$Failed];
 		];
 		
-		outmem = CUDAMemoryAllocate["Float", (Length@img1 - 10)^2];
+		len = First@OptionValue[CUDAMemoryInformation@img1, "Dimensions"];
+		outmem = CUDAMemoryAllocate["Float", (len - 10)^2];
 		
-		CUDASSIMkernel[img1, img2, outmem, Length@img1];
-		result = CUDATotal[outmem] / ((Length@img1 - 10)^2);
+		CUDASSIMkernel[img1, img2, outmem, len, {len - 10, len - 10}];
+		result = CUDATotal[outmem] / ((len - 10)^2);
 		
 		CUDAMemoryUnload[outmem];
 		
 		Return[result];
 	];
 
-CUDAEuclidean[img1_, img2_]:=
-	Module[{outmem, result},
+CUDAEuclidean[img1_CUDAMemory, img2_CUDAMemory]:=
+	Module[{len, outmem, result},
 		If[!CUDAQ[],
 			Message[GPUDistances::nocuda];
 			Return[$Failed];
 		];
 		
-		outmem = CUDAMemoryAllocate["Integer32", (Length@img1)^2];
+		len = First@OptionValue[CUDAMemoryInformation@img1, "Dimensions"];
+		outmem = CUDAMemoryAllocate["Integer32", len^2];
 		
-		CUDAEuclideankernel[img1, img2, outmem, Length@img1];
+		CUDAEuclideankernel[img1, img2, outmem, len, {len, len}];
 		result = Sqrt[CUDATotal[outmem]];
 		
 		CUDAMemoryUnload[outmem];
@@ -87,16 +89,17 @@ CUDAEuclidean[img1_, img2_]:=
 		Return[result];
 	];
 
-CUDAManhattan[img1_, img2_]:=
-	Module[{outmem, result},
+CUDAManhattan[img1_CUDAMemory, img2_CUDAMemory]:=
+	Module[{len, outmem, result},
 		If[!CUDAQ[],
 			Message[GPUDistances::nocuda];
 			Return[$Failed];
 		];
 		
-		outmem = CUDAMemoryAllocate["Integer32", (Length@img1)^2];
+		len = First@OptionValue[CUDAMemoryInformation@img1, "Dimensions"];
+		outmem = CUDAMemoryAllocate["Integer32", len^2];
 		
-		CUDAManhattankernel[img1, img2, outmem, Length@img1];
+		CUDAManhattankernel[img1, img2, outmem, len, {len, len}];
 		result = CUDATotal[outmem];
 		
 		CUDAMemoryUnload[outmem];
@@ -105,15 +108,16 @@ CUDAManhattan[img1_, img2_]:=
 	];
 
 OpenCLSSIM[img1_, img2_]:=
-	Module[{outmem, result}, 
+	Module[{len, outmem, result}, 
 		If[!OpenCLQ[],
 			Message[GPUDistances::noopencl];
 			Return[$Failed];
 		];
 		
-		outmem = OpenCLMemoryAllocate["Float", (Length@img1 - 10)^2];
+		len = First@OptionValue[OpenCLMemoryInformation@img1, "Dimensions"];
+		outmem = OpenCLMemoryAllocate["Float", (len - 10)^2];
 		
-		OpenCLSSIMkernel[img1, img2, outmem, Length@img1];
+		OpenCLSSIMkernel[img1, img2, outmem, len, {len - 10, len - 10}];
 		result = Mean[OpenCLMemoryGet[outmem]];
 		
 		OpenCLMemoryUnload[outmem];
@@ -121,16 +125,17 @@ OpenCLSSIM[img1_, img2_]:=
 		Return[result];
 	];
 
-OpenCLEuclidean[img1_, img2_]:=
-	Module[{outmem, result},
+OpenCLEuclidean[img1_OpenCLMemory, img2_OpenCLMemory]:=
+	Module[{len, outmem, result},
 		If[!OpenCLQ[],
 			Message[GPUDistances::noopencl];
 			Return[$Failed];
 		];
 		
-		outmem = OpenCLMemoryAllocate["Integer32", (Length@img1)^2];
+		len = First@OptionValue[OpenCLMemoryInformation@img1, "Dimensions"];
+		outmem = OpenCLMemoryAllocate["Integer32", len^2];
 		
-		OpenCLEuclideankernel[img1, img2, outmem, Length@img1];
+		OpenCLEuclideankernel[img1, img2, outmem, len, {len, len}];
 		result = Sqrt[Total[OpenCLMemoryGet[outmem]]];
 		
 		OpenCLMemoryUnload[outmem];
@@ -138,16 +143,17 @@ OpenCLEuclidean[img1_, img2_]:=
 		Return[result];
 	];
 
-OpenCLManhattan[img1_, img2_]:=
-	Module[{outmem, result},
+OpenCLManhattan[img1_OpenCLMemory, img2_OpenCLMemory]:=
+	Module[{len, outmem, result},
 		If[!OpenCLQ[],
 			Message[GPUDistances::noopencl];
 			Return[$Failed];
 		];
 		
-		outmem = OpenCLMemoryAllocate["Integer32", (Length@img1)^2];
+		len = First@OptionValue[OpenCLMemoryInformation@img1, "Dimensions"];
+		outmem = OpenCLMemoryAllocate["Integer32", len^2];
 		
-		OpenCLManhattankernel[img1, img2, outmem, Length@img1];
+		OpenCLManhattankernel[img1, img2, outmem, len, {len, len}];
 		result = Total[OpenCLMemoryGet[outmem]];
 		
 		OpenCLMemoryUnload[outmem];
