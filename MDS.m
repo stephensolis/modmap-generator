@@ -26,7 +26,7 @@ MDS[delta_List?MatrixQ, dim_Integer?Positive, accuracy_Integer: 15]:=
 		
 		bMatr = -0.5*(deltasq - ConstantArray[deltatotals/n, n] - (ConstantArray[#, n] & /@ (deltatotals/n)) + ConstantArray[sumOfDelta/(n^2), {n, n}]);
 
-		{eigenvals, eigenvecs} = Eigensystem[N[bMatr, accuracy], dim];
+		{eigenvals, eigenvecs} = Eigensystem[N[bMatr, accuracy], dim, Method->"Arnoldi"];
 
 		If[!VectorQ[eigenvals, Positive],
 			Message[MDS::dimerr];
