@@ -64,7 +64,7 @@ CUDASSIM[img1_CUDAMemory, img2_CUDAMemory]:=
 		outmem = CUDAMemoryAllocate["Float", (len - 10)^2];
 		
 		CUDASSIMkernel[img1, img2, outmem, len, {len - 10, len - 10}];
-		result = CUDATotal[outmem] / ((len - 10)^2);
+		result = CUDAFold[Plus, 0, outmem] / ((len - 10)^2);
 		
 		CUDAMemoryUnload[outmem];
 		
