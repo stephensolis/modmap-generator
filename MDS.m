@@ -4,8 +4,6 @@ BeginPackage["MDS`", {"RLink`"}]
 
 MDS::usage = 
 	"MDS[delta, dim] performs MDS in the given number of dimensions on the given distance matrix.\nMDS[delta, dim, accuracy] does the same, with a given argument to N."
-MDS::dimerr = 
-	"Not enough positive eigenvalues for this dimension"
 	
 RClassicalMDS::usage = 
 	"RClassicalMDS[delta, dim] calls the cmdscale function in R to perform classical MDS on the given distance matrix."
@@ -16,7 +14,7 @@ RSMACOFMDS::usage =
 
 Begin["`Private`"]
 
-MDS[delta_List?MatrixQ, dim_Integer?Positive, accuracy_Integer: 15]:=
+MDS[delta_List?MatrixQ, dim_Integer?Positive]:=
 	Module[{n, deltasq, deltatotals, sumOfDelta, bMatr, eigenvals, eigenvecs, solpts},
 		n = Length[delta];
 		
@@ -26,14 +24,9 @@ MDS[delta_List?MatrixQ, dim_Integer?Positive, accuracy_Integer: 15]:=
 		
 		bMatr = -0.5*(deltasq - ConstantArray[deltatotals/n, n] - (ConstantArray[#, n] & /@ (deltatotals/n)) + ConstantArray[sumOfDelta/(n^2), {n, n}]);
 
-		{eigenvals, eigenvecs} = Eigensystem[N[bMatr, accuracy], dim, Method->"Arnoldi"];
+		{eigenvals, eigenvecs} = Eigensystem[N[bMatr], dim, Method->"Arnoldi"];
 
-		If[!VectorQ[eigenvals, Positive],
-			Message[MDS::dimerr];
-			Return[$Failed];
-		];
-
-		solpts = Transpose[eigenvecs].Sqrt[DiagonalMatrix[eigenvals]];
+		solpts = Transpose[eigenvecs].Sqrt[DiagonalMatrix[Abs[eigenvals]]];
 		Return[solpts];
 	];
 
@@ -41,7 +34,7 @@ RClassicalMDS[delta_List?MatrixQ, dim_Integer?Positive]:=
 	Module[{result},
 		InstallR[];
 		
-		RSet["delta", delta];
+		RSet["delta", N[delta]];
 		RSet["dim", dim];
 		
 		result = REvaluate["cmdscale(delta, k = dim)"];
@@ -60,7 +53,7 @@ RSMACOFMDS[delta_List?MatrixQ, dim_Integer?Positive]:=
 			REvaluate["library(smacof)"];
 		];
 		
-		RSet["delta", delta];
+		RSet["delta", N[delta]];
 		RSet["dim", dim];
 		
 		result = REvaluate["smacofSym(delta, ndim = dim)$conf"];

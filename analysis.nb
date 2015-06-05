@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     69611,       1363]
-NotebookOptionsPosition[     67625,       1298]
-NotebookOutlinePosition[     68178,       1320]
-CellTagsIndexPosition[     68135,       1317]
+NotebookDataLength[     69724,       1365]
+NotebookOptionsPosition[     67737,       1300]
+NotebookOutlinePosition[     68291,       1322]
+CellTagsIndexPosition[     68248,       1319]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -42,14 +42,14 @@ Cell[BoxData[
     "\[IndentingNewLine]", 
    RowBox[{"(*", " ", "definitions", " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"dataDir", " ", "=", " ", 
+    RowBox[{"outputDir", " ", "=", " ", 
      RowBox[{"FileNameJoin", "[", 
       RowBox[{"{", 
        RowBox[{
-        RowBox[{"NotebookDirectory", "[", "]"}], ",", " ", "\"\<data\>\""}], 
-       "}"}], "]"}]}], ";"}], "\n", "\n", 
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", " ", "\"\<output\>\""}],
+        "}"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
-    RowBox[{"plot", " ", "colors"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"plot", " ", "colors"}], " ", "*)"}], "\n", 
    RowBox[{
     RowBox[{"colorScheme", " ", "=", " ", 
      RowBox[{"{", 
@@ -86,7 +86,8 @@ Cell[BoxData[
           RowBox[{"0", ",", " ", "1"}], "}"}]}], "]"}]}]}], ";"}], "*)"}], 
    "\n", "\n", 
    RowBox[{"(*", " ", 
-    RowBox[{"taxonomic", " ", "group", " ", "split"}], " ", "*)"}], "\n", 
+    RowBox[{"taxonomic", " ", "group", " ", "split"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"~~", "~~", "~~", "~~", "~~", "~~", 
@@ -94,7 +95,7 @@ Cell[BoxData[
        RowBox[{"|", "      ", 
         RowBox[{"group", " ", "name"}], "       ", "|", "    ", 
         RowBox[{"string", " ", "pattern"}]}]}]}], "    ", ">>>"}], "*)"}], 
-   "\[IndentingNewLine]", 
+   "\n", 
    RowBox[{
     RowBox[{"taxaGroups", " ", "=", " ", 
      RowBox[{"{", 
@@ -168,7 +169,7 @@ Cell[BoxData[
    3.634296916528164*^9, 3.6342970588472137`*^9}, {3.634297096942481*^9, 
    3.6342974380838804`*^9}, {3.634297486163165*^9, 3.63429758032493*^9}, {
    3.6342976177529964`*^9, 3.6342976184861975`*^9}, 3.6399246443490543`*^9, 
-   3.6410490117060547`*^9}]
+   3.6410490117060547`*^9, {3.642516271198242*^9, 3.6425162741884766`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -185,7 +186,7 @@ Cell["Load data", "Subsection",
 Cell[BoxData[{
  RowBox[{
   RowBox[{
-   RowBox[{"SetDirectory", "[", "dataDir", "]"}], ";"}], "\n"}], "\n", 
+   RowBox[{"SetDirectory", "[", "outputDir", "]"}], ";"}], "\n"}], "\n", 
  RowBox[{
   RowBox[{"dists", " ", "=", " ", 
    RowBox[{"Uncompress", "[", 
@@ -272,7 +273,8 @@ Cell[BoxData[{
    3.634163737044059*^9, 3.634163737402859*^9}, {3.634258333886746*^9, 
    3.6342583358698597`*^9}, {3.6342595895195637`*^9, 
    3.6342595900225925`*^9}, {3.634261030942009*^9, 3.6342610312850285`*^9}, {
-   3.6399246674530954`*^9, 3.639924672320304*^9}}]
+   3.6399246674530954`*^9, 3.639924672320304*^9}, {3.6425162796904297`*^9, 
+   3.6425162800976562`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1296,8 +1298,8 @@ Cell[BoxData[
    3.634297764738855*^9}, {3.6342977958921094`*^9, 3.6342977969529114`*^9}}]
 }, Closed]]
 },
-WindowSize->{1264, 942},
-WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+WindowSize->{1280, 942},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 PrintingCopies->1,
 PrintingPageRange->{32000, 32000},
 PrintingOptions->{"Magnification"->1.,
@@ -1322,45 +1324,45 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 418, 6, 49, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[1000, 30, 7166, 140, 373, "Code",
+Cell[1000, 30, 7222, 141, 373, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[8203, 175, 526, 7, 41, "Subsection",
+Cell[8259, 176, 526, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[8732, 184, 6141, 90, 113, "Code",
+Cell[8788, 185, 6197, 91, 113, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[14910, 279, 736, 11, 41, "Subsection",
+Cell[15022, 281, 736, 11, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[15649, 292, 9829, 193, 573, "Code",
+Cell[15761, 294, 9829, 193, 573, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[25515, 490, 737, 10, 41, "Subsection",
+Cell[25627, 492, 737, 10, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[26255, 502, 8240, 166, 273, "Code",
+Cell[26367, 504, 8240, 166, 273, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[34532, 673, 482, 7, 41, "Subsection",
+Cell[34644, 675, 482, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[35017, 682, 20552, 356, 793, "Code",
+Cell[35129, 684, 20552, 356, 793, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[55606, 1043, 534, 7, 41, "Subsection",
+Cell[55718, 1045, 534, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[56143, 1052, 11466, 243, 933, "Code",
+Cell[56255, 1054, 11466, 243, 933, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
