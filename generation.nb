@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     73992,       1394]
-NotebookOptionsPosition[     72490,       1345]
-NotebookOutlinePosition[     72878,       1362]
-CellTagsIndexPosition[     72835,       1359]
+NotebookDataLength[     73348,       1375]
+NotebookOptionsPosition[     71846,       1326]
+NotebookOutlinePosition[     72234,       1343]
+CellTagsIndexPosition[     72191,       1340]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -63,9 +63,10 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{
         RowBox[{"NotebookDirectory", "[", "]"}], ",", " ", "\"\<output\>\""}],
-        "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+        "}"}], "]"}]}], ";"}], "\n", "\n", 
    RowBox[{"(*", " ", 
-    RowBox[{"generation", " ", "settings"}], " ", "*)"}], "\n", 
+    RowBox[{"generation", " ", "settings"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"blockSize", " ", "=", " ", "50"}], ";"}], " ", 
    RowBox[{"(*", 
@@ -75,9 +76,9 @@ Cell[BoxData[
       " ", "-", " ", 
      RowBox[{
       RowBox[{"note", " ", "~", "6.5"}], "MB", " ", "RAM", " ", "required", 
-      " ", "per", " ", "CGR"}]}], "*)"}], "\[IndentingNewLine]", "\n", 
+      " ", "per", " ", "CGR"}]}], "*)"}], "\n", "\n", 
    RowBox[{"(*", " ", 
-    RowBox[{"CGR", " ", "settings"}], " ", "*)"}], "\n", 
+    RowBox[{"CGR", " ", "settings"}], " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"k", " ", "=", " ", "9"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
@@ -87,13 +88,6 @@ Cell[BoxData[
       "\"\<A\>\"", ",", " ", "\"\<C\>\"", ",", " ", "\"\<G\>\"", ",", " ", 
        "\"\<T\>\""}], "}"}]}], ";"}], "\[IndentingNewLine]", 
    "\[IndentingNewLine]", 
-   RowBox[{"(*", " ", 
-    RowBox[{"distance", " ", "settings"}], " ", "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"accuracy", " ", "=", " ", "15"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"the", " ", "argument", " ", "to", " ", 
-     RowBox[{"N", "[", "]"}]}], "*)"}], "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", " ", 
     RowBox[{"descriptors", " ", "settings"}], " ", "*)"}], 
    "\[IndentingNewLine]", 
@@ -120,17 +114,16 @@ Cell[BoxData[
     "stop", " ", "all", " ", "running", " ", "kernels", " ", "first"}], 
     "*)"}], "\n", 
    RowBox[{
-    RowBox[{"cudaKernels", " ", "=", " ", 
-     RowBox[{"LaunchKernels", "[", "$CUDADeviceCount", "]"}]}], ";"}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{"gpu", " ", "kernels"}], " ", "*)"}], "\n", 
-   RowBox[{
+    RowBox[{"gpuKernels", " ", "=", " ", 
+     RowBox[{"LaunchKernels", "[", "$CUDADeviceCount", "]"}]}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"gpu", " ", "kernels"}], " ", "*)"}], "\n", 
     RowBox[{"cpuKernels", " ", "=", " ", 
      RowBox[{"LaunchKernels", "[", "$ProcessorCount", "]"}]}], ";"}], " ", 
    RowBox[{"(*", " ", 
-    RowBox[{"cpu", " ", "kernels"}], " ", "*)"}], "\[IndentingNewLine]", "\n", 
+    RowBox[{"cpu", " ", "kernels"}], " ", "*)"}], "\n", "\n", 
    RowBox[{"(*", 
-    RowBox[{"gpu", " ", "setup"}], "*)"}], "\n", 
+    RowBox[{"gpu", " ", "setup"}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"MapIndexed", "[", 
      RowBox[{
@@ -138,33 +131,34 @@ Cell[BoxData[
        RowBox[{"ParallelEvaluate", "[", "\n", "\t", 
         RowBox[{
          RowBox[{
-          RowBox[{"Needs", "[", "\"\<GPUDistances`\>\"", "]"}], ";", " ", 
+          RowBox[{"isGPUkernel", " ", "=", " ", "True"}], ";", " ", "\n", 
           "\n", "\t", 
-          RowBox[{"isCUDAkernel", " ", "=", " ", "True"}], ";", " ", "\n", 
+          RowBox[{"Needs", "[", "\"\<CUDALink`\>\"", "]"}], ";", " ", "\n", 
           "\t", 
           RowBox[{"$CUDADevice", " ", "=", " ", 
-           RowBox[{"First", "@", "#2"}]}], ";"}], "\n", ",", " ", "#1"}], 
-        "]"}], "&"}], ",", " ", "cudaKernels"}], "]"}], ";"}], "\n", 
+           RowBox[{"First", "@", "#2"}]}], ";", "\n", "\t", 
+          RowBox[{"Needs", "[", "\"\<GPUDistances`\>\"", "]"}], ";"}], " ", 
+         "\n", ",", " ", "#1"}], "]"}], "&"}], ",", " ", "gpuKernels"}], 
+     "]"}], ";"}], "\n", 
    RowBox[{"(*", 
     RowBox[{"cpu", " ", "setup"}], "*)"}], "\n", 
    RowBox[{
     RowBox[{"ParallelEvaluate", "[", "\n", "\t", 
      RowBox[{
       RowBox[{
-       RowBox[{"isCUDAkernel", " ", "=", " ", "False"}], ";"}], "\n", ",", 
-      " ", "cpuKernels"}], "]"}], ";"}], "\n", 
+       RowBox[{"isGPUkernel", " ", "=", " ", "False"}], ";"}], "\n", ",", " ",
+       "cpuKernels"}], "]"}], ";"}], "\n", "\n", 
    RowBox[{"(*", 
     RowBox[{"common", " ", "setup"}], "*)"}], "\n", 
    RowBox[{
     RowBox[{"ParallelNeeds", "[", "\"\<CGR`\>\"", "]"}], ";", " ", 
-    RowBox[{"ParallelNeeds", "[", "\"\<CPUDistances`\>\"", "]"}], ";"}], " ", 
-   "\n", 
+    RowBox[{"ParallelNeeds", "[", "\"\<CPUDistances`\>\"", "]"}], ";"}], "\n", 
    RowBox[{
     RowBox[{"DistributeDefinitions", "[", 
      RowBox[{
      "fastaDir", ",", " ", "workDir", ",", " ", "k", ",", " ", "cgrOrder", 
-      ",", " ", "accuracy", ",", " ", "bins", ",", " ", "windowsizes", ",", 
-      " ", "steps"}], "]"}], ";"}]}]}]], "Code",
+      ",", " ", "bins", ",", " ", "windowsizes", ",", " ", "steps"}], "]"}], 
+    ";"}]}]}]], "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  CellChangeTimes->{
   3.6256172004702168`*^9, {3.62562306001648*^9, 3.6256230609383593`*^9}, {
@@ -211,7 +205,10 @@ Cell[BoxData[
    3.6399241654345665`*^9}, {3.6399242480681143`*^9, 
    3.6399242694073524`*^9}, {3.641049027555664*^9, 3.641049058725586*^9}, {
    3.641049406482422*^9, 3.6410494669560547`*^9}, {3.6410495791640625`*^9, 
-   3.641049613169922*^9}, {3.6410561461708984`*^9, 3.6410561663896484`*^9}}]
+   3.641049613169922*^9}, {3.6410561461708984`*^9, 3.6410561663896484`*^9}, {
+   3.642517933701172*^9, 3.6425179339560547`*^9}, {3.642518118463867*^9, 
+   3.642518119064453*^9}, {3.64251815259375*^9, 3.6425181902958984`*^9}, {
+   3.6425182513759766`*^9, 3.642518288352539*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -517,13 +514,9 @@ Cell[BoxData[{
          RowBox[{"distBlock", " ", "=", " ", 
           RowBox[{"Outer", "[", 
            RowBox[{
-            RowBox[{
-             RowBox[{"N", "[", 
-              RowBox[{
-               RowBox[{"EuclideanDistance", "[", 
-                RowBox[{"#1", ",", " ", "#2"}], "]"}], ",", " ", "accuracy"}],
-               "]"}], "&"}], ",", " ", "descrBlock1", ",", " ", "descrBlock2",
-             ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t", 
+            RowBox[{"N", " ", "@*", " ", "EuclideanDistance"}], ",", " ", 
+            "descrBlock1", ",", " ", "descrBlock2", ",", " ", "1"}], "]"}]}], 
+         ";", "\n", "\t\t", 
          RowBox[{"DumpSave", "[", 
           RowBox[{
            RowBox[{"\"\<dist-descr_\>\"", " ", "<>", " ", 
@@ -561,13 +554,9 @@ Cell[BoxData[{
          RowBox[{"distBlock", " ", "=", " ", 
           RowBox[{"Outer", "[", 
            RowBox[{
-            RowBox[{
-             RowBox[{"N", "[", 
-              RowBox[{
-               RowBox[{"ApproxInfoDist", "[", 
-                RowBox[{"#1", ",", " ", "#2"}], "]"}], ",", " ", "accuracy"}],
-               "]"}], "&"}], ",", " ", "cgrBlock1", ",", " ", "cgrBlock2", 
-            ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t", 
+            RowBox[{"N", " ", "@*", " ", "ApproxInfoDist"}], ",", " ", 
+            "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}], ";",
+          "\n", "\t\t", 
          RowBox[{"DumpSave", "[", 
           RowBox[{
            RowBox[{"\"\<dist-info_\>\"", " ", "<>", " ", 
@@ -576,11 +565,10 @@ Cell[BoxData[{
             RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}], 
            ",", " ", "distBlock"}], "]"}], ";", "\n", "\n", "\t\t", 
          RowBox[{"If", "[", 
-          RowBox[{"isCUDAkernel", ",", "\n", "\t\t\t", 
+          RowBox[{"isGPUkernel", ",", "\n", "\t\t\t", 
            RowBox[{"(*", " ", 
-            RowBox[{
-            "code", " ", "for", " ", "a", " ", "CUDA", " ", "kernel"}], " ", 
-            "*)"}], "\n", "\n", "\t\t\t", 
+            RowBox[{"code", " ", "for", " ", "a", " ", "GPU", " ", "kernel"}],
+             " ", "*)"}], "\n", "\n", "\t\t\t", 
            RowBox[{"(*", 
             RowBox[{"load", " ", "CGRs", " ", "into", " ", "GPU"}], "*)"}], 
            "\n", "\t\t\t", 
@@ -669,12 +657,11 @@ Cell[BoxData[{
               RowBox[{
                RowBox[{
                 RowBox[{"N", "[", 
-                 RowBox[{
-                  RowBox[{"1", " ", "-", " ", 
-                   RowBox[{"SSIM", "[", 
-                    RowBox[{"#1", ",", " ", "#2"}], "]"}]}], ",", " ", 
-                  "accuracy"}], "]"}], "&"}], ",", " ", "cgrBlock1", ",", " ",
-                "cgrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+                 RowBox[{"1", " ", "-", " ", 
+                  RowBox[{"SSIM", "[", 
+                   RowBox[{"#1", ",", " ", "#2"}], "]"}]}], "]"}], "&"}], ",",
+                " ", "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], 
+              "]"}]}], ";", "\n", "\t\t\t", 
             RowBox[{"DumpSave", "[", 
              RowBox[{
               RowBox[{"\"\<dist-ssim_\>\"", " ", "<>", " ", 
@@ -693,13 +680,9 @@ Cell[BoxData[{
             RowBox[{"distBlock", " ", "=", " ", 
              RowBox[{"Outer", "[", 
               RowBox[{
-               RowBox[{
-                RowBox[{"N", "[", 
-                 RowBox[{
-                  RowBox[{"EuclideanDistance", "[", 
-                   RowBox[{"#1", ",", " ", "#2"}], "]"}], ",", " ", 
-                  "accuracy"}], "]"}], "&"}], ",", " ", "cgrBlock1", ",", " ",
-                "cgrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+               RowBox[{"N", " ", "@*", " ", "EuclideanDistance"}], ",", " ", 
+               "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}], 
+            ";", "\n", "\t\t\t", 
             RowBox[{"DumpSave", "[", 
              RowBox[{
               RowBox[{"\"\<dist-euclid_\>\"", " ", "<>", " ", 
@@ -712,13 +695,9 @@ Cell[BoxData[{
             RowBox[{"distBlock", " ", "=", " ", 
              RowBox[{"Outer", "[", 
               RowBox[{
-               RowBox[{
-                RowBox[{"N", "[", 
-                 RowBox[{
-                  RowBox[{"ManhattanDistance", "[", 
-                   RowBox[{"#1", ",", " ", "#2"}], "]"}], ",", " ", 
-                  "accuracy"}], "]"}], "&"}], ",", " ", "cgrBlock1", ",", " ",
-                "cgrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+               RowBox[{"N", " ", "@*", " ", "ManhattanDistance"}], ",", " ", 
+               "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}], 
+            ";", "\n", "\t\t\t", 
             RowBox[{"DumpSave", "[", 
              RowBox[{
               RowBox[{"\"\<dist-manhat_\>\"", " ", "<>", " ", 
@@ -877,7 +856,9 @@ Cell[BoxData[{
    3.6410500702998047`*^9, 3.6410500705302734`*^9}, {3.641905689591797*^9, 
    3.641905876114258*^9}, {3.641905946821289*^9, 3.641906092421875*^9}, {
    3.6419061648271484`*^9, 3.6419062107558594`*^9}, {3.641906378022461*^9, 
-   3.6419064347265625`*^9}, 3.6419064854121094`*^9}]
+   3.6419064347265625`*^9}, 3.6419064854121094`*^9, {3.642517954553711*^9, 
+   3.6425180049609375`*^9}, {3.642518039583008*^9, 3.642518104319336*^9}, {
+   3.6425182239853516`*^9, 3.6425182264873047`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1364,34 +1345,34 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 418, 6, 49, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[1000, 30, 8629, 183, 873, "Code",
+Cell[1000, 30, 8571, 180, 873, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[9666, 218, 523, 7, 41, "Subsection",
+Cell[9608, 215, 523, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[10192, 227, 13707, 226, 653, "Code",
+Cell[10134, 224, 13707, 226, 653, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[23936, 458, 507, 7, 41, "Subsection",
+Cell[23878, 455, 507, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[24446, 467, 22740, 412, 1853, "Code",
+Cell[24388, 464, 22154, 396, 1853, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[47223, 884, 490, 7, 41, "Subsection",
+Cell[46579, 865, 490, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[47716, 893, 16197, 280, 813, "Code",
+Cell[47072, 874, 16197, 280, 813, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[63950, 1178, 557, 8, 41, "Subsection",
+Cell[63306, 1159, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[64510, 1188, 7964, 154, 633, "Code",
+Cell[63866, 1169, 7964, 154, 633, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
