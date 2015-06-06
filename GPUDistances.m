@@ -72,7 +72,7 @@ CUDASSIM[img1_CUDAMemory, img2_CUDAMemory]:=
 		outmem = CUDAMemoryAllocate["Float", (len - 10)^2];
 		
 		CUDASSIMkernel[img1, img2, outmem, len, {len - 10, len - 10}];
-		result = CUDAFold[Plus, 0, outmem] / ((len - 10)^2);
+		result = Mean[CUDAMemoryGet[outmem]];
 		
 		CUDAMemoryUnload[outmem];
 		
@@ -95,7 +95,7 @@ CUDAEuclidean[img1_CUDAMemory, img2_CUDAMemory]:=
 		outmem = CUDAMemoryAllocate["Integer32", len^2];
 		
 		CUDAEuclideankernel[img1, img2, outmem, len, {len, len}];
-		result = Sqrt[CUDATotal[outmem]];
+		result = Sqrt[Total[CUDAMemoryGet[outmem]]];
 		
 		CUDAMemoryUnload[outmem];
 		
@@ -118,7 +118,7 @@ CUDAManhattan[img1_CUDAMemory, img2_CUDAMemory]:=
 		outmem = CUDAMemoryAllocate["Integer32", len^2];
 		
 		CUDAManhattankernel[img1, img2, outmem, len, {len, len}];
-		result = CUDATotal[outmem];
+		result = Total[CUDAMemoryGet[outmem]];
 		
 		CUDAMemoryUnload[outmem];
 		
