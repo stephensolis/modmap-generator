@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     73395,       1375]
-NotebookOptionsPosition[     71893,       1326]
-NotebookOutlinePosition[     72281,       1343]
-CellTagsIndexPosition[     72238,       1340]
+NotebookDataLength[     73726,       1382]
+NotebookOptionsPosition[     72224,       1333]
+NotebookOutlinePosition[     72612,       1350]
+CellTagsIndexPosition[     72569,       1347]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -575,8 +575,11 @@ Cell[BoxData[{
            "\n", "\t\t\t", 
            RowBox[{
             RowBox[{"gpuCGRBlock1", " ", "=", " ", 
-             RowBox[{"CUDAMemoryLoad", " ", "/@", " ", "cgrBlock1"}]}], ";", 
-            "\n", "\t\t\t", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"CUDAMemoryLoad", "[", 
+                RowBox[{"#", ",", " ", "\"\<Integer32\>\""}], "]"}], "&"}], 
+              " ", "/@", " ", "cgrBlock1"}]}], ";", "\n", "\t\t\t", 
             RowBox[{"If", "[", 
              RowBox[{
               RowBox[{"i", " ", "\[Equal]", " ", "j"}], ",", " ", "\n", 
@@ -586,8 +589,12 @@ Cell[BoxData[{
                "\n", "\t\t\t", ",", "\n", "\t\t\t\t", 
               RowBox[{
                RowBox[{"gpuCGRBlock2", " ", "=", " ", 
-                RowBox[{"CUDAMemoryLoad", " ", "/@", " ", "cgrBlock2"}]}], 
-               ";"}]}], "\n", "\t\t\t", "]"}], ";", "\n", "\n", "\t\t\t", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"CUDAMemoryLoad", "[", 
+                   RowBox[{"#", ",", " ", "\"\<Integer32\>\""}], "]"}], "&"}],
+                  " ", "/@", " ", "cgrBlock2"}]}], ";"}]}], "\n", "\t\t\t", 
+             "]"}], ";", "\n", "\n", "\t\t\t", 
             RowBox[{"(*", "DSSIM", "*)"}], "\n", "\t\t\t", 
             RowBox[{"distBlock", " ", "=", " ", 
              RowBox[{"Outer", "[", 
@@ -858,7 +865,7 @@ Cell[BoxData[{
    3.6419064347265625`*^9}, 3.6419064854121094`*^9, {3.642517954553711*^9, 
    3.6425180049609375`*^9}, {3.642518039583008*^9, 3.642518104319336*^9}, {
    3.6425182239853516`*^9, 3.6425182264873047`*^9}, {3.642539667754883*^9, 
-   3.642539681770508*^9}}]
+   3.642539681770508*^9}, {3.642540155551758*^9, 3.642540167754883*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1358,21 +1365,21 @@ Cell[10134, 224, 13836, 228, 653, "Code",
 Cell[CellGroupData[{
 Cell[24007, 457, 507, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[24517, 466, 22072, 394, 1853, "Code",
+Cell[24517, 466, 22403, 401, 1853, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[46626, 865, 490, 7, 41, "Subsection",
+Cell[46957, 872, 490, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[47119, 874, 16197, 280, 813, "Code",
+Cell[47450, 881, 16197, 280, 813, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[63353, 1159, 557, 8, 41, "Subsection",
+Cell[63684, 1166, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[63913, 1169, 7964, 154, 633, "Code",
+Cell[64244, 1176, 7964, 154, 633, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
