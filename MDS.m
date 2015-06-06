@@ -4,7 +4,9 @@ BeginPackage["MDS`", {"RLink`"}]
 
 MDS::usage = 
 	"MDS[delta, dim] performs MDS in the given number of dimensions on the given distance matrix.\nMDS[delta, dim, accuracy] does the same, with a given argument to N."
-	
+MDS::negeigs = 
+	"Warning: some eigenvalues were negative"
+
 RClassicalMDS::usage = 
 	"RClassicalMDS[delta, dim] calls the cmdscale function in R to perform classical MDS on the given distance matrix."
 
@@ -26,6 +28,10 @@ MDS[delta_List?MatrixQ, dim_Integer?Positive]:=
 
 		{eigenvals, eigenvecs} = Eigensystem[N[bMatr], dim, Method->"Arnoldi"];
 
+		If[!VectorQ[eigenvals, Positive],
+			Message[MDS::negeigs];
+		];
+		
 		solpts = Transpose[eigenvecs].Sqrt[DiagonalMatrix[Abs[eigenvals]]];
 		Return[solpts];
 	];
