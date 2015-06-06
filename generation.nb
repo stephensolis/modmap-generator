@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     73348,       1375]
-NotebookOptionsPosition[     71846,       1326]
-NotebookOutlinePosition[     72234,       1343]
-CellTagsIndexPosition[     72191,       1340]
+NotebookDataLength[     73395,       1375]
+NotebookOptionsPosition[     71893,       1326]
+NotebookOutlinePosition[     72281,       1343]
+CellTagsIndexPosition[     72238,       1340]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -269,10 +269,11 @@ Cell[BoxData[{
                    RowBox[{"First", "@", 
                     RowBox[{"Import", "[", "#", "]"}]}]}], ";", "\t\t\t\t", 
                   "\n", "\t\t\t", 
-                  RowBox[{"FCGR", "[", 
-                   RowBox[{"seq", ",", " ", "cgrOrder", ",", " ", "k"}], 
-                   "]"}]}], "\n", "\t\t", ")"}], "&"}], ",", " ", "files"}], 
-              "]"}]}], ";", "\n", "\n", "\t\t", 
+                  RowBox[{"N", "@", 
+                   RowBox[{"FCGR", "[", 
+                    RowBox[{"seq", ",", " ", "cgrOrder", ",", " ", "k"}], 
+                    "]"}]}]}], "\n", "\t\t", ")"}], "&"}], ",", " ", 
+               "files"}], "]"}]}], ";", "\n", "\n", "\t\t", 
             RowBox[{"(*", " ", 
              RowBox[{"save", " ", "CGRs"}], " ", "*)"}], "\n", "\t\t", 
             RowBox[{"SetDirectory", "[", "workDir", "]"}], ";", "\n", "\t\t", 
@@ -288,11 +289,12 @@ Cell[BoxData[{
             RowBox[{"descrBlock", " ", "=", " ", 
              RowBox[{
               RowBox[{
-               RowBox[{"Descriptor", "[", 
-                RowBox[{
-                "#", ",", " ", "windowsizes", ",", " ", "steps", ",", " ", 
-                 "bins"}], "]"}], "&"}], " ", "/@", " ", "cgrBlock"}]}], ";", 
-            "\n", "\t\t", 
+               RowBox[{"N", "@", 
+                RowBox[{"Descriptor", "[", 
+                 RowBox[{
+                 "#", ",", " ", "windowsizes", ",", " ", "steps", ",", " ", 
+                  "bins"}], "]"}]}], "&"}], " ", "/@", " ", "cgrBlock"}]}], 
+            ";", "\n", "\t\t", 
             RowBox[{"DumpSave", "[", 
              RowBox[{
               RowBox[{"\"\<descr-temp_\>\"", " ", "<>", " ", 
@@ -448,7 +450,7 @@ Cell[BoxData[{
    3.6340771581216617`*^9, 3.6340771726904945`*^9}, {3.634082674345172*^9, 
    3.63408267466719*^9}, {3.6399243528949013`*^9, 3.639924393472974*^9}, {
    3.6410504522285156`*^9, 3.6410504528603516`*^9}, {3.6419157164716797`*^9, 
-   3.641915724758789*^9}}]
+   3.641915724758789*^9}, {3.642539641333008*^9, 3.642539644786133*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -514,9 +516,8 @@ Cell[BoxData[{
          RowBox[{"distBlock", " ", "=", " ", 
           RowBox[{"Outer", "[", 
            RowBox[{
-            RowBox[{"N", " ", "@*", " ", "EuclideanDistance"}], ",", " ", 
-            "descrBlock1", ",", " ", "descrBlock2", ",", " ", "1"}], "]"}]}], 
-         ";", "\n", "\t\t", 
+           "EuclideanDistance", ",", " ", "descrBlock1", ",", " ", 
+            "descrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t", 
          RowBox[{"DumpSave", "[", 
           RowBox[{
            RowBox[{"\"\<dist-descr_\>\"", " ", "<>", " ", 
@@ -680,9 +681,8 @@ Cell[BoxData[{
             RowBox[{"distBlock", " ", "=", " ", 
              RowBox[{"Outer", "[", 
               RowBox[{
-               RowBox[{"N", " ", "@*", " ", "EuclideanDistance"}], ",", " ", 
-               "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}], 
-            ";", "\n", "\t\t\t", 
+              "EuclideanDistance", ",", " ", "cgrBlock1", ",", " ", 
+               "cgrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
             RowBox[{"DumpSave", "[", 
              RowBox[{
               RowBox[{"\"\<dist-euclid_\>\"", " ", "<>", " ", 
@@ -695,9 +695,8 @@ Cell[BoxData[{
             RowBox[{"distBlock", " ", "=", " ", 
              RowBox[{"Outer", "[", 
               RowBox[{
-               RowBox[{"N", " ", "@*", " ", "ManhattanDistance"}], ",", " ", 
-               "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}], 
-            ";", "\n", "\t\t\t", 
+              "ManhattanDistance", ",", " ", "cgrBlock1", ",", " ", 
+               "cgrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
             RowBox[{"DumpSave", "[", 
              RowBox[{
               RowBox[{"\"\<dist-manhat_\>\"", " ", "<>", " ", 
@@ -858,7 +857,8 @@ Cell[BoxData[{
    3.6419061648271484`*^9, 3.6419062107558594`*^9}, {3.641906378022461*^9, 
    3.6419064347265625`*^9}, 3.6419064854121094`*^9, {3.642517954553711*^9, 
    3.6425180049609375`*^9}, {3.642518039583008*^9, 3.642518104319336*^9}, {
-   3.6425182239853516`*^9, 3.6425182264873047`*^9}}]
+   3.6425182239853516`*^9, 3.6425182264873047`*^9}, {3.642539667754883*^9, 
+   3.642539681770508*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1324,11 +1324,11 @@ nucleotide&rettype=gb&retmode=xml&id=\>\""}], ";"}], "\n", "\n",
    3.6399247822961044`*^9, 3.6399247855097103`*^9}}]
 }, Closed]]
 },
-WindowSize->{1280, 942},
+WindowSize->{1440, 818},
 WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 ShowSelection->True,
 ShowGroupOpener->True,
-FrontEndVersion->"10.1 for Microsoft Windows (32-bit) (March 23, 2015)",
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -1351,28 +1351,28 @@ Cell[1000, 30, 8571, 180, 873, "Code",
 Cell[CellGroupData[{
 Cell[9608, 215, 523, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[10134, 224, 13707, 226, 653, "Code",
+Cell[10134, 224, 13836, 228, 653, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[23878, 455, 507, 7, 41, "Subsection",
+Cell[24007, 457, 507, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[24388, 464, 22154, 396, 1853, "Code",
+Cell[24517, 466, 22072, 394, 1853, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[46579, 865, 490, 7, 41, "Subsection",
+Cell[46626, 865, 490, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[47072, 874, 16197, 280, 813, "Code",
+Cell[47119, 874, 16197, 280, 813, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[63306, 1159, 557, 8, 41, "Subsection",
+Cell[63353, 1159, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[63866, 1169, 7964, 154, 633, "Code",
+Cell[63913, 1169, 7964, 154, 633, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
