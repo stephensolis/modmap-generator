@@ -63,7 +63,7 @@ CUDASSIM[img1_CUDAMemory, img2_CUDAMemory]:=
 			Return[$Failed];
 		];
 		
-		If[First@OptionValue[CUDAMemoryInformation@img1, "Type"] != "Integer32" || First@OptionValue[CUDAMemoryInformation@img2, "Type"] != "Integer32",
+		If[OptionValue[CUDAMemoryInformation@img1, "Type"] != "Integer32" || OptionValue[CUDAMemoryInformation@img2, "Type"] != "Integer32",
 			Message[GPUDistances::invtype];
 			Return[$Failed];
 		];
@@ -86,7 +86,7 @@ CUDAEuclidean[img1_CUDAMemory, img2_CUDAMemory]:=
 			Return[$Failed];
 		];
 		
-		If[First@OptionValue[CUDAMemoryInformation@img1, "Type"] != "Integer32" || First@OptionValue[CUDAMemoryInformation@img2, "Type"] != "Integer32",
+		If[OptionValue[CUDAMemoryInformation@img1, "Type"] != "Integer32" || OptionValue[CUDAMemoryInformation@img2, "Type"] != "Integer32",
 			Message[GPUDistances::invtype];
 			Return[$Failed];
 		];
@@ -109,7 +109,7 @@ CUDAManhattan[img1_CUDAMemory, img2_CUDAMemory]:=
 			Return[$Failed];
 		];
 		
-		If[First@OptionValue[CUDAMemoryInformation@img1, "Type"] != "Integer32" || First@OptionValue[CUDAMemoryInformation@img2, "Type"] != "Integer32",
+		If[OptionValue[CUDAMemoryInformation@img1, "Type"] != "Integer32" || OptionValue[CUDAMemoryInformation@img2, "Type"] != "Integer32",
 			Message[GPUDistances::invtype];
 			Return[$Failed];
 		];
@@ -132,7 +132,7 @@ OpenCLSSIM[img1_, img2_]:=
 			Return[$Failed];
 		];
 		
-		If[First@OptionValue[OpenCLMemoryInformation@img1, "Type"] != "Integer32" || First@OptionValue[OpenCLMemoryInformation@img2, "Type"] != "Integer32",
+		If[OptionValue[OpenCLMemoryInformation@img1, "Type"] != "Integer32" || OptionValue[OpenCLMemoryInformation@img2, "Type"] != "Integer32",
 			Message[GPUDistances::invtype];
 			Return[$Failed];
 		];
@@ -155,7 +155,7 @@ OpenCLEuclidean[img1_OpenCLMemory, img2_OpenCLMemory]:=
 			Return[$Failed];
 		];
 		
-		If[First@OptionValue[OpenCLMemoryInformation@img1, "Type"] != "Integer32" || First@OptionValue[OpenCLMemoryInformation@img2, "Type"] != "Integer32",
+		If[OptionValue[OpenCLMemoryInformation@img1, "Type"] != "Integer32" || OptionValue[OpenCLMemoryInformation@img2, "Type"] != "Integer32",
 			Message[GPUDistances::invtype];
 			Return[$Failed];
 		];
@@ -178,7 +178,7 @@ OpenCLManhattan[img1_OpenCLMemory, img2_OpenCLMemory]:=
 			Return[$Failed];
 		];
 		
-		If[First@OptionValue[OpenCLMemoryInformation@img1, "Type"] != "Integer32" || First@OptionValue[OpenCLMemoryInformation@img2, "Type"] != "Integer32",
+		If[OptionValue[OpenCLMemoryInformation@img1, "Type"] != "Integer32" || OptionValue[OpenCLMemoryInformation@img2, "Type"] != "Integer32",
 			Message[GPUDistances::invtype];
 			Return[$Failed];
 		];
