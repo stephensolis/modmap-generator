@@ -2,10 +2,8 @@
 
 BeginPackage["GPUDistances`", {"CUDALink`", "OpenCLLink`"}]
 
-GPUDistances::nocuda = 
-	"CUDA is not supported"
-GPUDistances::noopencl = 
-	"OpenCL is not supported"
+GPUDistances::nogpu = 
+	"GPU computing is not supported"
 GPUDistances::invinput = 
 	"Inputs must be given as equal-sized 2D square matrices of Integer32 type"
 
@@ -42,49 +40,36 @@ checkInputs[meminfoFn_, img1_, img2_]:=
 		dims1[[1]] == dims1[[2]]
 	];
 
-(* distance functions *)
+(* distance function interfaces *)
 CUDASSIM[img1_CUDAMemory, img2_CUDAMemory]:=
-	Module[{len, outmem, result},
-		If[!CUDAQ[],
-			Message[GPUDistances::nocuda];
-			Return[$Failed];
-		];
-		
-		If[!checkInputs[CUDAMemoryInformation, img1, img2],
-			Message[GPUDistances::invinput];
-			Return[$Failed];
-		];
-		
-		len = First["Dimensions" /. CUDAMemoryInformation[img1]];
-		outmem = CUDAMemoryAllocate["Float", (len - 10)^2];
-		
-		CUDASSIMkernel[img1, img2, outmem, len, {len - 10, len - 10}];
-		result = Mean[CUDAMemoryGet[outmem]];
-		
-		CUDAMemoryUnload[outmem];
-		
-		Return[result];
-	];
+	gpuSSIM[CUDAQ, CUDAMemoryInformation, CUDAMemoryAllocate, CUDAMemoryGet, CUDAMemoryUnload,
+			CUDASSIMkernel, img1, img2]
 
 OpenCLSSIM[img1_OpenCLMemory, img2_OpenCLMemory]:=
+	gpuSSIM[OpenCLQ, OpenCLMemoryInformation, OpenCLMemoryAllocate, OpenCLMemoryGet, OpenCLMemoryUnload,
+			OpenCLSSIMkernel, img1, img2]
+
+(* distance function implementations *)
+gpuSSIM[gpuQ_, meminfoFn_, memalloc_, memget_, memfree_,
+		kernel_, img1_, img2_]:=
 	Module[{len, outmem, result}, 
-		If[!OpenCLQ[],
+		If[!gpuQ[],
 			Message[GPUDistances::noopencl];
 			Return[$Failed];
 		];
 		
-		If[!checkInputs[OpenCLMemoryInformation, img1, img2],
+		If[!checkInputs[meminfoFn, img1, img2],
 			Message[GPUDistances::invinput];
 			Return[$Failed];
 		];
 		
-		len = First["Dimensions" /. OpenCLMemoryInformation[img1]];
-		outmem = OpenCLMemoryAllocate["Float", (len - 10)^2];
+		len = First["Dimensions" /. meminfoFn[img1]];
+		outmem = memalloc["Float", (len - 10)^2];
 		
-		OpenCLSSIMkernel[img1, img2, outmem, len, {len - 10, len - 10}];
-		result = Mean[OpenCLMemoryGet[outmem]];
+		kernel[img1, img2, outmem, len, {len - 10, len - 10}];
+		result = Mean[memget[outmem]];
 		
-		OpenCLMemoryUnload[outmem];
+		memfree[outmem];
 		
 		Return[result];
 	];
