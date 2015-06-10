@@ -54,7 +54,7 @@ gpuSSIM[gpuQ_, meminfoFn_, memalloc_, memget_, memfree_,
 		kernel_, img1_, img2_]:=
 	Module[{len, outmem, result}, 
 		If[!gpuQ[],
-			Message[GPUDistances::noopencl];
+			Message[GPUDistances::nogpu];
 			Return[$Failed];
 		];
 		
