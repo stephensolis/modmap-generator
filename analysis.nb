@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     69724,       1365]
-NotebookOptionsPosition[     67737,       1300]
-NotebookOutlinePosition[     68291,       1322]
-CellTagsIndexPosition[     68248,       1319]
+NotebookDataLength[     69826,       1367]
+NotebookOptionsPosition[     67839,       1302]
+NotebookOutlinePosition[     68393,       1324]
+CellTagsIndexPosition[     68350,       1321]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -693,8 +693,9 @@ Cell[BoxData[
        RowBox[{"Take", "[", 
         RowBox[{"colorScheme", ",", " ", 
          RowBox[{"Length", "@", "taxaGroups"}]}], "]"}], ",", " ", 
-       "emptyGroups"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
-   RowBox[{"(*", "legend", "*)"}], "\[IndentingNewLine]", 
+       "emptyGroups"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "legend", "*)"}], "\n", 
    RowBox[{
     RowBox[{"legendNames", " ", "=", " ", 
      RowBox[{
@@ -780,7 +781,7 @@ Cell[BoxData[
        RowBox[{"colors", ",", " ", 
         RowBox[{"ConstantArray", "[", 
          RowBox[{
-          RowBox[{"PointSize", "[", "0.009", "]"}], ",", " ", 
+          RowBox[{"PointSize", "[", "0.01", "]"}], ",", " ", 
           RowBox[{"Length", "@", "taxaNames"}]}], "]"}]}], "}"}], "]"}]}], 
     ";"}], "\n", 
    RowBox[{
@@ -1038,7 +1039,7 @@ Cell[BoxData[
    3.634258916227054*^9, 3.634258937360263*^9}, {3.6342590645015345`*^9, 
    3.6342591013176403`*^9}, {3.634259136312642*^9, 3.634259137252696*^9}, {
    3.634259194735984*^9, 3.634259241372651*^9}, {3.63429772803199*^9, 
-   3.634297745691221*^9}}]
+   3.634297745691221*^9}, {3.642954466908203*^9, 3.642954467126953*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1063,8 +1064,8 @@ Cell[BoxData[
        RowBox[{"Take", "[", 
         RowBox[{"colorScheme", ",", " ", 
          RowBox[{"Length", "@", "taxaGroups"}]}], "]"}], ",", " ", 
-       "emptyGroups"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
-   RowBox[{"(*", "legend", "*)"}], "\n", 
+       "emptyGroups"}], "]"}]}], ";"}], "\n", "\n", 
+   RowBox[{"(*", "legend", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"legendNames", " ", "=", " ", 
      RowBox[{
@@ -1163,7 +1164,7 @@ Cell[BoxData[
        RowBox[{"colors", ",", " ", 
         RowBox[{"ConstantArray", "[", 
          RowBox[{
-          RowBox[{"PointSize", "[", "0.009", "]"}], ",", " ", 
+          RowBox[{"PointSize", "[", "0.01", "]"}], ",", " ", 
           RowBox[{"Length", "@", "taxaNames"}]}], "]"}]}], "}"}], "]"}]}], 
     ";"}], "\n", 
    RowBox[{
@@ -1295,7 +1296,8 @@ Cell[BoxData[
    3.6341458620023465`*^9, {3.634257697713359*^9, 3.6342577095010333`*^9}, 
    3.6342577433419685`*^9, {3.6342593320528383`*^9, 3.6342593951714478`*^9}, {
    3.6342595266029654`*^9, 3.634259550529334*^9}, {3.6342977559872394`*^9, 
-   3.634297764738855*^9}, {3.6342977958921094`*^9, 3.6342977969529114`*^9}}]
+   3.634297764738855*^9}, {3.6342977958921094`*^9, 3.6342977969529114`*^9}, {
+   3.6429544722910156`*^9, 3.6429544724941406`*^9}}]
 }, Closed]]
 },
 WindowSize->{1280, 942},
@@ -1354,15 +1356,15 @@ Cell[26367, 504, 8240, 166, 273, "Code",
 Cell[CellGroupData[{
 Cell[34644, 675, 482, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[35129, 684, 20552, 356, 793, "Code",
+Cell[35129, 684, 20601, 357, 793, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[55718, 1045, 534, 7, 41, "Subsection",
+Cell[55767, 1046, 534, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[56255, 1054, 11466, 243, 933, "Code",
+Cell[56304, 1055, 11519, 244, 933, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
