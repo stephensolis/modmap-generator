@@ -11,13 +11,13 @@ Some pre-generated Molecular Distance Maps may be seen [here](https://dl.dropbox
 It uses [FCGR](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC330698/) and supports 
 the following distances:
 
-- Euclidean
-- Manhattan
+- [Euclidean](http://en.wikipedia.org/wiki/Euclidean_distance)
+- [Manhattan](http://en.wikipedia.org/wiki/Manhattan_distance)
 - [SSIM](https://ece.uwaterloo.ca/~z70wang/research/ssim/)
 - [Descriptors](http://arxiv.org/abs/1503.00162)
 - [Approximate Information Distance](http://arxiv.org/abs/cs/0111054)
 
-The SSIM, Euclidean, and Manhattan distances may be accelerated with CUDA or OpenCL.
+The SSIM distance may be accelerated with CUDA or OpenCL.
 
 Usage
 -----
