@@ -6,8 +6,8 @@ GPUDistances::nocuda =
 	"CUDA is not supported"
 GPUDistances::noopencl = 
 	"OpenCL is not supported"
-GPUDistances::invtype = 
-	"Images must be given as matrices of Integer32 type"
+GPUDistances::invinput = 
+	"Inputs must be given as equal-sized 2D square matrices of Integer32 type"
 
 CUDASSIM::usage = 
 	"CUDASSIM[img1, img2] gives the Structural Similarity distance between two images, using CUDA"
@@ -31,6 +31,18 @@ If[OpenCLQ[],
 						{16, 16}, "CompileOptions"->{"-O3"}];
 ];
 
+(* function to make sure inputs are well-formed *)
+checkInputs[meminfoFn_, img1_, img2_]:=
+	Module[{type1, type2, dims1, dims2}, 
+		{{type1, dims1}, {type2, dims2}} = ({"Type", "Dimensions"} /. {meminfoFn[img1], meminfoFn[img2]});
+		
+		type1 == type2 == "Integer32" && 
+		dims1 == dims2 && 
+		Length[dims1] == 2 && 
+		dims1[[1]] == dims1[[2]]
+	];
+
+(* distance functions *)
 CUDASSIM[img1_CUDAMemory, img2_CUDAMemory]:=
 	Module[{len, outmem, result},
 		If[!CUDAQ[],
@@ -38,12 +50,12 @@ CUDASSIM[img1_CUDAMemory, img2_CUDAMemory]:=
 			Return[$Failed];
 		];
 		
-		If[OptionValue[CUDAMemoryInformation@img1, "Type"] != "Integer32" || OptionValue[CUDAMemoryInformation@img2, "Type"] != "Integer32",
-			Message[GPUDistances::invtype];
+		If[!checkInputs[CUDAMemoryInformation, img1, img2],
+			Message[GPUDistances::invinput];
 			Return[$Failed];
 		];
 		
-		len = First@OptionValue[CUDAMemoryInformation@img1, "Dimensions"];
+		len = First["Dimensions" /. CUDAMemoryInformation[img1]];
 		outmem = CUDAMemoryAllocate["Float", (len - 10)^2];
 		
 		CUDASSIMkernel[img1, img2, outmem, len, {len - 10, len - 10}];
@@ -54,19 +66,19 @@ CUDASSIM[img1_CUDAMemory, img2_CUDAMemory]:=
 		Return[result];
 	];
 
-OpenCLSSIM[img1_, img2_]:=
+OpenCLSSIM[img1_OpenCLMemory, img2_OpenCLMemory]:=
 	Module[{len, outmem, result}, 
 		If[!OpenCLQ[],
 			Message[GPUDistances::noopencl];
 			Return[$Failed];
 		];
 		
-		If[OptionValue[OpenCLMemoryInformation@img1, "Type"] != "Integer32" || OptionValue[OpenCLMemoryInformation@img2, "Type"] != "Integer32",
-			Message[GPUDistances::invtype];
+		If[!checkInputs[OpenCLMemoryInformation, img1, img2],
+			Message[GPUDistances::invinput];
 			Return[$Failed];
 		];
 		
-		len = First@OptionValue[OpenCLMemoryInformation@img1, "Dimensions"];
+		len = First["Dimensions" /. OpenCLMemoryInformation[img1]];
 		outmem = OpenCLMemoryAllocate["Float", (len - 10)^2];
 		
 		OpenCLSSIMkernel[img1, img2, outmem, len, {len - 10, len - 10}];
