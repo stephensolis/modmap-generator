@@ -2,21 +2,39 @@
 
 BeginPackage["CPUDistances`"]
 
+CGRStats::usage = 
+	"CGRStats[img] gives some useful statistics for a CGR image, which may be used to accelerate ApproxInfoDist and PearsonDistance"
+
 Descriptor::usage = 
 	"Descriptor[img, winsizes, steps, histbins] gives the descriptor of a matrix, given the windowsizes, windowsteps and histogram bins"
 Descriptor::lengtherr = 
 	"winsizes and steps must have the same length"
 
 SSIM::usage = 
-	"SSIM[img1, img2] gives the Structural Similarity distance between two images"
+	"SSIM[img1, img2] gives the structural similarity distance between two images"
 SSIMExact::usage = 
-	"SSIMExact[img1, img2] gives the Structural Similarity distance between two images, using a slower method which should be slightly more accurate"
+	"SSIMExact[img1, img2] gives the structural similarity distance between two images, using a slower method which should be slightly more accurate"
 
 ApproxInfoDist::usage = 
-	"ApproxInfoDist[img1, img2] gives the Approximate Information distance between two images"
+	"ApproxInfoDist[vect1, vect2] gives the approximate information distance between two vectors"
+
+PearsonDistance::usage = 
+	"PearsonDistance[vect1, vect2] gives the Pearson correlation coefficient distance between two vectors"
 
 
 Begin["`Private`"]
+
+CGRStats[img_List?MatrixQ]:=
+	Module[{vect, mean},
+		vect = Flatten[img];
+		mean = Mean[vect];
+		
+		Return[{
+			Total@Unitize[vect], (* for ApproxInfoDist *)
+			mean, (* for PearsonDistance *)
+			Norm[vect-mean] (* for PearsonDistance *)
+		}];
+	];
 
 Descriptor[img_List?MatrixQ, winsizes_List, steps_List, histbins_List]:=
 	Module[{allwinds, currsize, currstep, winds},
@@ -93,13 +111,45 @@ SSIMExact[img1_List?MatrixQ, img2_List?MatrixQ]:=
 		Return[Mean[Mean[ssimmap]]];
 	];
 
-ApproxInfoDist[img1_List?MatrixQ, img2_List?MatrixQ]:=
+(* without CGRStats *)
+ApproxInfoDist[vect1_List?VectorQ, vect2_List?VectorQ]:=
 	Module[{x, y, xy},
-		x = Total[Unitize[img1], 2]; 
-		y = Total[Unitize[img2], 2];
-		xy = Total[Unitize[img1 + img2], 2];
+		x = Total@Unitize[vect1]; 
+		y = Total@Unitize[vect2];
+		xy = Total@Unitize[vect1 + vect2];
 
 		Return[(2 xy - x - y)/xy];
+	];
+
+(* with CGRStats *)
+ApproxInfoDist[{vect1_List?VectorQ, stats1_}, {vect2_List?VectorQ, stats2_}]:=
+	Module[{x, y, xy},
+		x = stats1[[1]]; 
+		y = stats2[[1]];
+		xy = Total@Unitize[vect1 + vect2];
+
+		Return[(2 xy - x - y)/xy];
+	];
+
+(* without CGRStats *)
+PearsonDistance[vect1_List?VectorQ, vect2_List?VectorQ]:=
+	Module[{mean1, mean2, norm1, norm2},
+		mean1 = Mean[vect1];
+		mean2 = Mean[vect2];
+		
+		norm1 = Norm[vect1-mean1];
+		norm2 = Norm[vect2-mean2];
+		
+		Return[1 - (vect1-mean1).(vect2-mean2)/(norm1 * norm2)];
+	];
+
+(* with CGRStats *)
+PearsonDistance[{vect1_List?VectorQ, stats1_}, {vect2_List?VectorQ, stats2_}]:=
+	Module[{mean1, mean2, norm1, norm2},
+		{mean1, norm1} = stats1[[{2, 3}]];
+		{mean2, norm2} = stats2[[{2, 3}]];
+		
+		Return[1 - (vect1-mean1).(vect2-mean2)/(norm1 * norm2)];
 	];
 
 

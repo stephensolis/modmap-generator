@@ -13,6 +13,7 @@ the following distances:
 
 - [Euclidean](http://en.wikipedia.org/wiki/Euclidean_distance)
 - [Manhattan](http://en.wikipedia.org/wiki/Manhattan_distance)
+- [Pearson Correlation](http://mathworld.wolfram.com/CorrelationCoefficient.html)
 - [SSIM](https://ece.uwaterloo.ca/~z70wang/research/ssim/)
 - [Descriptors](http://arxiv.org/abs/1503.00162)
 - [Approximate Information Distance](http://arxiv.org/abs/cs/0111054)
