@@ -8,9 +8,9 @@ GPUDistances::invinput =
 	"Inputs must be given as equal-sized 2D square matrices of Integer32 type"
 
 CUDASSIM::usage = 
-	"CUDASSIM[img1, img2] gives the Structural Similarity distance between two images, using CUDA"
+	"CUDASSIM[img1, img2] gives the structural similarity distance between two images, using CUDA"
 OpenCLSSIM::usage = 
-	"OpenCLSSIM[img1, img2] gives the Structural Similarity distance between two images, using OpenCL"
+	"OpenCLSSIM[img1, img2] gives the structural similarity distance between two images, using OpenCL"
 
 
 Begin["`Private`"]
