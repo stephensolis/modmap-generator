@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    174185,       4513]
-NotebookOptionsPosition[    148479,       3933]
-NotebookOutlinePosition[    169567,       4360]
-CellTagsIndexPosition[    169524,       4357]
+NotebookDataLength[    174174,       4512]
+NotebookOptionsPosition[    148468,       3932]
+NotebookOutlinePosition[    169556,       4359]
+CellTagsIndexPosition[    169513,       4356]
 WindowTitle->tests.nb
 WindowFrame->Normal*)
 
@@ -1178,13 +1178,12 @@ Cell[BoxData[
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"distSSIM", "=", 
-  RowBox[{"Outer", "[", 
-   RowBox[{
-   "CPUDistances`SSIM", ",", " ", "CGRs", ",", " ", "CGRs", ",", " ", "1"}], 
-   "]"}]}]], "VerificationTest",
+ RowBox[{"Outer", "[", 
+  RowBox[{
+  "CPUDistances`SSIM", ",", " ", "CGRs", ",", " ", "CGRs", ",", " ", "1"}], 
+  "]"}]], "VerificationTest",
  CellChangeTimes->{{3.641917635973633*^9, 3.6419176670058594`*^9}, {
-  3.6419177129179688`*^9, 3.6419177161972656`*^9}},
+   3.6419177129179688`*^9, 3.6419177161972656`*^9}, 3.64312269084375*^9},
  CellID->274400391],
 
 Cell[BoxData["refDistSSIM"], "ExpectedOutput",
@@ -4400,119 +4399,119 @@ Cell[37386, 983, 7333, 191, 41, "BottomCell",
  CellID->114329545]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[44756, 1179, 329, 8, 47, "VerificationTest",
+Cell[44756, 1179, 318, 7, 47, "VerificationTest",
  CellID->274400391],
-Cell[45088, 1189, 184, 3, 39, "ExpectedOutput",
+Cell[45077, 1188, 184, 3, 39, "ExpectedOutput",
  CellID->91851058],
-Cell[45275, 1194, 500, 14, 40, "TestOptions",
+Cell[45264, 1193, 500, 14, 40, "TestOptions",
  CellID->325606043],
-Cell[45778, 1210, 7333, 191, 41, "BottomCell",
+Cell[45767, 1209, 7333, 191, 41, "BottomCell",
  CellID->147477010]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[53148, 1406, 363, 8, 47, "VerificationTest",
+Cell[53137, 1405, 363, 8, 47, "VerificationTest",
  CellID->19057856],
-Cell[53514, 1416, 139, 2, 39, "ExpectedOutput",
+Cell[53503, 1415, 139, 2, 39, "ExpectedOutput",
  CellID->376066294],
-Cell[53656, 1420, 394, 12, 40, "TestOptions",
+Cell[53645, 1419, 394, 12, 40, "TestOptions",
  CellID->302979602],
-Cell[54053, 1434, 7333, 191, 41, "BottomCell",
+Cell[54042, 1433, 7333, 191, 41, "BottomCell",
  CellID->757363733]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[61423, 1630, 705, 15, 47, "VerificationTest",
+Cell[61412, 1629, 705, 15, 47, "VerificationTest",
  CellID->13977224],
-Cell[62131, 1647, 161, 3, 39, "ExpectedOutput",
+Cell[62120, 1646, 161, 3, 39, "ExpectedOutput",
  CellID->255433678],
-Cell[62295, 1652, 394, 12, 40, "TestOptions",
+Cell[62284, 1651, 394, 12, 40, "TestOptions",
  CellID->206754707],
-Cell[62692, 1666, 7333, 191, 41, "BottomCell",
+Cell[62681, 1665, 7333, 191, 41, "BottomCell",
  CellID->383158362]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[70062, 1862, 664, 14, 47, "VerificationTest",
+Cell[70051, 1861, 664, 14, 47, "VerificationTest",
  CellID->369393264],
-Cell[70729, 1878, 220, 4, 39, "ExpectedOutput",
+Cell[70718, 1877, 220, 4, 39, "ExpectedOutput",
  CellID->274071536],
-Cell[70952, 1884, 422, 13, 40, "TestOptions",
+Cell[70941, 1883, 422, 13, 40, "TestOptions",
  CellID->95608939],
-Cell[71377, 1899, 7332, 191, 41, "BottomCell",
+Cell[71366, 1898, 7332, 191, 41, "BottomCell",
  CellID->83276313]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[78746, 2095, 410, 8, 47, "VerificationTest",
+Cell[78735, 2094, 410, 8, 47, "VerificationTest",
  CellID->505044048],
-Cell[79159, 2105, 167, 3, 39, "ExpectedOutput",
+Cell[79148, 2104, 167, 3, 39, "ExpectedOutput",
  CellID->36239957],
-Cell[79329, 2110, 476, 14, 40, "TestOptions",
+Cell[79318, 2109, 476, 14, 40, "TestOptions",
  CellID->65613101],
-Cell[79808, 2126, 7333, 191, 41, "BottomCell",
+Cell[79797, 2125, 7333, 191, 41, "BottomCell",
  CellID->365402957]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[87178, 2322, 764, 13, 47, "VerificationTest",
+Cell[87167, 2321, 764, 13, 47, "VerificationTest",
  CellID->1002999052],
-Cell[87945, 2337, 426, 6, 39, "ExpectedOutput",
+Cell[87934, 2336, 426, 6, 39, "ExpectedOutput",
  CellID->62175616],
-Cell[88374, 2345, 549, 15, 40, "TestOptions",
+Cell[88363, 2344, 549, 15, 40, "TestOptions",
  CellID->498815541],
-Cell[88926, 2362, 7332, 191, 41, "BottomCell",
+Cell[88915, 2361, 7332, 191, 41, "BottomCell",
  CellID->17973337]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[96295, 2558, 694, 16, 128, "VerificationTest",
+Cell[96284, 2557, 694, 16, 128, "VerificationTest",
  CellID->733261387],
-Cell[96992, 2576, 127, 2, 39, "ExpectedOutput",
+Cell[96981, 2575, 127, 2, 39, "ExpectedOutput",
  CellID->291565776],
-Cell[97122, 2580, 7332, 191, 41, "BottomCell",
+Cell[97111, 2579, 7332, 191, 41, "BottomCell",
  CellID->62783415]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[104491, 2776, 560, 10, 47, "VerificationTest",
+Cell[104480, 2775, 560, 10, 47, "VerificationTest",
  CellID->8579392],
-Cell[105054, 2788, 316, 5, 39, "ExpectedOutput",
+Cell[105043, 2787, 316, 5, 39, "ExpectedOutput",
  CellID->126486221],
-Cell[105373, 2795, 523, 14, 40, "TestOptions",
+Cell[105362, 2794, 523, 14, 40, "TestOptions",
  CellID->9829243],
-Cell[105899, 2811, 7333, 191, 41, "BottomCell",
+Cell[105888, 2810, 7333, 191, 41, "BottomCell",
  CellID->310137516]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[113269, 3007, 760, 17, 128, "VerificationTest",
+Cell[113258, 3006, 760, 17, 128, "VerificationTest",
  CellID->102342781],
-Cell[114032, 3026, 125, 2, 39, "ExpectedOutput",
+Cell[114021, 3025, 125, 2, 39, "ExpectedOutput",
  CellID->273035283],
-Cell[114160, 3030, 7333, 191, 41, "BottomCell",
+Cell[114149, 3029, 7333, 191, 41, "BottomCell",
  CellID->109741454]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[121530, 3226, 649, 11, 47, "VerificationTest",
+Cell[121519, 3225, 649, 11, 47, "VerificationTest",
  CellID->79193633],
-Cell[122182, 3239, 335, 5, 39, "ExpectedOutput",
+Cell[122171, 3238, 335, 5, 39, "ExpectedOutput",
  CellID->34877637],
-Cell[122520, 3246, 472, 13, 40, "TestOptions",
+Cell[122509, 3245, 472, 13, 40, "TestOptions",
  CellID->30566275],
-Cell[122995, 3261, 7333, 191, 41, "BottomCell",
+Cell[122984, 3260, 7333, 191, 41, "BottomCell",
  CellID->586518634]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[130365, 3457, 576, 12, 68, "VerificationTest",
+Cell[130354, 3456, 576, 12, 68, "VerificationTest",
  CellID->188960048],
-Cell[130944, 3471, 370, 7, 39, "ExpectedOutput",
+Cell[130933, 3470, 370, 7, 39, "ExpectedOutput",
  CellID->157475291],
-Cell[131317, 3480, 671, 17, 40, "TestOptions",
+Cell[131306, 3479, 671, 17, 40, "TestOptions",
  CellID->643721435],
-Cell[131991, 3499, 7333, 191, 41, "BottomCell",
+Cell[131980, 3498, 7333, 191, 41, "BottomCell",
  CellID->258687469]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[139361, 3695, 596, 12, 68, "VerificationTest",
+Cell[139350, 3694, 596, 12, 68, "VerificationTest",
  CellID->99795955],
-Cell[139960, 3709, 315, 7, 39, "ExpectedOutput",
+Cell[139949, 3708, 315, 7, 39, "ExpectedOutput",
  CellID->678594850],
-Cell[140278, 3718, 849, 19, 40, "TestOptions",
+Cell[140267, 3717, 849, 19, 40, "TestOptions",
  CellID->604069536],
-Cell[141130, 3739, 7333, 191, 41, "BottomCell",
+Cell[141119, 3738, 7333, 191, 41, "BottomCell",
  CellID->137392572]
 }, Open  ]]
 }
