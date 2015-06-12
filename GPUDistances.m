@@ -9,7 +9,6 @@ GPUDistances::invinput =
 
 CUDASSIM::usage = 
 	"CUDASSIM[img1, img2] gives the Structural Similarity distance between two images, using CUDA"
-
 OpenCLSSIM::usage = 
 	"OpenCLSSIM[img1, img2] gives the Structural Similarity distance between two images, using OpenCL"
 

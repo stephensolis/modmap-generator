@@ -36,21 +36,23 @@ CGRStats[img_List?MatrixQ]:=
 		}];
 	];
 
+fastBinCounts[list_, bins_]:=
+	Module[{noZeroList = list+1, noZeroBins = bins+1}, 
+		Total@Unitize@Clip[noZeroList, {#1, #2-1}, {0, 0}]& @@@ Partition[noZeroBins, 2, 1]
+	];
+
 Descriptor[img_List?MatrixQ, winsizes_List, steps_List, histbins_List]:=
-	Module[{allwinds, currsize, currstep, winds},
+	Module[{allwinds, winds},
 		If[Length[winsizes] != Length[steps],
 			Message[Descriptor::lengtherr];
 			Return[$Failed];
 		];
 		
-		allwinds = Map[(
-			{currsize, currstep} = #;
+		allwinds = (
+			winds = Partition[img, {#1, #1}, #2];
 			
-			winds = Partition[img, {currsize, currsize}, currstep];
-			
-			(* note: Length/@BinLists is ~2x faster than BinCounts here *)
-			Flatten@Map[(Length/@BinLists[Flatten[#], {histbins}]) / (currsize^2)&, winds, {2}]
-		)&, Transpose[{winsizes, steps}]];
+			Flatten@Map[fastBinCounts[Flatten[#], histbins]&, winds, {2}] / (#1^2)
+		)& @@@ Transpose[{winsizes, steps}];
 		
 		Return[Flatten[allwinds]];
 	];
