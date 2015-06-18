@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     87615,       1612]
-NotebookOptionsPosition[     85857,       1556]
-NotebookOutlinePosition[     86245,       1573]
-CellTagsIndexPosition[     86202,       1570]
+NotebookDataLength[     87659,       1613]
+NotebookOptionsPosition[     85901,       1557]
+NotebookOutlinePosition[     86289,       1574]
+CellTagsIndexPosition[     86246,       1571]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -299,7 +299,7 @@ Cell[BoxData[{
              RowBox[{
               RowBox[{"\"\<cgr-stats_\>\"", " ", "<>", " ", 
                RowBox[{"ToString", "@", "blockNum"}], " ", "<>", " ", 
-               "\"\<.mx\>\""}], ",", " ", "descrBlock"}], "]"}], ";", "\n", 
+               "\"\<.mx\>\""}], ",", " ", "statsBlock"}], "]"}], ";", "\n", 
             "\n", "\t\t", 
             RowBox[{"(*", " ", 
              RowBox[{"compute", " ", "descriptors"}], " ", "*)"}], "\n", 
@@ -470,7 +470,8 @@ Cell[BoxData[{
    3.6410504522285156`*^9, 3.6410504528603516`*^9}, {3.6419157164716797`*^9, 
    3.641915724758789*^9}, {3.642539641333008*^9, 3.642539644786133*^9}, {
    3.6429494341777344`*^9, 3.642949440169922*^9}, {3.643028918198242*^9, 
-   3.6430289536552734`*^9}, {3.6430289933583984`*^9, 3.6430290116220703`*^9}}]
+   3.6430289536552734`*^9}, {3.6430289933583984`*^9, 
+   3.6430290116220703`*^9}, {3.64359167875*^9, 3.6435916810625*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1558,7 +1559,7 @@ WindowSize->{1280, 942},
 WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 ShowSelection->True,
 ShowGroupOpener->True,
-FrontEndVersion->"10.1 for Microsoft Windows (32-bit) (March 23, 2015)",
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -1581,35 +1582,35 @@ Cell[1000, 30, 8944, 182, 953, "Code",
 Cell[CellGroupData[{
 Cell[9981, 217, 577, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[10561, 227, 14669, 245, 753, "Code",
+Cell[10561, 227, 14713, 246, 753, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[25267, 477, 564, 8, 41, "Subsection",
+Cell[25311, 478, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[25834, 487, 19504, 341, 1473, "Code",
+Cell[25878, 488, 19504, 341, 1473, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[45375, 833, 564, 8, 41, "Subsection",
+Cell[45419, 834, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10004.}],
-Cell[45942, 843, 14521, 245, 733, "Code",
+Cell[45986, 844, 14521, 245, 733, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10004.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[60500, 1093, 490, 7, 41, "Subsection",
+Cell[60544, 1094, 490, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[60993, 1102, 16287, 282, 813, "Code",
+Cell[61037, 1103, 16287, 282, 813, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[77317, 1389, 557, 8, 41, "Subsection",
+Cell[77361, 1390, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[77877, 1399, 7964, 154, 633, "Code",
+Cell[77921, 1400, 7964, 154, 633, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
