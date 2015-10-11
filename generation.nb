@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     87781,       1616]
-NotebookOptionsPosition[     86023,       1560]
-NotebookOutlinePosition[     86411,       1577]
-CellTagsIndexPosition[     86368,       1574]
+NotebookDataLength[     89689,       1647]
+NotebookOptionsPosition[     87931,       1591]
+NotebookOutlinePosition[     88319,       1608]
+CellTagsIndexPosition[     88276,       1605]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -514,159 +514,178 @@ Cell[BoxData[{
         RowBox[{
          RowBox[{"SetDirectory", "[", "workDir", "]"}], ";", "\n", "\n", 
          "\t\t", 
-         RowBox[{"(*", " ", 
-          RowBox[{"fetch", " ", "descriptor", " ", "blocks"}], " ", "*)"}], 
-         "\n", "\t\t", 
-         RowBox[{"Get", "[", 
-          RowBox[{"\"\<descr-temp_\>\"", " ", "<>", " ", 
-           RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-          "]"}], ";", "\n", "\t\t", 
-         RowBox[{"descrBlock1", " ", "=", " ", "descrBlock"}], ";", "\n", 
-         "\t\t", 
          RowBox[{"If", "[", 
           RowBox[{
-           RowBox[{"i", " ", "\[Equal]", " ", "j"}], ",", " ", "\n", "\t\t\t", 
-           RowBox[{
-            RowBox[{"descrBlock2", " ", "=", " ", "descrBlock1"}], ";"}], 
-           "\n", "\t\t", ",", "\n", "\t\t\t", 
+           RowBox[{"!", 
+            RowBox[{"FileExistsQ", "[", 
+             RowBox[{"\"\<dist-pearson_\>\"", " ", "<>", " ", 
+              RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+              " ", "<>", " ", 
+              RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}],
+              "]"}]}], ",", "\n", "\t\t\t", 
+           RowBox[{"(*", " ", 
+            RowBox[{"fetch", " ", "descriptor", " ", "blocks"}], " ", "*)"}], 
+           "\n", "\t\t\t", 
            RowBox[{
             RowBox[{"Get", "[", 
              RowBox[{"\"\<descr-temp_\>\"", " ", "<>", " ", 
-              RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}],
+              RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<.mx\>\""}],
               "]"}], ";", "\n", "\t\t\t", 
-            RowBox[{"descrBlock2", " ", "=", " ", "descrBlock"}], ";"}]}], 
-          "\n", "\t\t", "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"(*", "descriptors", "*)"}], "\n", "\t\t", 
-         RowBox[{"distBlock", " ", "=", " ", 
-          RowBox[{"Outer", "[", 
-           RowBox[{
-           "EuclideanDistance", ",", " ", "descrBlock1", ",", " ", 
-            "descrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t", 
-         RowBox[{"DumpSave", "[", 
-          RowBox[{
-           RowBox[{"\"\<dist-descr_\>\"", " ", "<>", " ", 
-            RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", " ", 
-            "<>", " ", 
-            RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-           ",", " ", "distBlock"}], "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"Clear", "[", 
-          RowBox[{
-          "descrBlock", ",", " ", "descrBlock1", ",", " ", "descrBlock2"}], 
-          "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"(*", " ", 
-          RowBox[{"fetch", " ", "CGR", " ", "blocks"}], " ", "*)"}], "\n", 
-         "\t\t", 
-         RowBox[{"Get", "[", 
-          RowBox[{"\"\<cgrs_\>\"", " ", "<>", " ", 
-           RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-          "]"}], ";", "\n", "\t\t", 
-         RowBox[{"cgrBlock1", " ", "=", " ", "cgrBlock"}], ";", "\n", "\t\t", 
-         RowBox[{"If", "[", 
-          RowBox[{
-           RowBox[{"i", " ", "\[Equal]", " ", "j"}], ",", " ", "\n", "\t\t\t", 
-           RowBox[{
-            RowBox[{"cgrBlock2", " ", "=", " ", "cgrBlock1"}], ";"}], "\n", 
-           "\t\t", ",", "\n", "\t\t\t", 
-           RowBox[{
+            RowBox[{"descrBlock1", " ", "=", " ", "descrBlock"}], ";", "\n", 
+            "\t\t\t", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"i", " ", "==", " ", "j"}], ",", " ", "\n", "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"descrBlock2", " ", "=", " ", "descrBlock1"}], ";"}], 
+              "\n", "\t\t\t", ",", "\n", "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"Get", "[", 
+                RowBox[{"\"\<descr-temp_\>\"", " ", "<>", " ", 
+                 RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+                 "\"\<.mx\>\""}], "]"}], ";", "\n", "\t\t\t\t", 
+               RowBox[{"descrBlock2", " ", "=", " ", "descrBlock"}], ";"}]}], 
+             "\n", "\t\t\t", "]"}], ";", "\n", "\n", "\t\t\t", 
+            RowBox[{"(*", "descriptors", "*)"}], "\n", "\t\t\t", 
+            RowBox[{"distBlock", " ", "=", " ", 
+             RowBox[{"Outer", "[", 
+              RowBox[{
+              "EuclideanDistance", ",", " ", "descrBlock1", ",", " ", 
+               "descrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-descr_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
+            "\n", "\t\t\t", 
+            RowBox[{"Clear", "[", 
+             RowBox[{
+             "descrBlock", ",", " ", "descrBlock1", ",", " ", "descrBlock2"}],
+              "]"}], ";", "\n", "\n", "\t\t\t", 
+            RowBox[{"(*", " ", 
+             RowBox[{"fetch", " ", "CGR", " ", "blocks"}], " ", "*)"}], "\n", 
+            "\t\t\t", 
             RowBox[{"Get", "[", 
              RowBox[{"\"\<cgrs_\>\"", " ", "<>", " ", 
-              RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}],
+              RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<.mx\>\""}],
               "]"}], ";", "\n", "\t\t\t", 
-            RowBox[{"cgrBlock2", " ", "=", " ", "cgrBlock"}], ";"}]}], "\n", 
-          "\t\t", "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"cgrBlock1", " ", "=", " ", 
-          RowBox[{"Flatten", " ", "/@", " ", "cgrBlock1"}]}], ";", "\n", 
-         "\t\t", 
-         RowBox[{"cgrBlock2", " ", "=", " ", 
-          RowBox[{"Flatten", " ", "/@", " ", "cgrBlock2"}]}], ";", "\n", "\n",
-          "\t\t", 
-         RowBox[{"(*", "euclidean", "*)"}], "\n", "\t\t", 
-         RowBox[{"distBlock", " ", "=", " ", 
-          RowBox[{"Outer", "[", 
-           RowBox[{
-           "EuclideanDistance", ",", " ", "cgrBlock1", ",", " ", "cgrBlock2", 
-            ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t", 
-         RowBox[{"DumpSave", "[", 
-          RowBox[{
-           RowBox[{"\"\<dist-euclid_\>\"", " ", "<>", " ", 
-            RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", " ", 
-            "<>", " ", 
-            RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-           ",", " ", "distBlock"}], "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"(*", "manhattan", "*)"}], "\n", "\t\t", 
-         RowBox[{"distBlock", " ", "=", " ", 
-          RowBox[{"Outer", "[", 
-           RowBox[{
-           "ManhattanDistance", ",", " ", "cgrBlock1", ",", " ", "cgrBlock2", 
-            ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t", 
-         RowBox[{"DumpSave", "[", 
-          RowBox[{
-           RowBox[{"\"\<dist-manhat_\>\"", " ", "<>", " ", 
-            RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", " ", 
-            "<>", " ", 
-            RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-           ",", " ", "distBlock"}], "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"(*", " ", 
-          RowBox[{"fetch", " ", "CGR", " ", "stats"}], " ", "*)"}], "\n", 
-         "\t\t", 
-         RowBox[{"Get", "[", 
-          RowBox[{"\"\<cgr-stats_\>\"", " ", "<>", " ", 
-           RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-          "]"}], ";", "\n", "\t\t", 
-         RowBox[{"cgrBlock1", " ", "=", " ", 
-          RowBox[{"Transpose", "[", 
-           RowBox[{"{", 
-            RowBox[{"cgrBlock1", ",", " ", "statsBlock"}], "}"}], "]"}]}], 
-         ";", "\n", "\t\t", 
-         RowBox[{"If", "[", 
-          RowBox[{
-           RowBox[{"i", " ", "\[Equal]", " ", "j"}], ",", " ", "\n", "\t\t\t", 
-           RowBox[{
-            RowBox[{"cgrBlock2", " ", "=", " ", "cgrBlock1"}], ";"}], "\n", 
-           "\t\t", ",", "\n", "\t\t\t", 
-           RowBox[{
+            RowBox[{"cgrBlock1", " ", "=", " ", "cgrBlock"}], ";", "\n", 
+            "\t\t\t", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"i", " ", "==", " ", "j"}], ",", " ", "\n", "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"cgrBlock2", " ", "=", " ", "cgrBlock1"}], ";"}], "\n",
+               "\t\t\t", ",", "\n", "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"Get", "[", 
+                RowBox[{"\"\<cgrs_\>\"", " ", "<>", " ", 
+                 RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+                 "\"\<.mx\>\""}], "]"}], ";", "\n", "\t\t\t\t", 
+               RowBox[{"cgrBlock2", " ", "=", " ", "cgrBlock"}], ";"}]}], 
+             "\n", "\t\t\t", "]"}], ";", "\n", "\n", "\t\t\t", 
+            RowBox[{"cgrBlock1", " ", "=", " ", 
+             RowBox[{"Flatten", " ", "/@", " ", "cgrBlock1"}]}], ";", "\n", 
+            "\t\t\t", 
+            RowBox[{"cgrBlock2", " ", "=", " ", 
+             RowBox[{"Flatten", " ", "/@", " ", "cgrBlock2"}]}], ";", "\n", 
+            "\n", "\t\t\t", 
+            RowBox[{"(*", "euclidean", "*)"}], "\n", "\t\t\t", 
+            RowBox[{"distBlock", " ", "=", " ", 
+             RowBox[{"Outer", "[", 
+              RowBox[{
+              "EuclideanDistance", ",", " ", "cgrBlock1", ",", " ", 
+               "cgrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-euclid_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
+            "\n", "\t\t\t", 
+            RowBox[{"(*", "manhattan", "*)"}], "\n", "\t\t\t", 
+            RowBox[{"distBlock", " ", "=", " ", 
+             RowBox[{"Outer", "[", 
+              RowBox[{
+              "ManhattanDistance", ",", " ", "cgrBlock1", ",", " ", 
+               "cgrBlock2", ",", " ", "1"}], "]"}]}], ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-manhat_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
+            "\n", "\t\t\t", 
+            RowBox[{"(*", " ", 
+             RowBox[{"fetch", " ", "CGR", " ", "stats"}], " ", "*)"}], "\n", 
+            "\t\t\t", 
             RowBox[{"Get", "[", 
              RowBox[{"\"\<cgr-stats_\>\"", " ", "<>", " ", 
-              RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}],
+              RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<.mx\>\""}],
               "]"}], ";", "\n", "\t\t\t", 
-            RowBox[{"cgrBlock2", " ", "=", " ", 
+            RowBox[{"cgrBlock1", " ", "=", " ", 
              RowBox[{"Transpose", "[", 
               RowBox[{"{", 
-               RowBox[{"cgrBlock2", ",", " ", "statsBlock"}], "}"}], "]"}]}], 
-            ";"}]}], "\n", "\t\t", "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"(*", 
-          RowBox[{"approx", " ", "info", " ", "dist"}], "*)"}], "\n", "\t\t", 
-         RowBox[{"distBlock", " ", "=", " ", 
-          RowBox[{"Outer", "[", 
-           RowBox[{
-            RowBox[{"N", " ", "@*", " ", "ApproxInfoDist"}], ",", " ", 
-            "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}], ";",
-          "\n", "\t\t", 
-         RowBox[{"DumpSave", "[", 
-          RowBox[{
-           RowBox[{"\"\<dist-info_\>\"", " ", "<>", " ", 
-            RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", " ", 
-            "<>", " ", 
-            RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-           ",", " ", "distBlock"}], "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"(*", "Pearson", "*)"}], "\n", "\t\t", 
-         RowBox[{"distBlock", " ", "=", " ", 
-          RowBox[{"Outer", "[", 
-           RowBox[{
-            RowBox[{"N", " ", "@*", " ", "PearsonDistance"}], ",", " ", 
-            "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}], ";",
-          "\n", "\t\t", 
-         RowBox[{"DumpSave", "[", 
-          RowBox[{
-           RowBox[{"\"\<dist-pearson_\>\"", " ", "<>", " ", 
-            RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", " ", 
-            "<>", " ", 
-            RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-           ",", " ", "distBlock"}], "]"}], ";", "\n", "\n", "\t\t", 
-         RowBox[{"Clear", "[", 
-          RowBox[{
-          "cgrBlock", ",", " ", "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", 
-           "statsBlock"}], "]"}], ";"}]}], "\n", "\t", "]"}], "\n", ",", " ", 
+               RowBox[{"cgrBlock1", ",", " ", "statsBlock"}], "}"}], "]"}]}], 
+            ";", "\n", "\t\t\t", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"i", " ", "==", " ", "j"}], ",", " ", "\n", "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"cgrBlock2", " ", "=", " ", "cgrBlock1"}], ";"}], "\n",
+               "\t\t\t", ",", "\n", "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"Get", "[", 
+                RowBox[{"\"\<cgr-stats_\>\"", " ", "<>", " ", 
+                 RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+                 "\"\<.mx\>\""}], "]"}], ";", "\n", "\t\t\t\t", 
+               RowBox[{"cgrBlock2", " ", "=", " ", 
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", 
+                  RowBox[{"cgrBlock2", ",", " ", "statsBlock"}], "}"}], 
+                 "]"}]}], ";"}]}], "\n", "\t\t\t", "]"}], ";", "\n", "\n", 
+            "\t\t\t", 
+            RowBox[{"(*", 
+             RowBox[{"approx", " ", "info", " ", "dist"}], "*)"}], "\n", 
+            "\t\t\t", 
+            RowBox[{"distBlock", " ", "=", " ", 
+             RowBox[{"Outer", "[", 
+              RowBox[{
+               RowBox[{"N", " ", "@*", " ", "ApproxInfoDist"}], ",", " ", 
+               "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}], 
+            ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-info_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
+            "\n", "\t\t\t", 
+            RowBox[{"(*", "Pearson", "*)"}], "\n", "\t\t\t", 
+            RowBox[{"distBlock", " ", "=", " ", 
+             RowBox[{"Outer", "[", 
+              RowBox[{
+               RowBox[{"N", " ", "@*", " ", "PearsonDistance"}], ",", " ", 
+               "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}], 
+            ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-pearson_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
+            "\n", "\t\t\t", 
+            RowBox[{"Clear", "[", 
+             RowBox[{
+             "cgrBlock", ",", " ", "cgrBlock1", ",", " ", "cgrBlock2", ",", 
+              " ", "statsBlock"}], "]"}], ";"}]}], "\n", "\t\t", "]"}], 
+         ";"}]}], "\n", "\t", "]"}], "\n", ",", " ", 
       RowBox[{"{", 
        RowBox[{"i", ",", " ", "1", ",", " ", "numBlocks"}], "}"}], ",", " ", 
       RowBox[{"{", 
@@ -827,7 +846,8 @@ Cell[BoxData[{
    3.6430292982197266`*^9, 3.643029330129883*^9}, {3.6430294763466797`*^9, 
    3.643029509401367*^9}, {3.6430295579873047`*^9, 3.643029571411133*^9}, {
    3.643029821651367*^9, 3.643029918975586*^9}, {3.6430299645039062`*^9, 
-   3.6430299777929688`*^9}}]
+   3.6430299777929688`*^9}, {3.653510910625*^9, 3.6535109261875*^9}, {
+   3.653510959734375*^9, 3.653510977140625*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -870,68 +890,78 @@ Cell[BoxData[{
         RowBox[{
          RowBox[{"SetDirectory", "[", "workDir", "]"}], ";", "\n", "\n", 
          "\t\t", 
-         RowBox[{"(*", " ", 
-          RowBox[{"fetch", " ", "CGR", " ", "blocks"}], " ", "*)"}], "\n", 
-         "\t\t", 
-         RowBox[{"Get", "[", 
-          RowBox[{"\"\<cgrs_\>\"", " ", "<>", " ", 
-           RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-          "]"}], ";", "\n", "\t\t", 
-         RowBox[{"cgrBlock1", " ", "=", " ", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"CUDAMemoryLoad", "[", 
-             RowBox[{"#", ",", " ", "\"\<Integer32\>\""}], "]"}], "&"}], " ", 
-           "/@", " ", "cgrBlock"}]}], ";", "\n", "\t\t", 
          RowBox[{"If", "[", 
           RowBox[{
-           RowBox[{"i", " ", "\[Equal]", " ", "j"}], ",", " ", "\n", "\t\t\t", 
-           RowBox[{
-            RowBox[{"cgrBlock2", " ", "=", " ", "cgrBlock1"}], ";"}], "\n", 
-           "\t\t", ",", "\n", "\t\t\t", 
+           RowBox[{"!", 
+            RowBox[{"FileExistsQ", "[", 
+             RowBox[{"\"\<dist-ssim_\>\"", " ", "<>", " ", 
+              RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+              " ", "<>", " ", 
+              RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}],
+              "]"}]}], ",", "\n", "\t\t\t", 
+           RowBox[{"(*", " ", 
+            RowBox[{"fetch", " ", "CGR", " ", "blocks"}], " ", "*)"}], "\n", 
+           "\t\t\t", 
            RowBox[{
             RowBox[{"Get", "[", 
              RowBox[{"\"\<cgrs_\>\"", " ", "<>", " ", 
-              RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}],
+              RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<.mx\>\""}],
               "]"}], ";", "\n", "\t\t\t", 
-            RowBox[{"cgrBlock2", " ", "=", " ", 
+            RowBox[{"cgrBlock1", " ", "=", " ", 
              RowBox[{
               RowBox[{
                RowBox[{"CUDAMemoryLoad", "[", 
                 RowBox[{"#", ",", " ", "\"\<Integer32\>\""}], "]"}], "&"}], 
-              " ", "/@", " ", "cgrBlock"}]}], ";"}]}], "\n", "\t\t", "]"}], 
-         ";", "\n", "\n", "\t\t", 
-         RowBox[{"(*", "DSSIM", "*)"}], "\n", "\t\t", 
-         RowBox[{"distBlock", " ", "=", " ", 
-          RowBox[{"Outer", "[", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"(", 
-              RowBox[{"1", " ", "-", " ", 
-               RowBox[{"CUDASSIM", "[", 
-                RowBox[{"#1", ",", " ", "#2"}], "]"}]}], ")"}], "&"}], ",", 
-            " ", "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}],
-          ";", "\n", "\t\t", 
-         RowBox[{"DumpSave", "[", 
-          RowBox[{
-           RowBox[{"\"\<dist-ssim_\>\"", " ", "<>", " ", 
-            RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", " ", 
-            "<>", " ", 
-            RowBox[{"ToString", "@", "j"}], " ", "<>", " ", "\"\<.mx\>\""}], 
-           ",", " ", "distBlock"}], "]"}], ";", "\n", "\t\t", "\n", "\t\t", 
-         RowBox[{"(*", 
-          RowBox[{"unload", " ", "CGRs", " ", "from", " ", "GPU"}], "*)"}], 
-         "\n", "\t\t", 
-         RowBox[{"CUDAMemoryUnload", " ", "/@", " ", "cgrBlock1"}], ";", "\n",
-          "\t\t", 
-         RowBox[{"If", "[", 
-          RowBox[{
-           RowBox[{"i", " ", "\[NotEqual]", " ", "j"}], ",", " ", "\n", 
-           "\t\t\t", 
-           RowBox[{
-            RowBox[{"CUDAMemoryUnload", " ", "/@", " ", "cgrBlock2"}], 
-            ";"}]}], "\n", "\t\t", "]"}], ";"}]}], "\n", "\t", "]"}], "\n", 
-      ",", " ", 
+              " ", "/@", " ", "cgrBlock"}]}], ";", "\n", "\t\t\t", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"i", " ", "==", " ", "j"}], ",", " ", "\n", "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"cgrBlock2", " ", "=", " ", "cgrBlock1"}], ";"}], "\n",
+               "\t\t\t", ",", "\n", "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"Get", "[", 
+                RowBox[{"\"\<cgrs_\>\"", " ", "<>", " ", 
+                 RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+                 "\"\<.mx\>\""}], "]"}], ";", "\n", "\t\t\t\t", 
+               RowBox[{"cgrBlock2", " ", "=", " ", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"CUDAMemoryLoad", "[", 
+                   RowBox[{"#", ",", " ", "\"\<Integer32\>\""}], "]"}], "&"}],
+                  " ", "/@", " ", "cgrBlock"}]}], ";"}]}], "\n", "\t\t\t", 
+             "]"}], ";", "\n", "\n", "\t\t\t", 
+            RowBox[{"(*", "DSSIM", "*)"}], "\n", "\t\t\t", 
+            RowBox[{"distBlock", " ", "=", " ", 
+             RowBox[{"Outer", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"1", " ", "-", " ", 
+                  RowBox[{"CUDASSIM", "[", 
+                   RowBox[{"#1", ",", " ", "#2"}], "]"}]}], ")"}], "&"}], ",",
+                " ", "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], 
+              "]"}]}], ";", "\n", "\t\t\t", 
+            RowBox[{"DumpSave", "[", 
+             RowBox[{
+              RowBox[{"\"\<dist-ssim_\>\"", " ", "<>", " ", 
+               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<_\>\"", 
+               " ", "<>", " ", 
+               RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
+               "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
+            "\t\t\t", "\n", "\t\t\t", 
+            RowBox[{"(*", 
+             RowBox[{"unload", " ", "CGRs", " ", "from", " ", "GPU"}], "*)"}],
+             "\n", "\t\t\t", 
+            RowBox[{"CUDAMemoryUnload", " ", "/@", " ", "cgrBlock1"}], ";", 
+            "\n", "\t\t\t", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"i", " ", "!=", " ", "j"}], ",", " ", "\n", "\t\t\t\t", 
+              RowBox[{
+               RowBox[{"CUDAMemoryUnload", " ", "/@", " ", "cgrBlock2"}], 
+               ";"}]}], "\n", "\t\t\t", "]"}], ";"}]}], "\n", "\t\t", "]"}], 
+         ";"}]}], "\n", "\t", "]"}], "\n", ",", " ", 
       RowBox[{"{", 
        RowBox[{"i", ",", " ", "1", ",", " ", "numBlocks"}], "}"}], ",", " ", 
       RowBox[{"{", 
@@ -1087,7 +1117,8 @@ Cell[BoxData[{
    3.6425182239853516`*^9, 3.6425182264873047`*^9}, {3.642539667754883*^9, 
    3.642539681770508*^9}, {3.642540155551758*^9, 3.642540167754883*^9}, {
    3.6429494665507812`*^9, 3.6429495716816406`*^9}, 3.6429555274160156`*^9, {
-   3.642955572385742*^9, 3.642955572745117*^9}}]
+   3.642955572385742*^9, 3.642955572745117*^9}, {3.653510998625*^9, 
+   3.653511025578125*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1558,11 +1589,11 @@ nucleotide&rettype=gb&retmode=xml&id=\>\""}], ";"}], "\n", "\n",
    3.646581719376953*^9}}]
 }, Closed]]
 },
-WindowSize->{1280, 942},
+WindowSize->{1440, 818},
 WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 ShowSelection->True,
 ShowGroupOpener->True,
-FrontEndVersion->"10.1 for Microsoft Windows (32-bit) (March 23, 2015)",
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -1592,28 +1623,28 @@ Cell[10561, 227, 14713, 246, 753, "Code",
 Cell[CellGroupData[{
 Cell[25311, 478, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[25878, 488, 19504, 341, 1473, "Code",
+Cell[25878, 488, 20705, 361, 1513, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[45419, 834, 564, 8, 41, "Subsection",
+Cell[46620, 854, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10004.}],
-Cell[45986, 844, 14521, 245, 733, "Code",
+Cell[47187, 864, 15228, 256, 773, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10004.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[60544, 1094, 490, 7, 41, "Subsection",
+Cell[62452, 1125, 490, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[61037, 1103, 16287, 282, 813, "Code",
+Cell[62945, 1134, 16287, 282, 813, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[77361, 1390, 557, 8, 41, "Subsection",
+Cell[79269, 1421, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[77921, 1400, 8086, 157, 653, "Code",
+Cell[79829, 1431, 8086, 157, 653, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
