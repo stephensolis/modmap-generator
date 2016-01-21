@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     78611,       1524]
-NotebookOptionsPosition[     76350,       1451]
-NotebookOutlinePosition[     76904,       1473]
-CellTagsIndexPosition[     76861,       1470]
+NotebookDataLength[     78689,       1528]
+NotebookOptionsPosition[     76426,       1455]
+NotebookOutlinePosition[     76982,       1477]
+CellTagsIndexPosition[     76939,       1474]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -560,8 +560,17 @@ Cell["Stats + Histograms", "Subsection",
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"n", " ", "=", " ", 
-   RowBox[{"Length", "@", "distsFiltered"}]}], ";"}], "\n", 
+  RowBox[{
+   RowBox[{"n", " ", "=", " ", 
+    RowBox[{"Length", "@", "distsFiltered"}]}], ";"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"the", " ", "upper"}], "-", 
+     RowBox[{
+     "triangular", " ", "part", " ", "of", " ", "the", " ", "distance", " ", 
+      "matrix"}]}], ",", " ", 
+    RowBox[{"as", " ", "a", " ", "flat", " ", "list"}]}], " ", "*)"}]}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"distEntries", " ", "=", " ", 
@@ -574,15 +583,14 @@ Cell[BoxData[{
           RowBox[{
            RowBox[{"#", "+", "1"}], ";;"}]}], "]"}], "]"}], "&"}], " ", "/@", 
       " ", 
-      RowBox[{"Range", "[", "n", "]"}]}], "]"}]}], ";"}], " ", 
+      RowBox[{"Range", "[", "n", "]"}]}], "]"}]}], ";"}], "\n", 
   RowBox[{"(*", " ", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"the", " ", "upper"}], "-", 
-     RowBox[{
-     "triangular", " ", "part", " ", "of", " ", "the", " ", "distance", " ", 
-      "matrix"}]}], ",", " ", 
-    RowBox[{"as", " ", "a", " ", "flat", " ", "list"}]}], " ", "*)"}]}], "\n", 
+   RowBox[{"the", " ", "positions", " ", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", " ", "j"}], "}"}], " ", "in", " ", "the", " ", 
+    "original", " ", "distance", " ", "matrix", " ", "corresponding", " ", 
+    "to", " ", "the", " ", "entries", " ", "in", " ", "distEntries"}], " ", 
+   "*)"}]}], "\n", 
  RowBox[{
   RowBox[{"origIndexes", " ", "=", " ", 
    RowBox[{"Flatten", "[", 
@@ -599,14 +607,9 @@ Cell[BoxData[{
            RowBox[{
             RowBox[{"#", "+", "1"}], ",", " ", "n"}], "]"}]}], "}"}], "]"}], 
        "&"}], " ", "/@", " ", 
-      RowBox[{"Range", "[", "n", "]"}]}], ",", " ", "1"}], "]"}]}], ";", " ", 
-  RowBox[{"(*", " ", 
-   RowBox[{"the", " ", "positions", " ", 
-    RowBox[{"{", 
-     RowBox[{"i", ",", " ", "j"}], "}"}], " ", "in", " ", "the", " ", 
-    "original", " ", "distance", " ", "matrix", " ", "corresponding", " ", 
-    "to", " ", "the", " ", "entries", " ", "in", " ", "distEntries"}], " ", 
-   "*)"}], "\n", "\n", 
+      RowBox[{"Range", "[", "n", "]"}]}], ",", " ", "1"}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
   RowBox[{"posMax", " ", "=", " ", 
    RowBox[{"Flatten", "@", 
     RowBox[{"Position", "[", 
@@ -724,7 +727,8 @@ Cell[BoxData[{
    3.6342985572358465`*^9, 3.6342985697626686`*^9}, {3.6342986249555655`*^9, 
    3.6342986328179793`*^9}, {3.634298819222707*^9, 3.6342989033692546`*^9}, {
    3.634298938219716*^9, 3.6342989782805862`*^9}, {3.634299053815919*^9, 
-   3.634299086326376*^9}, {3.6399248318707933`*^9, 3.6399249340389805`*^9}}]
+   3.634299086326376*^9}, {3.6399248318707933`*^9, 3.6399249340389805`*^9}, {
+   3.662398232116211*^9, 3.662398242772461*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1449,8 +1453,8 @@ Cell[BoxData[
    3.6623863856367226`*^9}}]
 }, Closed]]
 },
-WindowSize->{1920, 998},
-WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+WindowSize->{1424, 842},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
 PrintingCopies->1,
 PrintingPageRange->{32000, 32000},
 PrintingOptions->{"Magnification"->1.,
@@ -1458,7 +1462,7 @@ PrintingOptions->{"Magnification"->1.,
 "PaperSize"->{612., 791.9999999999999}},
 ShowSelection->True,
 ShowGroupOpener->True,
-FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (December 10, 2015)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -1497,31 +1501,31 @@ Cell[18134, 350, 9829, 193, 573, "Code",
 Cell[CellGroupData[{
 Cell[28000, 548, 737, 10, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[28740, 560, 8240, 166, 273, "Code",
+Cell[28740, 560, 8316, 170, 293, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[37017, 731, 482, 7, 41, "Subsection",
+Cell[37093, 735, 482, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[37502, 740, 19136, 320, 613, "Code",
+Cell[37578, 744, 19136, 320, 613, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[56675, 1065, 534, 7, 41, "Subsection",
+Cell[56751, 1069, 534, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[57212, 1074, 10009, 207, 753, "Code",
+Cell[57288, 1078, 10009, 207, 753, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[67258, 1286, 622, 8, 41, "Subsection",
+Cell[67334, 1290, 622, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[67883, 1296, 8451, 152, 373, "Code",
+Cell[67959, 1300, 8451, 152, 373, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
