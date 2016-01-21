@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     80939,       1585]
-NotebookOptionsPosition[     78680,       1512]
-NotebookOutlinePosition[     79234,       1534]
-CellTagsIndexPosition[     79191,       1531]
+NotebookDataLength[     78611,       1524]
+NotebookOptionsPosition[     76350,       1451]
+NotebookOutlinePosition[     76904,       1473]
+CellTagsIndexPosition[     76861,       1470]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -47,12 +47,12 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{
         RowBox[{"NotebookDirectory", "[", "]"}], ",", " ", "\"\<output\>\""}],
-        "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+        "}"}], "]"}]}], ";"}], "\n", "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
      RowBox[{
      "amount", " ", "of", " ", "connectivity", " ", "for", " ", "NN"}], "-", 
-     "graph"}], " ", "*)"}], "\n", 
+     "graph"}], " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"edgesPerNode", " ", "=", " ", "3"}], ";"}], "\n", "\n", 
    RowBox[{"(*", " ", 
@@ -74,7 +74,8 @@ Cell[BoxData[
         "\"\<YellowGreen\>\"", "]"}], ",", " ", 
        RowBox[{
         RowBox[{"ColorData", "[", "\"\<Legacy\>\"", "]"}], "[", 
-        "\"\<DarkGreen\>\"", "]"}], ",", " ", "Brown"}], "}"}]}], ";"}], "\n", 
+        "\"\<DarkGreen\>\"", "]"}], ",", " ", "Brown"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"colorScheme", " ", "=", " ", 
@@ -91,7 +92,7 @@ Cell[BoxData[
          RowBox[{"#", "&"}], ",", " ", "12", ",", " ", 
          RowBox[{"{", 
           RowBox[{"0", ",", " ", "1"}], "}"}]}], "]"}]}]}], ";"}], "*)"}], 
-   "\n", "\[IndentingNewLine]", 
+   "\n", "\n", 
    RowBox[{"(*", " ", 
     RowBox[{"taxonomic", " ", "group", " ", "split"}], " ", "*)"}], "\n", 
    RowBox[{"(*", 
@@ -117,8 +118,55 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{
         "\"\<Stramenopiles\>\"", ",", "\t\t", 
-         "\"\<Eukaryota; Stramenopiles;\>\""}], "}"}]}], "}"}]}], 
-    ";"}]}]}]], "Code",
+         "\"\<Eukaryota; Stramenopiles;\>\""}], "}"}]}], "}"}]}], ";"}], "\n",
+    "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"mouseover", " ", "info", " ", "grid", " ", "function"}], " ", 
+    "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ShowMouseoverInfo", "[", "]"}], " ", ":=", " ", 
+     RowBox[{"(", "\n", "\t", 
+      RowBox[{
+       RowBox[{"Print", "[", 
+        RowBox[{"Dynamic", "[", "\n", "\t\t", 
+         RowBox[{
+          RowBox[{"labels", " ", "=", " ", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Style", "[", 
+              RowBox[{"#", ",", " ", "Bold"}], "]"}], "&"}], " ", "/@", " ", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<ID\>\"", ",", " ", "\"\<Group\>\"", ",", " ", 
+              "\"\<Organism\>\"", ",", " ", "\"\<Accession\>\"", ",", " ", 
+              "\"\<GenID\>\"", ",", " ", "\"\<Length (kb)\>\"", ",", " ", 
+              "\"\<Taxonomy\>\""}], "}"}]}]}], ";", "\n", "\n", "\t\t", 
+          RowBox[{"currPtData", " ", "=", " ", 
+           RowBox[{"MouseAnnotation", "[", "]"}]}], ";", "\n", "\t\t", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"!", 
+             RowBox[{"Null", " ", "===", " ", "currPtData"}]}], ",", "\n", 
+            "\t\t\t", 
+            RowBox[{
+             RowBox[{"tableData", " ", "=", " ", 
+              RowBox[{"Transpose", "[", 
+               RowBox[{"{", 
+                RowBox[{"labels", ",", " ", "currPtData"}], "}"}], "]"}]}], 
+             ";"}]}], "\n", "\t\t", "]"}], ";", "\n", "\n", "\t\t", 
+          RowBox[{"Grid", "[", 
+           RowBox[{"tableData", ",", " ", 
+            RowBox[{"Alignment", "\[Rule]", "Left"}], ",", " ", 
+            RowBox[{"ItemSize", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Scaled", "[", ".2", "]"}], ",", " ", 
+                RowBox[{"Scaled", "[", ".8", "]"}]}], "}"}], "}"}]}], ",", 
+            " ", 
+            RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], "\n", "\t", "]"}],
+         "]"}], ";"}], "\n", ")"}]}], ";"}]}]}]], "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  CellChangeTimes->{
   3.6256172004702168`*^9, {3.62562306001648*^9, 3.6256230609383593`*^9}, {
@@ -176,7 +224,8 @@ Cell[BoxData[
    3.6342974380838804`*^9}, {3.634297486163165*^9, 3.63429758032493*^9}, {
    3.6342976177529964`*^9, 3.6342976184861975`*^9}, 3.6399246443490543`*^9, 
    3.6410490117060547`*^9, {3.642516271198242*^9, 3.6425162741884766`*^9}, {
-   3.6623154923203125`*^9, 3.6623155068027344`*^9}}]
+   3.6623154923203125`*^9, 3.6623155068027344`*^9}, {3.662386296161765*^9, 
+   3.6623863520610633`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -700,9 +749,8 @@ Cell[BoxData[
        RowBox[{"Take", "[", 
         RowBox[{"colorScheme", ",", " ", 
          RowBox[{"Length", "@", "taxaGroups"}]}], "]"}], ",", " ", 
-       "emptyGroups"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
-   RowBox[{"(*", "legend", "*)"}], "\n", 
+       "emptyGroups"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", "legend", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"legendNames", " ", "=", " ", 
      RowBox[{
@@ -813,44 +861,7 @@ Cell[BoxData[
    RowBox[{"(*", 
     RowBox[{"mouseover", " ", "info"}], "*)"}], "\n", 
    RowBox[{
-    RowBox[{"Print", "[", 
-     RowBox[{"Dynamic", "[", "\n", "\t", 
-      RowBox[{
-       RowBox[{"labels", " ", "=", " ", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"Style", "[", 
-           RowBox[{"#", ",", " ", "Bold"}], "]"}], "&"}], " ", "/@", " ", 
-         RowBox[{"{", 
-          RowBox[{
-          "\"\<ID\>\"", ",", " ", "\"\<Group\>\"", ",", " ", 
-           "\"\<Organism\>\"", ",", " ", "\"\<Accession\>\"", ",", " ", 
-           "\"\<GenID\>\"", ",", " ", "\"\<Length (kb)\>\"", ",", " ", 
-           "\"\<Taxonomy\>\""}], "}"}]}]}], ";", "\n", "\n", "\t", 
-       RowBox[{"currPtData", " ", "=", " ", 
-        RowBox[{"MouseAnnotation", "[", "]"}]}], ";", "\n", "\t", 
-       RowBox[{"If", "[", 
-        RowBox[{
-         RowBox[{"!", 
-          RowBox[{"Null", " ", "===", " ", "currPtData"}]}], ",", "\n", 
-         "\t\t", 
-         RowBox[{
-          RowBox[{"tableData", " ", "=", " ", 
-           RowBox[{"Transpose", "[", 
-            RowBox[{"{", 
-             RowBox[{"labels", ",", " ", "currPtData"}], "}"}], "]"}]}], 
-          ";"}]}], "\n", "\t", "]"}], ";", "\n", "\n", "\t", 
-       RowBox[{"Grid", "[", 
-        RowBox[{"tableData", ",", " ", 
-         RowBox[{"Alignment", "\[Rule]", "Left"}], ",", " ", 
-         RowBox[{"ItemSize", "\[Rule]", 
-          RowBox[{"{", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"Scaled", "[", ".2", "]"}], ",", " ", 
-             RowBox[{"Scaled", "[", ".8", "]"}]}], "}"}], "}"}]}], ",", " ", 
-         RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], "\n", "]"}], "]"}], 
-    ";"}]}]}]], "Code",
+    RowBox[{"ShowMouseoverInfo", "[", "]"}], ";"}]}]}]], "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False,
@@ -1046,7 +1057,8 @@ Cell[BoxData[
    3.634258916227054*^9, 3.634258937360263*^9}, {3.6342590645015345`*^9, 
    3.6342591013176403`*^9}, {3.634259136312642*^9, 3.634259137252696*^9}, {
    3.634259194735984*^9, 3.634259241372651*^9}, {3.63429772803199*^9, 
-   3.634297745691221*^9}, {3.642954466908203*^9, 3.642954467126953*^9}}]
+   3.634297745691221*^9}, {3.642954466908203*^9, 3.642954467126953*^9}, 
+   3.662386311454792*^9, {3.6623863593562765`*^9, 3.6623863605262785`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1071,7 +1083,7 @@ Cell[BoxData[
        RowBox[{"Take", "[", 
         RowBox[{"colorScheme", ",", " ", 
          RowBox[{"Length", "@", "taxaGroups"}]}], "]"}], ",", " ", 
-       "emptyGroups"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+       "emptyGroups"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", "legend", "*)"}], "\n", 
    RowBox[{
     RowBox[{"legendNames", " ", "=", " ", 
@@ -1204,44 +1216,7 @@ Cell[BoxData[
    RowBox[{"(*", 
     RowBox[{"mouseover", " ", "info"}], "*)"}], "\n", 
    RowBox[{
-    RowBox[{"Print", "[", 
-     RowBox[{"Dynamic", "[", "\n", "\t", 
-      RowBox[{
-       RowBox[{"labels", " ", "=", " ", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"Style", "[", 
-           RowBox[{"#", ",", " ", "Bold"}], "]"}], " ", "&"}], " ", "/@", " ", 
-         RowBox[{"{", 
-          RowBox[{
-          "\"\<ID\>\"", ",", " ", "\"\<Group\>\"", ",", " ", 
-           "\"\<Organism\>\"", ",", " ", "\"\<Accession\>\"", ",", " ", 
-           "\"\<GenID\>\"", ",", " ", "\"\<Length (kb)\>\"", ",", " ", 
-           "\"\<Taxonomy\>\""}], "}"}]}]}], ";", "\n", "\n", "\t", 
-       RowBox[{"currPtData", " ", "=", " ", 
-        RowBox[{"MouseAnnotation", "[", "]"}]}], ";", "\n", "\t", 
-       RowBox[{"If", "[", 
-        RowBox[{
-         RowBox[{"!", 
-          RowBox[{"Null", " ", "===", " ", "currPtData"}]}], ",", "\n", 
-         "\t\t", 
-         RowBox[{
-          RowBox[{"tableData", " ", "=", " ", 
-           RowBox[{"Transpose", "[", 
-            RowBox[{"{", 
-             RowBox[{"labels", ",", " ", "currPtData"}], "}"}], "]"}]}], 
-          ";"}]}], "\n", "\t", "]"}], ";", "\n", "\n", "\t", 
-       RowBox[{"Grid", "[", 
-        RowBox[{"tableData", ",", " ", 
-         RowBox[{"Alignment", "\[Rule]", "Left"}], ",", " ", 
-         RowBox[{"ItemSize", "\[Rule]", 
-          RowBox[{"{", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"Scaled", "[", ".2", "]"}], ",", " ", 
-             RowBox[{"Scaled", "[", ".8", "]"}]}], "}"}], "}"}]}], ",", " ", 
-         RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], "\n", "]"}], "]"}], 
-    ";"}]}]}]], "Code",
+    RowBox[{"ShowMouseoverInfo", "[", "]"}], ";"}]}]}]], "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False,
@@ -1303,7 +1278,8 @@ Cell[BoxData[
    3.6342577433419685`*^9, {3.6342593320528383`*^9, 3.6342593951714478`*^9}, {
    3.6342595266029654`*^9, 3.634259550529334*^9}, {3.6342977559872394`*^9, 
    3.634297764738855*^9}, {3.6342977958921094`*^9, 3.6342977969529114`*^9}, {
-   3.6429544722910156`*^9, 3.6429544724941406`*^9}, 3.662313368251953*^9}]
+   3.6429544722910156`*^9, 3.6429544724941406`*^9}, 3.662313368251953*^9, {
+   3.662386368409292*^9, 3.662386369501294*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1345,7 +1321,7 @@ Cell[BoxData[
               RowBox[{"metadataFiltered", "[", 
                RowBox[{"[", "#", "]"}], "]"}]}], "]"}]}], ";", "\n", "\n", 
            "\t", 
-           RowBox[{"Annotation", "[", 
+           RowBox[{"Tooltip", "[", 
             RowBox[{
              RowBox[{"Style", "[", 
               RowBox[{"#", ",", " ", 
@@ -1389,45 +1365,7 @@ Cell[BoxData[
    RowBox[{
     RowBox[{"Print", "[", 
      RowBox[{"Graph", "[", 
-      RowBox[{"vertices", ",", " ", "edges"}], "]"}], "]"}], ";"}], "\n", 
-   "\n", 
-   RowBox[{"(*", 
-    RowBox[{"mouseover", " ", "info"}], "*)"}], "\n", 
-   RowBox[{
-    RowBox[{"Print", "[", 
-     RowBox[{"Dynamic", "[", "\n", "\t", 
-      RowBox[{
-       RowBox[{"labels", " ", "=", " ", 
-        RowBox[{
-         RowBox[{
-          RowBox[{"Style", "[", 
-           RowBox[{"#", ",", " ", "Bold"}], "]"}], " ", "&"}], " ", "/@", " ", 
-         RowBox[{"{", 
-          RowBox[{"\"\<ID\>\"", ",", " ", "\"\<Group\>\""}], "}"}]}]}], ";", 
-       "\n", "\n", "\t", 
-       RowBox[{"currPtData", " ", "=", " ", 
-        RowBox[{"MouseAnnotation", "[", "]"}]}], ";", "\n", "\t", 
-       RowBox[{"If", "[", 
-        RowBox[{
-         RowBox[{"!", 
-          RowBox[{"Null", " ", "===", " ", "currPtData"}]}], ",", "\n", 
-         "\t\t", 
-         RowBox[{
-          RowBox[{"tableData", " ", "=", " ", 
-           RowBox[{"Transpose", "[", 
-            RowBox[{"{", 
-             RowBox[{"labels", ",", " ", "currPtData"}], "}"}], "]"}]}], 
-          ";"}]}], "\n", "\t", "]"}], ";", "\n", "\n", "\t", 
-       RowBox[{"Grid", "[", 
-        RowBox[{"tableData", ",", " ", 
-         RowBox[{"Alignment", "\[Rule]", "Left"}], ",", " ", 
-         RowBox[{"ItemSize", "\[Rule]", 
-          RowBox[{"{", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"Scaled", "[", ".2", "]"}], ",", " ", 
-             RowBox[{"Scaled", "[", ".8", "]"}]}], "}"}], "}"}]}], ",", " ", 
-         RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], "\n", "]"}], "]"}], 
+      RowBox[{"vertices", ",", " ", "edges"}], "]"}], "]"}], 
     ";"}]}]}]], "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
@@ -1507,10 +1445,11 @@ Cell[BoxData[
    3.662314876926758*^9, 3.662314878520508*^9}, {3.6623149587822266`*^9, 
    3.6623149615166016`*^9}, {3.6623151692646484`*^9, 
    3.6623151757646484`*^9}, {3.662315277651367*^9, 3.6623153241367188`*^9}, {
-   3.662315522209961*^9, 3.662315542548828*^9}}]
+   3.662315522209961*^9, 3.662315542548828*^9}, {3.6623863817317157`*^9, 
+   3.6623863856367226`*^9}}]
 }, Closed]]
 },
-WindowSize->{1440, 818},
+WindowSize->{1920, 998},
 WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 PrintingCopies->1,
 PrintingPageRange->{32000, 32000},
@@ -1536,53 +1475,53 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 418, 6, 49, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[1000, 30, 7518, 148, 433, "Code",
+Cell[1000, 30, 9595, 197, 713, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[8555, 183, 526, 7, 41, "Subsection",
+Cell[10632, 232, 526, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[9084, 192, 6197, 91, 113, "Code",
+Cell[11161, 241, 6197, 91, 113, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[15318, 288, 736, 11, 41, "Subsection",
+Cell[17395, 337, 736, 11, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[16057, 301, 9829, 193, 573, "Code",
+Cell[18134, 350, 9829, 193, 573, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[25923, 499, 737, 10, 41, "Subsection",
+Cell[28000, 548, 737, 10, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[26663, 511, 8240, 166, 273, "Code",
+Cell[28740, 560, 8240, 166, 273, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[34940, 682, 482, 7, 41, "Subsection",
+Cell[37017, 731, 482, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[35425, 691, 20601, 357, 793, "Code",
+Cell[37502, 740, 19136, 320, 613, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[56063, 1053, 534, 7, 41, "Subsection",
+Cell[56675, 1065, 534, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[56600, 1062, 11501, 243, 933, "Code",
+Cell[57212, 1074, 10009, 207, 753, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[68138, 1310, 622, 8, 41, "Subsection",
+Cell[67258, 1286, 622, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[68763, 1320, 9901, 189, 613, "Code",
+Cell[67883, 1296, 8451, 152, 373, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
