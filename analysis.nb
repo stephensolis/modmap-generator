@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     78689,       1528]
-NotebookOptionsPosition[     76426,       1455]
-NotebookOutlinePosition[     76982,       1477]
-CellTagsIndexPosition[     76939,       1474]
+NotebookDataLength[     78873,       1531]
+NotebookOptionsPosition[     76610,       1458]
+NotebookOutlinePosition[     77166,       1480]
+CellTagsIndexPosition[     77123,       1477]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1339,31 +1339,34 @@ Cell[BoxData[
     RowBox[{"create", " ", "edges"}], "*)"}], "\n", 
    RowBox[{
     RowBox[{"edges", " ", "=", " ", 
-     RowBox[{"Flatten", "@", 
-      RowBox[{"MapIndexed", "[", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"(", "\n", "\t", 
+     RowBox[{"DeleteDuplicatesBy", "[", 
+      RowBox[{
+       RowBox[{"Flatten", "@", 
+        RowBox[{"MapIndexed", "[", 
+         RowBox[{
           RowBox[{
-           RowBox[{"nodeID", " ", "=", " ", 
-            RowBox[{"First", "@", "#2"}]}], ";", "\n", "\n", "\t", 
-           RowBox[{"(*", " ", 
+           RowBox[{"(", "\n", "\t", 
             RowBox[{
-            "drop", " ", "smallest", " ", "to", " ", "avoid", " ", 
-             "connecting", " ", "node", " ", "to", " ", "itself"}], " ", 
-            "*)"}], "\n", "\t", 
-           RowBox[{"Map", "[", 
-            RowBox[{
-             RowBox[{
-              RowBox[{"UndirectedEdge", "[", 
-               RowBox[{"nodeID", ",", " ", "#"}], "]"}], "&"}], ",", " ", 
-             RowBox[{"Drop", "[", 
+             RowBox[{"nodeID", " ", "=", " ", 
+              RowBox[{"First", "@", "#2"}]}], ";", "\n", "\n", "\t", 
+             RowBox[{"(*", " ", 
               RowBox[{
-               RowBox[{"Ordering", "[", 
-                RowBox[{"#", ",", " ", 
-                 RowBox[{"edgesPerNode", "+", "1"}]}], "]"}], ",", " ", "1"}],
-               "]"}]}], "]"}]}], "\n", ")"}], "&"}], ",", " ", 
-        "distsFiltered"}], "]"}]}]}], ";"}], "\n", "\n", 
+              "drop", " ", "smallest", " ", "to", " ", "avoid", " ", 
+               "connecting", " ", "node", " ", "to", " ", "itself"}], " ", 
+              "*)"}], "\n", "\t", 
+             RowBox[{"Map", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"UndirectedEdge", "[", 
+                 RowBox[{"nodeID", ",", " ", "#"}], "]"}], "&"}], ",", " ", 
+               RowBox[{"Drop", "[", 
+                RowBox[{
+                 RowBox[{"Ordering", "[", 
+                  RowBox[{"#", ",", " ", 
+                   RowBox[{"edgesPerNode", "+", "1"}]}], "]"}], ",", " ", 
+                 "1"}], "]"}]}], "]"}]}], "\n", ")"}], "&"}], ",", " ", 
+          "distsFiltered"}], "]"}]}], ",", " ", "Sort"}], "]"}]}], ";"}], 
+   "\n", "\n", 
    RowBox[{"(*", 
     RowBox[{"draw", " ", "graph"}], "*)"}], "\n", 
    RowBox[{
@@ -1450,7 +1453,7 @@ Cell[BoxData[
    3.6623149615166016`*^9}, {3.6623151692646484`*^9, 
    3.6623151757646484`*^9}, {3.662315277651367*^9, 3.6623153241367188`*^9}, {
    3.662315522209961*^9, 3.662315542548828*^9}, {3.6623863817317157`*^9, 
-   3.6623863856367226`*^9}}]
+   3.6623863856367226`*^9}, {3.662399146051758*^9, 3.662399152973633*^9}}]
 }, Closed]]
 },
 WindowSize->{1424, 842},
@@ -1525,7 +1528,7 @@ Cell[57288, 1078, 10009, 207, 753, "Code",
 Cell[CellGroupData[{
 Cell[67334, 1290, 622, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[67959, 1300, 8451, 152, 373, "Code",
+Cell[67959, 1300, 8635, 155, 373, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
