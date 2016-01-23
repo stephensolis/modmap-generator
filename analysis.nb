@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     78873,       1531]
-NotebookOptionsPosition[     76610,       1458]
-NotebookOutlinePosition[     77166,       1480]
-CellTagsIndexPosition[     77123,       1477]
+NotebookDataLength[     73057,       1448]
+NotebookOptionsPosition[     71063,       1383]
+NotebookOutlinePosition[     71620,       1405]
+CellTagsIndexPosition[     71577,       1402]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -230,27 +230,154 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell["Load data", "Subsection",
+Cell["Load + pre-process data", "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  CellChangeTimes->{{3.590025455126362*^9, 3.5900254906913958`*^9}, {
    3.5900255904221*^9, 3.590025598479561*^9}, {3.590025788141409*^9, 
    3.5900258211132956`*^9}, {3.5900261408725843`*^9, 3.590026149314067*^9}, 
    3.5900263467493596`*^9, 3.590026424154787*^9, {3.590026622947157*^9, 
    3.590026629369525*^9}, {3.5900273411432357`*^9, 3.5900273422032967`*^9}, 
-   3.625623542392795*^9, {3.6327476710621185`*^9, 3.6327476722808685`*^9}}],
+   3.625623542392795*^9, {3.6327476710621185`*^9, 3.6327476722808685`*^9}, {
+   3.6625550778710938`*^9, 3.6625550811523438`*^9}}],
 
 Cell[BoxData[{
  RowBox[{
   RowBox[{
-   RowBox[{"SetDirectory", "[", "outputDir", "]"}], ";"}], "\n"}], "\n", 
+   RowBox[{"SetDirectory", "[", "outputDir", "]"}], ";"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"load", " ", "data"}], " ", "*)"}]}], "\n", 
  RowBox[{
   RowBox[{"dists", " ", "=", " ", 
    RowBox[{"Uncompress", "[", 
     RowBox[{"<<", "\"\<dist-ssim.dat\>\""}], "]"}]}], ";"}], "\n", 
  RowBox[{
-  RowBox[{"metadata", " ", "=", " ", 
-   RowBox[{"Uncompress", "[", 
-    RowBox[{"<<", "\"\<metadata.dat\>\""}], "]"}]}], ";"}]}], "Code",
+  RowBox[{
+   RowBox[{"metadata", " ", "=", " ", 
+    RowBox[{"Uncompress", "[", 
+     RowBox[{"<<", "\"\<metadata.dat\>\""}], "]"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"pre", "-", "processing"}], " ", "*)"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"get", " ", "names", " ", "and", " ", "patterns"}], " ", 
+   "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"taxaNames", ",", " ", "taxaPatterns"}], "}"}], " ", "=", " ", 
+    RowBox[{"Transpose", "[", "taxaGroups", "]"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "get", " ", "indexes", " ", "matching", " ", "given", " ", "patterns"}], 
+   " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"taxaStrings", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"#", "[", 
+      RowBox[{"[", "5", "]"}], "]"}], "&"}], " ", "/@", " ", "metadata"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"taxaIndexes", " ", "=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Flatten", "@", 
+       RowBox[{"Position", "[", 
+        RowBox[{
+         RowBox[{"StringFreeQ", "[", 
+          RowBox[{"taxaStrings", ",", " ", "#"}], "]"}], ",", " ", "False"}], 
+        "]"}]}], "&"}], " ", "/@", " ", "taxaPatterns"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"omit", " ", "elements", " ", "from", " ", "analysis"}], " ", 
+   "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"removePositions", " ", "=", " ", 
+   RowBox[{"Flatten", "@", 
+    RowBox[{"Position", "[", 
+     RowBox[{
+      RowBox[{"StringMatchQ", "[", 
+       RowBox[{
+        RowBox[{"First", " ", "/@", " ", "metadata"}], ",", "\n", "\t", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "replace", " ", "these", " ", "with", " ", "species", " ", "names", 
+          " ", "to", " ", "omit"}], " ", "*)"}], "\n", "\t", 
+        RowBox[{
+         RowBox[{"(", "\"\<$$$$$$$$\>\"", ")"}], "~~", 
+         RowBox[{"___", " ", "|", " ", "\n", "\t", 
+          RowBox[{"(", "\"\<$$$$$$$$\>\"", ")"}]}], "~~", "___"}]}], "\n", 
+       "]"}], ",", " ", "True"}], "]"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"taxaIndexes", " ", "=", " ", 
+    RowBox[{"DeleteCases", "[", 
+     RowBox[{"taxaIndexes", ",", " ", 
+      RowBox[{"Alternatives", " ", "@@", " ", "removePositions"}], ",", " ", 
+      "Infinity"}], "]"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"remove", " ", "empty", " ", "taxa", " ", "groups"}], " ", 
+   "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"emptyGroups", " ", "=", " ", 
+   RowBox[{"Position", "[", 
+    RowBox[{"taxaIndexes", ",", " ", 
+     RowBox[{"{", "}"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"taxaNames", " ", "=", " ", 
+   RowBox[{"Delete", "[", 
+    RowBox[{"taxaNames", ",", " ", "emptyGroups"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"taxaIndexes", " ", "=", " ", 
+    RowBox[{"Delete", "[", 
+     RowBox[{"taxaIndexes", ",", " ", "emptyGroups"}], "]"}]}], ";"}], "\n", 
+  "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"cut", " ", 
+    RowBox[{"dists", "/", "metadata"}], " ", "into", " ", "just", " ", 
+    "those", " ", "from", " ", "taxaIndexes"}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"indexes", " ", "=", " ", 
+   RowBox[{"Union", "@", 
+    RowBox[{"Flatten", "[", "taxaIndexes", "]"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"dists", " ", "=", " ", 
+   RowBox[{"dists", "[", 
+    RowBox[{"[", 
+     RowBox[{"indexes", ",", " ", "indexes"}], "]"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"metadata", " ", "=", " ", 
+    RowBox[{"metadata", "[", 
+     RowBox[{"[", "indexes", "]"}], "]"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "update", " ", "taxaIndexes", " ", "to", " ", "match", " ", "new", " ", 
+    "dist", " ", "matrix"}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"rules", " ", "=", " ", 
+   RowBox[{"Rule", " ", "@@@", " ", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", 
+      RowBox[{"indexes", ",", " ", 
+       RowBox[{"Range", "[", 
+        RowBox[{"Length", "@", "indexes"}], "]"}]}], "}"}], "]"}]}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"revRules", " ", "=", " ", 
+   RowBox[{"Rule", " ", "@@@", " ", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{"Length", "@", "indexes"}], "]"}], ",", " ", "indexes"}], 
+      "}"}], "]"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"taxaIndexes", " ", "=", " ", 
+   RowBox[{"Replace", "[", 
+    RowBox[{"taxaIndexes", ",", " ", "rules", ",", " ", "Infinity"}], "]"}]}],
+   ";"}]}], "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False,
@@ -330,218 +457,10 @@ Cell[BoxData[{
    3.6342583358698597`*^9}, {3.6342595895195637`*^9, 
    3.6342595900225925`*^9}, {3.634261030942009*^9, 3.6342610312850285`*^9}, {
    3.6399246674530954`*^9, 3.639924672320304*^9}, {3.6425162796904297`*^9, 
-   3.6425162800976562`*^9}}]
-}, Closed]],
-
-Cell[CellGroupData[{
-
-Cell["\<\
-Pre-process metadata + distances (omit elements, split into groups)\
-\>", "Subsection",
- CellGroupingRules->{GroupTogetherGrouping, 10001.},
- CellChangeTimes->{{3.590025455126362*^9, 3.5900254906913958`*^9}, {
-   3.5900255904221*^9, 3.590025598479561*^9}, {3.590025788141409*^9, 
-   3.5900258211132956`*^9}, {3.5900261408725843`*^9, 3.590026149314067*^9}, 
-   3.5900263467493596`*^9, 3.590026424154787*^9, {3.590026622947157*^9, 
-   3.590026629369525*^9}, {3.5900273411432357`*^9, 3.5900273422032967`*^9}, 
-   3.625623542392795*^9, {3.632747618276593*^9, 3.632747641020069*^9}, {
-   3.633720148283553*^9, 3.633720150264756*^9}, {3.634076578003481*^9, 
-   3.634076596579543*^9}, {3.6342600320908775`*^9, 3.634260034122994*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"(*", " ", 
-   RowBox[{"get", " ", "names", " ", "and", " ", "patterns"}], " ", "*)"}], 
-  "\n", 
-  RowBox[{
-   RowBox[{
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"taxaNames", ",", " ", "taxaPatterns"}], "}"}], " ", "=", " ", 
-     RowBox[{"Transpose", "[", "taxaGroups", "]"}]}], ";"}], "\n", "\n", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "get", " ", "indexes", " ", "matching", " ", "given", " ", "patterns"}], 
-    " ", "*)"}], "\n", 
-   RowBox[{
-    RowBox[{"taxaStrings", " ", "=", " ", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"#", "[", 
-        RowBox[{"[", "5", "]"}], "]"}], "&"}], " ", "/@", " ", "metadata"}]}],
-     ";"}], "\n", 
-   RowBox[{
-    RowBox[{"taxaIndexes", " ", "=", " ", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"Flatten", "@", 
-        RowBox[{"Position", "[", 
-         RowBox[{
-          RowBox[{"StringFreeQ", "[", 
-           RowBox[{"taxaStrings", ",", " ", "#"}], "]"}], ",", " ", "False"}],
-          "]"}]}], "&"}], " ", "/@", " ", "taxaPatterns"}]}], ";"}], "\n", 
-   "\n", 
-   RowBox[{"(*", " ", 
-    RowBox[{"omit", " ", "elements", " ", "from", " ", "analysis"}], " ", 
-    "*)"}], "\n", 
-   RowBox[{
-    RowBox[{"removePositions", " ", "=", " ", 
-     RowBox[{"Flatten", "@", 
-      RowBox[{"Position", "[", 
-       RowBox[{
-        RowBox[{"StringMatchQ", "[", 
-         RowBox[{
-          RowBox[{"First", " ", "/@", " ", "metadata"}], ",", " ", "\n", "\t", 
-          RowBox[{
-           RowBox[{"(", "\"\<Floydiella terrestris\>\"", ")"}], "~~", 
-           "__"}]}], "\t", 
-         RowBox[{"(*", " ", 
-          RowBox[{"add", " ", "more", " ", "elements", " ", "here"}], " ", 
-          "*)"}], "\n", "]"}], ",", " ", "True"}], "]"}]}]}], ";"}], " ", 
-   "\n", 
-   RowBox[{
-    RowBox[{"taxaIndexes", " ", "=", " ", 
-     RowBox[{"DeleteCases", "[", 
-      RowBox[{"taxaIndexes", ",", " ", 
-       RowBox[{"Alternatives", " ", "@@", " ", "removePositions"}], ",", " ", 
-       "Infinity"}], "]"}]}], ";"}], "\n", "\n", 
-   RowBox[{"(*", " ", 
-    RowBox[{"remove", " ", "empty", " ", "taxa", " ", "groups"}], " ", "*)"}],
-    "\n", 
-   RowBox[{
-    RowBox[{"emptyGroups", " ", "=", " ", 
-     RowBox[{"Position", "[", 
-      RowBox[{"taxaIndexes", ",", " ", 
-       RowBox[{"{", "}"}]}], "]"}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"taxaNames", " ", "=", " ", 
-     RowBox[{"Delete", "[", 
-      RowBox[{"taxaNames", ",", " ", "emptyGroups"}], "]"}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"taxaIndexes", " ", "=", " ", 
-     RowBox[{"Delete", "[", 
-      RowBox[{"taxaIndexes", ",", " ", "emptyGroups"}], "]"}]}], ";"}], "\n", 
-   "\n", 
-   RowBox[{"(*", " ", 
-    RowBox[{"cut", " ", 
-     RowBox[{"dists", "/", "metadata"}], " ", "into", " ", "just", " ", 
-     "those", " ", "from", " ", "taxaIndexes"}], " ", "*)"}], "\n", 
-   RowBox[{
-    RowBox[{"indexes", " ", "=", " ", 
-     RowBox[{"Union", "@", 
-      RowBox[{"Flatten", "[", "taxaIndexes", "]"}]}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"distsFiltered", " ", "=", " ", 
-     RowBox[{"dists", "[", 
-      RowBox[{"[", 
-       RowBox[{"indexes", ",", " ", "indexes"}], "]"}], "]"}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"metadataFiltered", " ", "=", " ", 
-     RowBox[{"metadata", "[", 
-      RowBox[{"[", "indexes", "]"}], "]"}]}], ";"}], "\n", "\n", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "update", " ", "taxaIndexes", " ", "to", " ", "match", " ", "new", " ", 
-     "dist", " ", "matrix"}], " ", "*)"}], "\n", 
-   RowBox[{
-    RowBox[{"rules", " ", "=", " ", 
-     RowBox[{"Rule", " ", "@@@", " ", 
-      RowBox[{"Transpose", "[", 
-       RowBox[{"{", 
-        RowBox[{"indexes", ",", " ", 
-         RowBox[{"Range", "[", 
-          RowBox[{"Length", "@", "indexes"}], "]"}]}], "}"}], "]"}]}]}], 
-    ";"}], "\n", 
-   RowBox[{
-    RowBox[{"revRules", " ", "=", " ", 
-     RowBox[{"Rule", " ", "@@@", " ", 
-      RowBox[{"Transpose", "[", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"Range", "[", 
-          RowBox[{"Length", "@", "indexes"}], "]"}], ",", " ", "indexes"}], 
-        "}"}], "]"}]}]}], ";"}], "\n", 
-   RowBox[{
-    RowBox[{"taxaIndexes", " ", "=", " ", 
-     RowBox[{"Replace", "[", 
-      RowBox[{"taxaIndexes", ",", " ", "rules", ",", " ", "Infinity"}], 
-      "]"}]}], ";"}]}]}]], "Code",
- CellOpen->True,
- CellGroupingRules->{GroupTogetherGrouping, 10001.},
- InitializationCell->False,
- CellChangeTimes->{{3.5894966897375665`*^9, 3.589496712237454*^9}, {
-   3.5894968394913635`*^9, 3.5894969273082123`*^9}, {3.5895106194257665`*^9, 
-   3.5895106273557587`*^9}, {3.5898472507474937`*^9, 3.589847266512396*^9}, {
-   3.589850566406555*^9, 3.5898505715913243`*^9}, 3.589851116944766*^9, {
-   3.589851154404766*^9, 3.589851155459766*^9}, {3.589934623179574*^9, 
-   3.589934649840099*^9}, {3.5899356338983836`*^9, 3.5899357852490406`*^9}, {
-   3.589935816448825*^9, 3.589935874840165*^9}, {3.5899374617649264`*^9, 
-   3.589937498136935*^9}, {3.5899381040605917`*^9, 3.5899381137801476`*^9}, {
-   3.590027093544074*^9, 3.590027106661824*^9}, {3.5900292939127674`*^9, 
-   3.5900292994570847`*^9}, {3.5900321504931173`*^9, 3.590032180991171*^9}, {
-   3.590110277059164*^9, 3.590110278884368*^9}, {3.607306862825617*^9, 
-   3.607306862999626*^9}, {3.607306957315021*^9, 3.607306981525406*^9}, {
-   3.6073072447654624`*^9, 3.6073072480586505`*^9}, {3.6073090966563845`*^9, 
-   3.607309097120411*^9}, {3.607309295452755*^9, 3.6073093966755447`*^9}, {
-   3.607309437319869*^9, 3.6073094435672264`*^9}, {3.6086583446555758`*^9, 
-   3.6086583479424744`*^9}, {3.6086584255546947`*^9, 3.608658433994584*^9}, {
-   3.6086758135845613`*^9, 3.6086758152563295`*^9}, {3.6091206100599957`*^9, 
-   3.6091206510173383`*^9}, {3.6091207068865337`*^9, 3.609120779599693*^9}, {
-   3.6091586719481974`*^9, 3.6091586832249975`*^9}, {3.609990687331872*^9, 
-   3.6099906935252266`*^9}, {3.609990740918937*^9, 3.6099908053176203`*^9}, {
-   3.6099908559495163`*^9, 3.6099908609288015`*^9}, {3.609990918091071*^9, 
-   3.6099909188141117`*^9}, {3.6099909856179333`*^9, 3.609991012861491*^9}, {
-   3.610116167397427*^9, 3.610116213318427*^9}, {3.6116903669172506`*^9, 
-   3.6116904137178755`*^9}, {3.611690694845858*^9, 3.6116907325064836`*^9}, {
-   3.611690819722723*^9, 3.6116908999416237`*^9}, {3.6116909518195925`*^9, 
-   3.6116910453035746`*^9}, {3.611691230558876*^9, 3.611691231142763*^9}, {
-   3.61169175868524*^9, 3.6116917902222843`*^9}, {3.611691832167842*^9, 
-   3.611691857022696*^9}, {3.6117184792096033`*^9, 3.611718480293518*^9}, {
-   3.625623542392795*^9, 3.625623682333066*^9}, {3.6256237137236376`*^9, 
-   3.625623761287896*^9}, {3.6256238146533284`*^9, 3.625623890919354*^9}, 
-   3.630801217432099*^9, {3.6308021784194937`*^9, 3.630802178888955*^9}, {
-   3.630802220017494*^9, 3.6308022363381467`*^9}, {3.6308022982241745`*^9, 
-   3.6308022999761467`*^9}, {3.630802388928239*^9, 3.630802456782094*^9}, {
-   3.630802489612625*^9, 3.63080256100395*^9}, {3.6308025924099207`*^9, 
-   3.630802600021211*^9}, {3.630802656669367*^9, 3.6308026886058946`*^9}, {
-   3.630802725841109*^9, 3.6308027333289075`*^9}, {3.63086989770205*^9, 
-   3.630869904103243*^9}, {3.6308699816660776`*^9, 3.6308700193075686`*^9}, {
-   3.6308925132574005`*^9, 3.6308925136480303`*^9}, {3.6309332280139284`*^9, 
-   3.630933228052931*^9}, {3.632262723737444*^9, 3.632262733509125*^9}, 
-   3.632269097450074*^9, 3.632747641020069*^9, {3.6327478783273225`*^9, 
-   3.632747921829485*^9}, {3.632751836197342*^9, 3.632751948040573*^9}, 
-   3.6337201384399357`*^9, 3.63372031710705*^9, {3.633720530234624*^9, 
-   3.6337205311550255`*^9}, {3.63373613258101*^9, 3.633736136839817*^9}, {
-   3.633736248208413*^9, 3.633736259471633*^9}, {3.633736969904808*^9, 
-   3.6337370092394776`*^9}, 3.633737302498194*^9, 3.6337374724931006`*^9, {
-   3.633738477073043*^9, 3.6337384788856463`*^9}, 3.6337407108256984`*^9, {
-   3.6337449839647446`*^9, 3.6337449983791695`*^9}, {3.633745390203657*^9, 
-   3.633745413010897*^9}, {3.633911036057006*^9, 3.633911058273445*^9}, {
-   3.6339113798076124`*^9, 3.6339114062631254`*^9}, {3.633911498567047*^9, 
-   3.633911501453052*^9}, {3.6339118182111073`*^9, 3.6339118919714375`*^9}, {
-   3.6339121071112213`*^9, 3.6339121221098485`*^9}, {3.6339121951641774`*^9, 
-   3.6339122167158155`*^9}, {3.6339179015002155`*^9, 3.633917905789461*^9}, {
-   3.6339187735513124`*^9, 3.6339187735825577`*^9}, {3.6339514127902327`*^9, 
-   3.633951414040564*^9}, 3.6340587171369963`*^9, 3.634058749695655*^9, {
-   3.634076601403819*^9, 3.634076663251357*^9}, {3.6340770306143684`*^9, 
-   3.634077036726718*^9}, {3.6340830114094505`*^9, 3.634083023704154*^9}, {
-   3.6340835612659006`*^9, 3.6340835727545576`*^9}, {3.634084427065421*^9, 
-   3.6340844609813614`*^9}, {3.634084567273441*^9, 3.6340845810392284`*^9}, {
-   3.634084836083816*^9, 3.6340849283820953`*^9}, {3.634085410190653*^9, 
-   3.6340854522140565`*^9}, {3.6340856266850357`*^9, 3.634085651745469*^9}, {
-   3.634085887905977*^9, 3.634085913703452*^9}, {3.6340863070129485`*^9, 
-   3.6340863089390583`*^9}, {3.6340879988437157`*^9, 
-   3.6340880050110683`*^9}, {3.6341402299620633`*^9, 3.634140234735672*^9}, {
-   3.6341422075575447`*^9, 3.6341422481020155`*^9}, 3.6341423293937583`*^9, {
-   3.63414295088325*^9, 3.6341429867633133`*^9}, {3.634143048726622*^9, 
-   3.634143077836273*^9}, 3.63414311597834*^9, {3.634143971671043*^9, 
-   3.6341440321367493`*^9}, {3.634145009815033*^9, 3.6341450198926506`*^9}, {
-   3.6341450687215385`*^9, 3.634145074310749*^9}, {3.634258391975068*^9, 
-   3.6342585760595975`*^9}, {3.634258618306014*^9, 3.634258623802328*^9}, {
-   3.634258692228242*^9, 3.634258718139724*^9}, {3.634258761757219*^9, 
-   3.6342587981733017`*^9}, {3.634297628860216*^9, 3.6342976548654613`*^9}, {
-   3.634297694772732*^9, 3.6342976961455345`*^9}, {3.639924711795576*^9, 
-   3.6399247193187895`*^9}}]
+   3.6425162800976562`*^9}, {3.6625550834804688`*^9, 3.662555097254883*^9}, {
+   3.662555146486328*^9, 3.662555148236328*^9}, {3.662555301401367*^9, 
+   3.6625553116884766`*^9}, {3.662555586544922*^9, 3.662555619701172*^9}, {
+   3.6625556498808594`*^9, 3.6625556910966797`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -562,7 +481,7 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"n", " ", "=", " ", 
-    RowBox[{"Length", "@", "distsFiltered"}]}], ";"}], "\n", 
+    RowBox[{"Length", "@", "dists"}]}], ";"}], "\n", 
   RowBox[{"(*", " ", 
    RowBox[{
     RowBox[{
@@ -577,7 +496,7 @@ Cell[BoxData[{
     RowBox[{"Flatten", "[", 
      RowBox[{
       RowBox[{
-       RowBox[{"distsFiltered", "[", 
+       RowBox[{"dists", "[", 
         RowBox[{"[", 
          RowBox[{"#", ",", " ", 
           RowBox[{
@@ -633,7 +552,7 @@ Cell[BoxData[{
     RowBox[{"Map", "[", 
      RowBox[{
       RowBox[{
-       RowBox[{"metadataFiltered", "[", 
+       RowBox[{"metadata", "[", 
         RowBox[{"[", 
          RowBox[{"#", ",", " ", "1"}], "]"}], "]"}], "&"}], ",", " ", 
       RowBox[{"origIndexes", "[", 
@@ -651,7 +570,7 @@ Cell[BoxData[{
     RowBox[{"Map", "[", 
      RowBox[{
       RowBox[{
-       RowBox[{"metadataFiltered", "[", 
+       RowBox[{"metadata", "[", 
         RowBox[{"[", 
          RowBox[{"#", ",", " ", "1"}], "]"}], "]"}], "&"}], ",", " ", 
       RowBox[{"origIndexes", "[", 
@@ -728,7 +647,8 @@ Cell[BoxData[{
    3.6342986328179793`*^9}, {3.634298819222707*^9, 3.6342989033692546`*^9}, {
    3.634298938219716*^9, 3.6342989782805862`*^9}, {3.634299053815919*^9, 
    3.634299086326376*^9}, {3.6399248318707933`*^9, 3.6399249340389805`*^9}, {
-   3.662398232116211*^9, 3.662398242772461*^9}}]
+   3.662398232116211*^9, 3.662398242772461*^9}, {3.6625549278935547`*^9, 
+   3.6625549397558594`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -753,7 +673,7 @@ Cell[BoxData[
        RowBox[{"Take", "[", 
         RowBox[{"colorScheme", ",", " ", 
          RowBox[{"Length", "@", "taxaGroups"}]}], "]"}], ",", " ", 
-       "emptyGroups"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+       "emptyGroups"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", "legend", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"legendNames", " ", "=", " ", 
@@ -777,7 +697,7 @@ Cell[BoxData[
    RowBox[{
     RowBox[{"pts", " ", "=", " ", 
      RowBox[{"MDS", "[", 
-      RowBox[{"distsFiltered", ",", " ", "2"}], "]"}]}], ";"}], "\n", "\n", 
+      RowBox[{"dists", ",", " ", "2"}], "]"}]}], ";"}], "\n", "\n", 
    RowBox[{"(*", 
     RowBox[{"scaling", " ", 
      RowBox[{"(", 
@@ -822,7 +742,7 @@ Cell[BoxData[
                 RowBox[{"[", 
                  RowBox[{"First", "@", "#2"}], "]"}], "]"}]}], "}"}], ",", 
              " ", 
-             RowBox[{"metadataFiltered", "[", 
+             RowBox[{"metadata", "[", 
               RowBox[{"[", "#", "]"}], "]"}]}], "]"}]}], ";", "\n", "\n", 
           "\t", 
           RowBox[{"Annotation", "[", 
@@ -1062,7 +982,9 @@ Cell[BoxData[
    3.6342591013176403`*^9}, {3.634259136312642*^9, 3.634259137252696*^9}, {
    3.634259194735984*^9, 3.634259241372651*^9}, {3.63429772803199*^9, 
    3.634297745691221*^9}, {3.642954466908203*^9, 3.642954467126953*^9}, 
-   3.662386311454792*^9, {3.6623863593562765`*^9, 3.6623863605262785`*^9}}]
+   3.662386311454792*^9, {3.6623863593562765`*^9, 3.6623863605262785`*^9}, {
+   3.6625549469560547`*^9, 3.6625549793603516`*^9}, {3.662555234823242*^9, 
+   3.662555237166992*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1087,8 +1009,8 @@ Cell[BoxData[
        RowBox[{"Take", "[", 
         RowBox[{"colorScheme", ",", " ", 
          RowBox[{"Length", "@", "taxaGroups"}]}], "]"}], ",", " ", 
-       "emptyGroups"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
-   RowBox[{"(*", "legend", "*)"}], "\n", 
+       "emptyGroups"}], "]"}]}], ";"}], "\n", "\n", 
+   RowBox[{"(*", "legend", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"legendNames", " ", "=", " ", 
      RowBox[{
@@ -1111,7 +1033,7 @@ Cell[BoxData[
    RowBox[{
     RowBox[{"pts", " ", "=", " ", 
      RowBox[{"MDS", "[", 
-      RowBox[{"distsFiltered", ",", " ", "3"}], "]"}]}], ";"}], "\n", "\n", 
+      RowBox[{"dists", ",", " ", "3"}], "]"}]}], ";"}], "\n", "\n", 
    RowBox[{"(*", 
     RowBox[{"scaling", " ", 
      RowBox[{"(", 
@@ -1154,12 +1076,14 @@ Cell[BoxData[
            RowBox[{"Join", "[", 
             RowBox[{
              RowBox[{"{", 
-              RowBox[{"#", ",", " ", 
+              RowBox[{
+               RowBox[{"Replace", "[", 
+                RowBox[{"#", ",", " ", "revRules"}], "]"}], ",", " ", 
                RowBox[{"taxaNames", "[", 
                 RowBox[{"[", 
                  RowBox[{"First", "@", "#2"}], "]"}], "]"}]}], "}"}], ",", 
              " ", 
-             RowBox[{"metadataFiltered", "[", 
+             RowBox[{"metadata", "[", 
               RowBox[{"[", "#", "]"}], "]"}]}], "]"}]}], ";", "\n", "\n", 
           "\t", 
           RowBox[{"Annotation", "[", 
@@ -1283,7 +1207,8 @@ Cell[BoxData[
    3.6342595266029654`*^9, 3.634259550529334*^9}, {3.6342977559872394`*^9, 
    3.634297764738855*^9}, {3.6342977958921094`*^9, 3.6342977969529114`*^9}, {
    3.6429544722910156`*^9, 3.6429544724941406`*^9}, 3.662313368251953*^9, {
-   3.662386368409292*^9, 3.662386369501294*^9}}]
+   3.662386368409292*^9, 3.662386369501294*^9}, {3.662554999881836*^9, 
+   3.662555035328125*^9}, 3.662555242182617*^9}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1322,7 +1247,7 @@ Cell[BoxData[
                  RowBox[{"[", 
                   RowBox[{"First", "@", "#2"}], "]"}], "]"}]}], "}"}], ",", 
               " ", 
-              RowBox[{"metadataFiltered", "[", 
+              RowBox[{"metadata", "[", 
                RowBox[{"[", "#", "]"}], "]"}]}], "]"}]}], ";", "\n", "\n", 
            "\t", 
            RowBox[{"Tooltip", "[", 
@@ -1365,8 +1290,7 @@ Cell[BoxData[
                   RowBox[{"#", ",", " ", 
                    RowBox[{"edgesPerNode", "+", "1"}]}], "]"}], ",", " ", 
                  "1"}], "]"}]}], "]"}]}], "\n", ")"}], "&"}], ",", " ", 
-          "distsFiltered"}], "]"}]}], ",", " ", "Sort"}], "]"}]}], ";"}], 
-   "\n", "\n", 
+          "dists"}], "]"}]}], ",", " ", "Sort"}], "]"}]}], ";"}], "\n", "\n", 
    RowBox[{"(*", 
     RowBox[{"draw", " ", "graph"}], "*)"}], "\n", 
    RowBox[{
@@ -1453,11 +1377,12 @@ Cell[BoxData[
    3.6623149615166016`*^9}, {3.6623151692646484`*^9, 
    3.6623151757646484`*^9}, {3.662315277651367*^9, 3.6623153241367188`*^9}, {
    3.662315522209961*^9, 3.662315542548828*^9}, {3.6623863817317157`*^9, 
-   3.6623863856367226`*^9}, {3.662399146051758*^9, 3.662399152973633*^9}}]
+   3.6623863856367226`*^9}, {3.662399146051758*^9, 3.662399152973633*^9}, {
+   3.6625550552871094`*^9, 3.6625550589345703`*^9}}]
 }, Closed]]
 },
-WindowSize->{1424, 842},
-WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+WindowSize->{1440, 818},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 PrintingCopies->1,
 PrintingPageRange->{32000, 32000},
 PrintingOptions->{"Magnification"->1.,
@@ -1486,49 +1411,41 @@ Cell[1000, 30, 9595, 197, 713, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[10632, 232, 526, 7, 41, "Subsection",
+Cell[10632, 232, 594, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[11161, 241, 6197, 91, 113, "Code",
+Cell[11229, 242, 10891, 220, 773, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[17395, 337, 736, 11, 41, "Subsection",
- CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[18134, 350, 9829, 193, 573, "Code",
- CellOpen->True,
- CellGroupingRules->{GroupTogetherGrouping, 10001.},
- InitializationCell->False]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[28000, 548, 737, 10, 41, "Subsection",
+Cell[22157, 467, 737, 10, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[28740, 560, 8316, 170, 293, "Code",
+Cell[22897, 479, 8338, 171, 293, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[37093, 735, 482, 7, 41, "Subsection",
+Cell[31272, 655, 482, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[37578, 744, 19136, 320, 613, "Code",
+Cell[31757, 664, 19224, 322, 613, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[56751, 1069, 534, 7, 41, "Subsection",
+Cell[51018, 991, 534, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[57288, 1078, 10009, 207, 753, "Code",
+Cell[51555, 1000, 10161, 210, 753, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[67334, 1290, 622, 8, 41, "Subsection",
+Cell[61753, 1215, 622, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[67959, 1300, 8635, 155, 373, "Code",
+Cell[62378, 1225, 8669, 155, 373, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
