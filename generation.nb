@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     89689,       1647]
-NotebookOptionsPosition[     87931,       1591]
-NotebookOutlinePosition[     88319,       1608]
-CellTagsIndexPosition[     88276,       1605]
+NotebookDataLength[     87868,       1608]
+NotebookOptionsPosition[     86107,       1552]
+NotebookOutlinePosition[     86498,       1569]
+CellTagsIndexPosition[     86455,       1566]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -289,19 +289,6 @@ Cell[BoxData[{
                "\"\<.mx\>\""}], ",", " ", "cgrBlock"}], "]"}], ";", "\n", 
             "\n", "\t\t", 
             RowBox[{"(*", " ", 
-             RowBox[{"compute", " ", "CGR", " ", "stats"}], " ", "*)"}], "\n",
-             "\t\t", 
-            RowBox[{"statsBlock", " ", "=", " ", 
-             RowBox[{
-              RowBox[{"N", "@*", "CGRStats"}], " ", "/@", " ", "cgrBlock"}]}],
-             ";", "\n", "\t\t", 
-            RowBox[{"DumpSave", "[", 
-             RowBox[{
-              RowBox[{"\"\<cgr-stats_\>\"", " ", "<>", " ", 
-               RowBox[{"ToString", "@", "blockNum"}], " ", "<>", " ", 
-               "\"\<.mx\>\""}], ",", " ", "statsBlock"}], "]"}], ";", "\n", 
-            "\n", "\t\t", 
-            RowBox[{"(*", " ", 
              RowBox[{"compute", " ", "descriptors"}], " ", "*)"}], "\n", 
             "\t\t", 
             RowBox[{"descrBlock", " ", "=", " ", 
@@ -315,7 +302,7 @@ Cell[BoxData[{
             ";", "\n", "\t\t", 
             RowBox[{"DumpSave", "[", 
              RowBox[{
-              RowBox[{"\"\<descr-temp_\>\"", " ", "<>", " ", 
+              RowBox[{"\"\<descr_\>\"", " ", "<>", " ", 
                RowBox[{"ToString", "@", "blockNum"}], " ", "<>", " ", 
                "\"\<.mx\>\""}], ",", " ", "descrBlock"}], "]"}], ";"}]}], 
           "\n", "\t", "]"}]}], "\n", ")"}], "&"}], ",", " ", "fileBlocks"}], 
@@ -471,7 +458,8 @@ Cell[BoxData[{
    3.641915724758789*^9}, {3.642539641333008*^9, 3.642539644786133*^9}, {
    3.6429494341777344`*^9, 3.642949440169922*^9}, {3.643028918198242*^9, 
    3.6430289536552734`*^9}, {3.6430289933583984`*^9, 
-   3.6430290116220703`*^9}, {3.64359167875*^9, 3.6435916810625*^9}}]
+   3.6430290116220703`*^9}, {3.64359167875*^9, 3.6435916810625*^9}, {
+   3.665185981390625*^9, 3.66518598165625*^9}, 3.6651860728447266`*^9}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -528,7 +516,7 @@ Cell[BoxData[{
            "\n", "\t\t\t", 
            RowBox[{
             RowBox[{"Get", "[", 
-             RowBox[{"\"\<descr-temp_\>\"", " ", "<>", " ", 
+             RowBox[{"\"\<descr_\>\"", " ", "<>", " ", 
               RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<.mx\>\""}],
               "]"}], ";", "\n", "\t\t\t", 
             RowBox[{"descrBlock1", " ", "=", " ", "descrBlock"}], ";", "\n", 
@@ -541,7 +529,7 @@ Cell[BoxData[{
               "\n", "\t\t\t", ",", "\n", "\t\t\t\t", 
               RowBox[{
                RowBox[{"Get", "[", 
-                RowBox[{"\"\<descr-temp_\>\"", " ", "<>", " ", 
+                RowBox[{"\"\<descr_\>\"", " ", "<>", " ", 
                  RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
                  "\"\<.mx\>\""}], "]"}], ";", "\n", "\t\t\t\t", 
                RowBox[{"descrBlock2", " ", "=", " ", "descrBlock"}], ";"}]}], 
@@ -620,35 +608,6 @@ Cell[BoxData[{
                RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
                "\"\<.mx\>\""}], ",", " ", "distBlock"}], "]"}], ";", "\n", 
             "\n", "\t\t\t", 
-            RowBox[{"(*", " ", 
-             RowBox[{"fetch", " ", "CGR", " ", "stats"}], " ", "*)"}], "\n", 
-            "\t\t\t", 
-            RowBox[{"Get", "[", 
-             RowBox[{"\"\<cgr-stats_\>\"", " ", "<>", " ", 
-              RowBox[{"ToString", "@", "i"}], " ", "<>", " ", "\"\<.mx\>\""}],
-              "]"}], ";", "\n", "\t\t\t", 
-            RowBox[{"cgrBlock1", " ", "=", " ", 
-             RowBox[{"Transpose", "[", 
-              RowBox[{"{", 
-               RowBox[{"cgrBlock1", ",", " ", "statsBlock"}], "}"}], "]"}]}], 
-            ";", "\n", "\t\t\t", 
-            RowBox[{"If", "[", 
-             RowBox[{
-              RowBox[{"i", " ", "==", " ", "j"}], ",", " ", "\n", "\t\t\t\t", 
-              RowBox[{
-               RowBox[{"cgrBlock2", " ", "=", " ", "cgrBlock1"}], ";"}], "\n",
-               "\t\t\t", ",", "\n", "\t\t\t\t", 
-              RowBox[{
-               RowBox[{"Get", "[", 
-                RowBox[{"\"\<cgr-stats_\>\"", " ", "<>", " ", 
-                 RowBox[{"ToString", "@", "j"}], " ", "<>", " ", 
-                 "\"\<.mx\>\""}], "]"}], ";", "\n", "\t\t\t\t", 
-               RowBox[{"cgrBlock2", " ", "=", " ", 
-                RowBox[{"Transpose", "[", 
-                 RowBox[{"{", 
-                  RowBox[{"cgrBlock2", ",", " ", "statsBlock"}], "}"}], 
-                 "]"}]}], ";"}]}], "\n", "\t\t\t", "]"}], ";", "\n", "\n", 
-            "\t\t\t", 
             RowBox[{"(*", 
              RowBox[{"approx", " ", "info", " ", "dist"}], "*)"}], "\n", 
             "\t\t\t", 
@@ -670,8 +629,8 @@ Cell[BoxData[{
             RowBox[{"distBlock", " ", "=", " ", 
              RowBox[{"Outer", "[", 
               RowBox[{
-               RowBox[{"N", " ", "@*", " ", "PearsonDistance"}], ",", " ", 
-               "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}], 
+               RowBox[{"N", " ", "@*", " ", "CorrelationDistance"}], ",", " ",
+                "cgrBlock1", ",", " ", "cgrBlock2", ",", " ", "1"}], "]"}]}], 
             ";", "\n", "\t\t\t", 
             RowBox[{"DumpSave", "[", 
              RowBox[{
@@ -683,9 +642,9 @@ Cell[BoxData[{
             "\n", "\t\t\t", 
             RowBox[{"Clear", "[", 
              RowBox[{
-             "cgrBlock", ",", " ", "cgrBlock1", ",", " ", "cgrBlock2", ",", 
-              " ", "statsBlock"}], "]"}], ";"}]}], "\n", "\t\t", "]"}], 
-         ";"}]}], "\n", "\t", "]"}], "\n", ",", " ", 
+             "cgrBlock", ",", " ", "cgrBlock1", ",", " ", "cgrBlock2"}], 
+             "]"}], ";"}]}], "\n", "\t\t", "]"}], ";"}]}], "\n", "\t", "]"}], 
+      "\n", ",", " ", 
       RowBox[{"{", 
        RowBox[{"i", ",", " ", "1", ",", " ", "numBlocks"}], "}"}], ",", " ", 
       RowBox[{"{", 
@@ -847,7 +806,9 @@ Cell[BoxData[{
    3.643029509401367*^9}, {3.6430295579873047`*^9, 3.643029571411133*^9}, {
    3.643029821651367*^9, 3.643029918975586*^9}, {3.6430299645039062`*^9, 
    3.6430299777929688`*^9}, {3.653510910625*^9, 3.6535109261875*^9}, {
-   3.653510959734375*^9, 3.653510977140625*^9}}]
+   3.653510959734375*^9, 3.653510977140625*^9}, {3.665186011876953*^9, 
+   3.665186012392578*^9}, {3.665186043658203*^9, 3.665186044080078*^9}, {
+   3.665186076881836*^9, 3.665186079209961*^9}, 3.665190775326172*^9}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1593,7 +1554,7 @@ WindowSize->{1440, 818},
 WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 ShowSelection->True,
 ShowGroupOpener->True,
-FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (December 10, 2015)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -1616,35 +1577,35 @@ Cell[1000, 30, 8944, 182, 953, "Code",
 Cell[CellGroupData[{
 Cell[9981, 217, 577, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[10561, 227, 14713, 246, 753, "Code",
+Cell[10561, 227, 14168, 234, 673, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[25311, 478, 564, 8, 41, "Subsection",
+Cell[24766, 466, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[25878, 488, 20705, 361, 1513, "Code",
+Cell[25333, 476, 19426, 334, 1313, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[46620, 854, 564, 8, 41, "Subsection",
+Cell[44796, 815, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10004.}],
-Cell[47187, 864, 15228, 256, 773, "Code",
+Cell[45363, 825, 15228, 256, 773, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10004.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[62452, 1125, 490, 7, 41, "Subsection",
+Cell[60628, 1086, 490, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[62945, 1134, 16287, 282, 813, "Code",
+Cell[61121, 1095, 16287, 282, 813, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[79269, 1421, 557, 8, 41, "Subsection",
+Cell[77445, 1382, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[79829, 1431, 8086, 157, 653, "Code",
+Cell[78005, 1392, 8086, 157, 653, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
