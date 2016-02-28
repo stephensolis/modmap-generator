@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     73770,       1465]
-NotebookOptionsPosition[     71776,       1400]
-NotebookOutlinePosition[     72333,       1422]
-CellTagsIndexPosition[     72290,       1419]
+NotebookDataLength[     74047,       1470]
+NotebookOptionsPosition[     72052,       1405]
+NotebookOutlinePosition[     72609,       1427]
+CellTagsIndexPosition[     72566,       1424]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -566,7 +566,9 @@ Cell[BoxData[{
          RowBox[{"#", ",", " ", "1"}], "]"}], "]"}], "&"}], ",", " ", 
       "posMax", ",", " ", 
       RowBox[{"{", "2", "}"}]}], "]"}], ",", " ", "\"\<, at: \>\"", ",", " ", 
-    "posMax"}], "]"}], ";"}], "\n", 
+    RowBox[{"Replace", "[", 
+     RowBox[{"posMax", ",", " ", "revRules", ",", " ", 
+      RowBox[{"{", "2", "}"}]}], "]"}]}], "]"}], ";"}], "\n", 
  RowBox[{
   RowBox[{"Print", "[", 
    RowBox[{
@@ -580,7 +582,9 @@ Cell[BoxData[{
          RowBox[{"#", ",", " ", "1"}], "]"}], "]"}], "&"}], ",", " ", 
       "posMin", ",", " ", 
       RowBox[{"{", "2", "}"}]}], "]"}], ",", " ", "\"\<, at: \>\"", ",", " ", 
-    "posMin"}], "]"}], ";"}], "\n", 
+    RowBox[{"Replace", "[", 
+     RowBox[{"posMin", ",", " ", "revRules", ",", " ", 
+      RowBox[{"{", "2", "}"}]}], "]"}]}], "]"}], ";"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"Print", "[", 
@@ -653,7 +657,8 @@ Cell[BoxData[{
    3.662398232116211*^9, 3.662398242772461*^9}, {3.6625549278935547`*^9, 
    3.6625549397558594`*^9}, {3.665626761734375*^9, 3.665626782765625*^9}, {
    3.665627134223633*^9, 3.665627135286133*^9}, {3.6656271786757812`*^9, 
-   3.6656272345078125`*^9}, {3.6656273909296875`*^9, 3.665627432341797*^9}}]
+   3.6656272345078125`*^9}, {3.6656273909296875`*^9, 3.665627432341797*^9}, {
+   3.6656280351572266`*^9, 3.6656280400478516`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1438,31 +1443,31 @@ Cell[11186, 239, 10891, 220, 773, "Code",
 Cell[CellGroupData[{
 Cell[22114, 464, 737, 10, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[22854, 476, 8578, 179, 413, "Code",
+Cell[22854, 476, 8854, 184, 413, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[31469, 660, 482, 7, 41, "Subsection",
+Cell[31745, 665, 482, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[31954, 669, 19224, 322, 613, "Code",
+Cell[32230, 674, 19224, 322, 613, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[51215, 996, 534, 7, 41, "Subsection",
+Cell[51491, 1001, 534, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[51752, 1005, 10161, 210, 753, "Code",
+Cell[52028, 1010, 10161, 210, 753, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[61950, 1220, 622, 8, 41, "Subsection",
+Cell[62226, 1225, 622, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[62575, 1230, 9185, 167, 433, "Code",
+Cell[62851, 1235, 9185, 167, 433, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
