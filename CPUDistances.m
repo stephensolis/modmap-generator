@@ -39,7 +39,7 @@ Descriptor[img_List?MatrixQ, winsizes_List, steps_List, histbins_List]:=
 		Return[Flatten[allwinds]];
 	];
 
-SSIM = Compile[{{img1, _Integer, 2}, {img2, _Integer, 2}},
+SSIM = Compile[{{img1, _Real, 2}, {img2, _Real, 2}},
 	Module[{w, c1, c2, m1, m2, m1sq, m2sq, m1m2, sigma1sq, sigma2sq, sigma12, ssimmap},
 		(* like w = N[GaussianMatrix[{5, 1.5}], 16] - this is 15-20% faster *)
 		w = {{0.000003802917046317888,0.00001759448244809565,0.00006636107686176908,0.0001945573540794799,0.0004122408174475112,0.0005609936362550451,0.0004122408174475112,0.0001945573540794799,0.00006636107686176908,0.00001759448244809565,0.000003802917046317888},
@@ -95,7 +95,7 @@ SSIMExact[img1_List?MatrixQ, img2_List?MatrixQ]:=
 		Return[Mean[Mean[ssimmap]]];
 	];
 
-ApproxInfoDist = Compile[{{vect1, _Integer, 1}, {vect2, _Integer, 1}}, 
+ApproxInfoDist = Compile[{{vect1, _Real, 1}, {vect2, _Real, 1}}, 
 	Module[{x, y, xy}, 
 		x = Length@vect1 - Count[vect1, 0];
 		y = Length@vect1 - Count[vect2, 0];
