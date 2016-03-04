@@ -97,9 +97,9 @@ SSIMExact[img1_List?MatrixQ, img2_List?MatrixQ]:=
 
 ApproxInfoDist = Compile[{{vect1, _Real, 1}, {vect2, _Real, 1}}, 
 	Module[{x, y, xy}, 
-		x = Length@vect1 - Count[vect1, 0];
-		y = Length@vect1 - Count[vect2, 0];
-		xy = Length@vect1 - Count[vect1 + vect2, 0];
+		x = Total@Unitize[vect1];
+		y = Total@Unitize[vect2];
+		xy = Total@Unitize[vect1 + vect2];
 		
 		(2 xy - x - y)/xy
 	]
