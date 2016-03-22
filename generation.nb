@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     87916,       1608]
-NotebookOptionsPosition[     86155,       1552]
-NotebookOutlinePosition[     86546,       1569]
-CellTagsIndexPosition[     86503,       1566]
+NotebookDataLength[     88052,       1610]
+NotebookOptionsPosition[     86294,       1554]
+NotebookOutlinePosition[     86682,       1571]
+CellTagsIndexPosition[     86639,       1568]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1466,8 +1466,10 @@ nucleotide&rettype=gb&retmode=xml&id=\>\""}], ";"}], "\n", "\n",
                 RowBox[{
                  RowBox[{"NCBIurl", " ", "<>", " ", 
                   RowBox[{"importData", "[", 
-                   RowBox[{"[", "3", "]"}], "]"}]}], ",", " ", 
-                 "\"\<XML\>\""}], "]"}]}]}], ";", "\n", "\n", "\t\t", 
+                   RowBox[{"[", "3", "]"}], "]"}]}], ",", " ", "\"\<XML\>\"", 
+                 ",", " ", 
+                 RowBox[{"\"\<ReadDTD\>\"", "\[Rule]", "False"}]}], "]"}]}]}],
+              ";", "\n", "\n", "\t\t", 
              RowBox[{"Append", "[", 
               RowBox[{"importData", ",", " ", "taxonomy"}], "]"}]}], "\n", 
             "\t", ")"}], "&"}], ",", " ", "files"}], "]"}]}], ";"}], "\n", 
@@ -1547,14 +1549,14 @@ nucleotide&rettype=gb&retmode=xml&id=\>\""}], ";"}], "\n", "\n",
    3.6337177838940516`*^9, 3.633717794907671*^9}, {3.6337180125234003`*^9, 
    3.6337180485594635`*^9}, {3.63389269179908*^9, 3.6338926984994917`*^9}, {
    3.6399247822961044`*^9, 3.6399247855097103`*^9}, {3.6465817145615234`*^9, 
-   3.646581719376953*^9}}]
+   3.646581719376953*^9}, {3.667651037905488*^9, 3.6676510467455006`*^9}}]
 }, Closed]]
 },
 WindowSize->{1440, 818},
 WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 ShowSelection->True,
 ShowGroupOpener->True,
-FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (December 10, 2015)",
+FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -1605,7 +1607,7 @@ Cell[61169, 1095, 16287, 282, 813, "Code",
 Cell[CellGroupData[{
 Cell[77493, 1382, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[78053, 1392, 8086, 157, 653, "Code",
+Cell[78053, 1392, 8225, 159, 653, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
