@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     88052,       1610]
-NotebookOptionsPosition[     86294,       1554]
-NotebookOutlinePosition[     86682,       1571]
-CellTagsIndexPosition[     86639,       1568]
+NotebookDataLength[     88169,       1609]
+NotebookOptionsPosition[     86406,       1553]
+NotebookOutlinePosition[     86798,       1570]
+CellTagsIndexPosition[     86755,       1567]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -63,10 +63,9 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{
         RowBox[{"NotebookDirectory", "[", "]"}], ",", " ", "\"\<output\>\""}],
-        "}"}], "]"}]}], ";"}], "\n", "\n", 
+        "}"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
-    RowBox[{"generation", " ", "settings"}], " ", "*)"}], 
-   "\[IndentingNewLine]", 
+    RowBox[{"generation", " ", "settings"}], " ", "*)"}], "\n", 
    RowBox[{
     RowBox[{"blockSize", " ", "=", " ", "100"}], ";"}], " ", 
    RowBox[{"(*", 
@@ -76,9 +75,9 @@ Cell[BoxData[
       " ", "-", " ", 
      RowBox[{
       RowBox[{"note", " ", "~", "6.5"}], "MB", " ", "RAM", " ", "required", 
-      " ", "per", " ", "CGR"}]}], "*)"}], "\n", "\n", 
+      " ", "per", " ", "CGR"}]}], "*)"}], "\n", "\[IndentingNewLine]", 
    RowBox[{"(*", " ", 
-    RowBox[{"CGR", " ", "settings"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"CGR", " ", "settings"}], " ", "*)"}], "\n", 
    RowBox[{
     RowBox[{"k", " ", "=", " ", "9"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{
@@ -109,7 +108,8 @@ Cell[BoxData[
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
-     RowBox[{"LaunchCPUKernels", "[", "]"}], " ", ":=", " ", 
+     RowBox[{"LaunchCPUKernels", "[", 
+      RowBox[{"workers_:", "$ProcessorCount"}], "]"}], " ", ":=", " ", 
      RowBox[{"(", "\n", "\t", 
       RowBox[{
        RowBox[{"SetDirectory", "[", 
@@ -119,8 +119,7 @@ Cell[BoxData[
         RowBox[{
         "stop", " ", "all", " ", "running", " ", "kernels", " ", "first"}], 
         "*)"}], "\n", "\t", 
-       RowBox[{"LaunchKernels", "[", "$ProcessorCount", "]"}], ";", "\n", 
-       "\n", "\t", 
+       RowBox[{"LaunchKernels", "[", "workers", "]"}], ";", "\n", "\n", "\t", 
        RowBox[{"ParallelNeeds", "[", "\"\<CGR`\>\"", "]"}], ";", " ", 
        RowBox[{"ParallelNeeds", "[", "\"\<CPUDistances`\>\"", "]"}], ";", 
        "\n", "\t", 
@@ -131,7 +130,8 @@ Cell[BoxData[
         "]"}], ";"}], "\n", ")"}]}], ";"}], "\n", "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
-     RowBox[{"LaunchGPUKernels", "[", "]"}], " ", ":=", " ", 
+     RowBox[{"LaunchGPUKernels", "[", 
+      RowBox[{"workers_:", "$CUDADeviceCount"}], "]"}], " ", ":=", " ", 
      RowBox[{"(", "\n", "\t", 
       RowBox[{
        RowBox[{"SetDirectory", "[", 
@@ -141,8 +141,7 @@ Cell[BoxData[
         RowBox[{
         "stop", " ", "all", " ", "running", " ", "kernels", " ", "first"}], 
         "*)"}], "\n", "\t", 
-       RowBox[{"LaunchKernels", "[", "$CUDADeviceCount", "]"}], ";", "\n", 
-       "\n", "\t", 
+       RowBox[{"LaunchKernels", "[", "workers", "]"}], ";", "\n", "\n", "\t", 
        RowBox[{"MapIndexed", "[", 
         RowBox[{
          RowBox[{
@@ -210,7 +209,7 @@ Cell[BoxData[
    3.6425182513759766`*^9, 3.642518288352539*^9}, {3.6429493711953125`*^9, 
    3.6429493713623047`*^9}, {3.642949401779297*^9, 3.642949409888672*^9}, {
    3.6429543953398438`*^9, 3.6429544046523438`*^9}, {3.6435636618007812`*^9, 
-   3.643563696232422*^9}}]
+   3.643563696232422*^9}, {3.6858405050249243`*^9, 3.6858405420461426`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1556,7 +1555,7 @@ WindowSize->{1440, 818},
 WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 ShowSelection->True,
 ShowGroupOpener->True,
-FrontEndVersion->"10.1 for Microsoft Windows (64-bit) (March 23, 2015)",
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -1573,41 +1572,41 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 418, 6, 49, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[1000, 30, 8944, 182, 953, "Code",
+Cell[1000, 30, 9056, 181, 861, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[9981, 217, 625, 8, 41, "Subsection",
+Cell[10093, 216, 625, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[10609, 227, 14168, 234, 673, "Code",
+Cell[10721, 226, 14168, 234, 673, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[24814, 466, 564, 8, 41, "Subsection",
+Cell[24926, 465, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[25381, 476, 19426, 334, 1313, "Code",
+Cell[25493, 475, 19426, 334, 1313, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[44844, 815, 564, 8, 41, "Subsection",
+Cell[44956, 814, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10004.}],
-Cell[45411, 825, 15228, 256, 773, "Code",
+Cell[45523, 824, 15228, 256, 773, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10004.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[60676, 1086, 490, 7, 41, "Subsection",
+Cell[60788, 1085, 490, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[61169, 1095, 16287, 282, 813, "Code",
+Cell[61281, 1094, 16287, 282, 813, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[77493, 1382, 557, 8, 41, "Subsection",
+Cell[77605, 1381, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[78053, 1392, 8225, 159, 653, "Code",
+Cell[78165, 1391, 8225, 159, 653, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
@@ -1616,4 +1615,3 @@ Cell[78053, 1392, 8225, 159, 653, "Code",
 ]
 *)
 
-(* End of internal cache information *)
