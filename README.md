@@ -4,7 +4,8 @@ modmap-generator
 This is a generator for Molecular Distance Maps, as seen in the following papers:
 
 - [Mapping the Space of Genomic Signatures](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0119815)
-- [An investigation into inter- and intragenomic variations of graphic genomic signatures](http://arxiv.org/abs/1503.00162)
+- [An investigation into inter- and intragenomic variations of graphic genomic signatures](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-015-0655-4)
+- [Additive methods for genomic signatures](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1157-8)
 
 Some pre-generated Molecular Distance Maps may be seen [here](https://dl.dropboxusercontent.com/u/34456847/modmaps3D/index.html).
 
@@ -15,7 +16,7 @@ the following distances:
 - [Manhattan](http://en.wikipedia.org/wiki/Manhattan_distance)
 - [Pearson Correlation](http://mathworld.wolfram.com/CorrelationCoefficient.html)
 - [SSIM](https://ece.uwaterloo.ca/~z70wang/research/ssim/)
-- [Descriptors](http://arxiv.org/abs/1503.00162)
+- [Descriptors](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-015-0655-4)
 - [Approximate Information Distance](http://arxiv.org/abs/cs/0111054)
 
 The SSIM distance may be accelerated with CUDA or OpenCL.
@@ -39,7 +40,7 @@ Credits
 This code is based on work by [Rallis Karamichalis](http://www.csd.uwo.ca/~rkaramic/), from
 [here](https://github.com/rallis/intraSupplemental_Material).
 
-Licence ![License](http://img.shields.io/:license-mit-blue.svg)
+License ![License](http://img.shields.io/:license-mit-blue.svg)
 -------
 
     The MIT License (MIT)
