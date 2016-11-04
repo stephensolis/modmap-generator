@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     73939,       1463]
-NotebookOptionsPosition[     71945,       1398]
-NotebookOutlinePosition[     72502,       1420]
-CellTagsIndexPosition[     72459,       1417]
+NotebookDataLength[     74968,       1484]
+NotebookOptionsPosition[     72972,       1419]
+NotebookOutlinePosition[     73530,       1441]
+CellTagsIndexPosition[     73487,       1438]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -47,17 +47,21 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{
         RowBox[{"NotebookDirectory", "[", "]"}], ",", " ", "\"\<output\>\""}],
-        "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+        "}"}], "]"}]}], ";"}], "\n", "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
      RowBox[{
      "amount", " ", "of", " ", "connectivity", " ", "for", " ", "NN"}], "-", 
-     "graph"}], " ", "*)"}], "\n", 
+     "graph"}], " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"edgesPerNode", " ", "=", " ", "3"}], ";"}], "\n", "\n", 
-   RowBox[{"(*", " ", 
-    RowBox[{"plot", " ", "colors"}], " ", "*)"}], "\n", 
+    RowBox[{"edgesPerNode", " ", "=", " ", "3"}], ";"}], "\n", 
    RowBox[{
+    RowBox[{"edgeDisconnectThreshold", " ", "=", " ", "50"}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"set", " ", "to", " ", "Infinity", " ", "to", " ", "disable"}], 
+     " ", "*)"}], "\n", "\n", 
+    RowBox[{"(*", " ", 
+     RowBox[{"plot", " ", "colors"}], " ", "*)"}], "\n", 
     RowBox[{"colorScheme", " ", "=", " ", 
      RowBox[{"{", "\n", "\t", 
       RowBox[{"Black", ",", " ", 
@@ -81,7 +85,7 @@ Cell[BoxData[
      RowBox[{"colorScheme", " ", "=", " ", 
       RowBox[{"ColorData", "[", 
        RowBox[{"3", ",", " ", "\"\<ColorList\>\""}], "]"}]}], ";"}], "*)"}], 
-   "\n", 
+   "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"colorScheme", " ", "=", " ", 
@@ -92,7 +96,7 @@ Cell[BoxData[
          RowBox[{"#", "&"}], ",", " ", "12", ",", " ", 
          RowBox[{"{", 
           RowBox[{"0", ",", " ", "1"}], "}"}]}], "]"}]}]}], ";"}], "*)"}], 
-   "\[IndentingNewLine]", "\n", 
+   "\n", "\n", 
    RowBox[{"(*", " ", 
     RowBox[{"taxonomic", " ", "group", " ", "split"}], " ", "*)"}], "\n", 
    RowBox[{"(*", 
@@ -222,7 +226,7 @@ Cell[BoxData[
    3.6410490117060547`*^9, {3.642516271198242*^9, 3.6425162741884766`*^9}, {
    3.6623154923203125`*^9, 3.6623155068027344`*^9}, {3.662386296161765*^9, 
    3.6623863520610633`*^9}, {3.6625558542851562`*^9, 3.6625558680820312`*^9}, 
-   3.665626639984375*^9}]
+   3.665626639984375*^9, {3.6872256000423226`*^9, 3.6872256155567503`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -674,8 +678,9 @@ Cell[BoxData[
        RowBox[{"Take", "[", 
         RowBox[{"colorScheme", ",", " ", 
          RowBox[{"Length", "@", "taxaGroups"}]}], "]"}], ",", " ", 
-       "emptyGroups"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
-   RowBox[{"(*", "legend", "*)"}], "\[IndentingNewLine]", 
+       "emptyGroups"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "legend", "*)"}], "\n", 
    RowBox[{
     RowBox[{"legendNames", " ", "=", " ", 
      RowBox[{
@@ -1010,7 +1015,7 @@ Cell[BoxData[
        RowBox[{"Take", "[", 
         RowBox[{"colorScheme", ",", " ", 
          RowBox[{"Length", "@", "taxaGroups"}]}], "]"}], ",", " ", 
-       "emptyGroups"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+       "emptyGroups"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", "legend", "*)"}], "\n", 
    RowBox[{
     RowBox[{"legendNames", " ", "=", " ", 
@@ -1295,8 +1300,24 @@ Cell[BoxData[
              RowBox[{"Map", "[", 
               RowBox[{
                RowBox[{
-                RowBox[{"UndirectedEdge", "[", 
-                 RowBox[{"nodeID", ",", " ", "#"}], "]"}], "&"}], ",", " ", 
+                RowBox[{"(", "\n", "\t\t", 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"First", "@", 
+                    RowBox[{"FirstPosition", "[", 
+                    RowBox[{
+                    RowBox[{"Ordering", "[", 
+                    RowBox[{"dists", "[", 
+                    RowBox[{"[", "#", "]"}], "]"}], "]"}], ",", " ", 
+                    "nodeID"}], "]"}]}], " ", "<", " ", 
+                    "edgeDisconnectThreshold"}], ",", "\n", "\t\t\t", 
+                   RowBox[{"DirectedEdge", "[", 
+                    RowBox[{"nodeID", ",", " ", "#"}], "]"}], "\n", "\t\t", 
+                   ",", "\n", "\t\t\t", 
+                   RowBox[{
+                    RowBox[{"##", "&"}], "[", "]"}]}], "\n", "\t\t", "]"}], 
+                 "\n", "\t", ")"}], "&"}], ",", " ", 
                RowBox[{"Drop", "[", 
                 RowBox[{
                  RowBox[{"Ordering", "[", 
@@ -1393,7 +1414,7 @@ Cell[BoxData[
    3.6623863856367226`*^9}, {3.662399146051758*^9, 3.662399152973633*^9}, {
    3.6625550552871094`*^9, 3.6625550589345703`*^9}, 3.665626653953125*^9, {
    3.665626698796875*^9, 3.66562669965625*^9}, 3.66562673996875*^9, {
-   3.6688902938476562`*^9, 3.6688902954257812`*^9}}]
+   3.6688902938476562`*^9, 3.6688902954257812`*^9}, 3.6872256581980267`*^9}]
 }, Closed]]
 },
 WindowSize->{1440, 818},
@@ -1405,7 +1426,7 @@ PrintingOptions->{"Magnification"->1.,
 "PaperSize"->{612., 791.9999999999999}},
 ShowSelection->True,
 ShowGroupOpener->True,
-FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (December 10, 2015)",
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -1422,45 +1443,45 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 418, 6, 49, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[1000, 30, 9552, 194, 773, "Code",
+Cell[1000, 30, 9804, 198, 718, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[10589, 229, 594, 8, 41, "Subsection",
+Cell[10841, 233, 594, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[11186, 239, 10891, 220, 773, "Code",
+Cell[11438, 243, 10891, 220, 773, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[22114, 464, 737, 10, 41, "Subsection",
+Cell[22366, 468, 737, 10, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[22854, 476, 8634, 175, 413, "Code",
+Cell[23106, 480, 8634, 175, 413, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[31525, 656, 482, 7, 41, "Subsection",
+Cell[31777, 660, 482, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[32010, 665, 19224, 322, 613, "Code",
+Cell[32262, 669, 19228, 323, 613, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[51271, 992, 534, 7, 41, "Subsection",
+Cell[51527, 997, 534, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[51808, 1001, 10161, 210, 753, "Code",
+Cell[52064, 1006, 10161, 210, 753, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[62006, 1216, 622, 8, 41, "Subsection",
+Cell[62262, 1221, 622, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[62631, 1226, 9298, 169, 433, "Code",
+Cell[62887, 1231, 10069, 185, 485, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
@@ -1469,4 +1490,3 @@ Cell[62631, 1226, 9298, 169, 433, "Code",
 ]
 *)
 
-(* End of internal cache information *)
