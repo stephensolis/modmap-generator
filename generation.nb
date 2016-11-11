@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     88169,       1609]
-NotebookOptionsPosition[     86406,       1553]
-NotebookOutlinePosition[     86798,       1570]
-CellTagsIndexPosition[     86755,       1567]
+NotebookDataLength[     88835,       1620]
+NotebookOptionsPosition[     87072,       1564]
+NotebookOutlinePosition[     87464,       1581]
+CellTagsIndexPosition[     87421,       1578]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -259,53 +259,63 @@ Cell[BoxData[{
             RowBox[{"files", ",", " ", "blockNum"}], "}"}], ",", " ", "\n", 
            "\t\t", 
            RowBox[{
-            RowBox[{"SetDirectory", "[", "fastaDir", "]"}], ";", "\n", "\n", 
-            "\t\t", 
-            RowBox[{"(*", " ", 
-             RowBox[{"compute", " ", "CGRs"}], " ", "*)"}], "\n", "\t\t", 
-            RowBox[{"cgrBlock", " ", "=", " ", 
-             RowBox[{"Map", "[", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"(", "\n", "\t\t\t", 
-                 RowBox[{
-                  RowBox[{"seq", " ", "=", " ", 
-                   RowBox[{"First", "@", 
-                    RowBox[{"Import", "[", "#", "]"}]}]}], ";", "\t\t\t\t", 
-                  "\n", "\t\t\t", 
-                  RowBox[{"N", "@", 
-                   RowBox[{"FCGR", "[", 
-                    RowBox[{"seq", ",", " ", "cgrOrder", ",", " ", "k"}], 
-                    "]"}]}]}], "\n", "\t\t", ")"}], "&"}], ",", " ", 
-               "files"}], "]"}]}], ";", "\n", "\n", "\t\t", 
-            RowBox[{"(*", " ", 
-             RowBox[{"save", " ", "CGRs"}], " ", "*)"}], "\n", "\t\t", 
             RowBox[{"SetDirectory", "[", "workDir", "]"}], ";", "\n", "\t\t", 
-            RowBox[{"DumpSave", "[", 
+            RowBox[{"If", "[", 
              RowBox[{
-              RowBox[{"\"\<cgrs_\>\"", " ", "<>", " ", 
-               RowBox[{"ToString", "@", "blockNum"}], " ", "<>", " ", 
-               "\"\<.mx\>\""}], ",", " ", "cgrBlock"}], "]"}], ";", "\n", 
-            "\n", "\t\t", 
-            RowBox[{"(*", " ", 
-             RowBox[{"compute", " ", "descriptors"}], " ", "*)"}], "\n", 
-            "\t\t", 
-            RowBox[{"descrBlock", " ", "=", " ", 
-             RowBox[{
+              RowBox[{"!", 
+               RowBox[{"FileExistsQ", "[", 
+                RowBox[{"\"\<descr_\>\"", " ", "<>", " ", 
+                 RowBox[{"ToString", "@", "blockNum"}], " ", "<>", " ", 
+                 "\"\<.mx\>\""}], "]"}]}], ",", "\n", "\t\t\t", 
               RowBox[{
-               RowBox[{"N", "@", 
-                RowBox[{"Descriptor", "[", 
+               RowBox[{"SetDirectory", "[", "fastaDir", "]"}], ";", "\n", 
+               "\n", "\t\t\t", 
+               RowBox[{"(*", " ", 
+                RowBox[{"compute", " ", "CGRs"}], " ", "*)"}], "\n", "\t\t\t", 
+               RowBox[{"cgrBlock", " ", "=", " ", 
+                RowBox[{"Map", "[", 
                  RowBox[{
-                 "#", ",", " ", "windowsizes", ",", " ", "steps", ",", " ", 
-                  "bins"}], "]"}]}], "&"}], " ", "/@", " ", "cgrBlock"}]}], 
-            ";", "\n", "\t\t", 
-            RowBox[{"DumpSave", "[", 
-             RowBox[{
-              RowBox[{"\"\<descr_\>\"", " ", "<>", " ", 
-               RowBox[{"ToString", "@", "blockNum"}], " ", "<>", " ", 
-               "\"\<.mx\>\""}], ",", " ", "descrBlock"}], "]"}], ";"}]}], 
-          "\n", "\t", "]"}]}], "\n", ")"}], "&"}], ",", " ", "fileBlocks"}], 
-     "]"}]}], ";"}], "\n", "\n", 
+                  RowBox[{
+                   RowBox[{"(", "\n", "\t\t\t\t", 
+                    RowBox[{
+                    RowBox[{"seq", " ", "=", " ", 
+                    RowBox[{"First", "@", 
+                    RowBox[{"Import", "[", "#", "]"}]}]}], ";", "\t\t\t\t", 
+                    "\n", "\t\t\t\t", 
+                    RowBox[{"N", "@", 
+                    RowBox[{"FCGR", "[", 
+                    RowBox[{"seq", ",", " ", "cgrOrder", ",", " ", "k"}], 
+                    "]"}]}]}], "\n", "\t\t\t", ")"}], "&"}], ",", " ", 
+                  "files"}], "]"}]}], ";", "\n", "\n", "\t\t\t", 
+               RowBox[{"(*", " ", 
+                RowBox[{"save", " ", "CGRs"}], " ", "*)"}], "\n", "\t\t\t", 
+               RowBox[{"SetDirectory", "[", "workDir", "]"}], ";", "\n", 
+               "\t\t\t", 
+               RowBox[{"DumpSave", "[", 
+                RowBox[{
+                 RowBox[{"\"\<cgrs_\>\"", " ", "<>", " ", 
+                  RowBox[{"ToString", "@", "blockNum"}], " ", "<>", " ", 
+                  "\"\<.mx\>\""}], ",", " ", "cgrBlock"}], "]"}], ";", "\n", 
+               "\n", "\t\t\t", 
+               RowBox[{"(*", " ", 
+                RowBox[{"compute", " ", "descriptors"}], " ", "*)"}], "\n", 
+               "\t\t\t", 
+               RowBox[{"descrBlock", " ", "=", " ", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"N", "@", 
+                   RowBox[{"Descriptor", "[", 
+                    RowBox[{
+                    "#", ",", " ", "windowsizes", ",", " ", "steps", ",", " ",
+                     "bins"}], "]"}]}], "&"}], " ", "/@", " ", "cgrBlock"}]}],
+                ";", "\n", "\t\t\t", 
+               RowBox[{"DumpSave", "[", 
+                RowBox[{
+                 RowBox[{"\"\<descr_\>\"", " ", "<>", " ", 
+                  RowBox[{"ToString", "@", "blockNum"}], " ", "<>", " ", 
+                  "\"\<.mx\>\""}], ",", " ", "descrBlock"}], "]"}], ";"}]}], 
+             "\n", "\t\t", "]"}], ";"}]}], "\n", "\t", "]"}]}], "\n", ")"}], 
+       "&"}], ",", " ", "fileBlocks"}], "]"}]}], ";"}], "\n", "\n", 
   RowBox[{"(*", " ", "run", " ", "*)"}]}], "\n", 
  RowBox[{
   RowBox[{"PrintTemporary", "[", 
@@ -458,7 +468,8 @@ Cell[BoxData[{
    3.6429494341777344`*^9, 3.642949440169922*^9}, {3.643028918198242*^9, 
    3.6430289536552734`*^9}, {3.6430289933583984`*^9, 
    3.6430290116220703`*^9}, {3.64359167875*^9, 3.6435916810625*^9}, {
-   3.665185981390625*^9, 3.66518598165625*^9}, 3.6651860728447266`*^9}]
+   3.665185981390625*^9, 3.66518598165625*^9}, 3.6651860728447266`*^9, {
+   3.687838763681732*^9, 3.687838830735567*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1578,35 +1589,35 @@ Cell[1000, 30, 9056, 181, 861, "Code",
 Cell[CellGroupData[{
 Cell[10093, 216, 625, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[10721, 226, 14168, 234, 673, "Code",
+Cell[10721, 226, 14834, 245, 647, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[24926, 465, 564, 8, 41, "Subsection",
+Cell[25592, 476, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[25493, 475, 19426, 334, 1313, "Code",
+Cell[26159, 486, 19426, 334, 1169, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[44956, 814, 564, 8, 41, "Subsection",
+Cell[45622, 825, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10004.}],
-Cell[45523, 824, 15228, 256, 773, "Code",
+Cell[46189, 835, 15228, 256, 683, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10004.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[60788, 1085, 490, 7, 41, "Subsection",
+Cell[61454, 1096, 490, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[61281, 1094, 16287, 282, 813, "Code",
+Cell[61947, 1105, 16287, 282, 719, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[77605, 1381, 557, 8, 41, "Subsection",
+Cell[78271, 1392, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[78165, 1391, 8225, 159, 653, "Code",
+Cell[78831, 1402, 8225, 159, 575, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
