@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     90415,       1654]
-NotebookOptionsPosition[     88652,       1598]
-NotebookOutlinePosition[     89044,       1615]
-CellTagsIndexPosition[     89001,       1612]
+NotebookDataLength[     90432,       1654]
+NotebookOptionsPosition[     88669,       1598]
+NotebookOutlinePosition[     89061,       1615]
+CellTagsIndexPosition[     89018,       1612]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -317,8 +317,8 @@ Cell[BoxData[{
                     RowBox[{
                     RowBox[{"2", "^", "k"}], ",", " ", 
                     RowBox[{"2", "^", "k"}]}], "}"}]}], "]"}], ",", " ", 
-                    "seqs"}], "]"}], ";"}], "\n", "\t\t\t", ")"}], "&"}], ",",
-                   " ", "files"}], "]"}]}], ";", "\n", "\n", "\t\t\t", 
+                    "seqs"}], "]"}]}], "\n", "\t\t\t", ")"}], "&"}], ",", " ",
+                   "files"}], "]"}]}], ";", "\n", "\n", "\t\t\t", 
                RowBox[{"(*", " ", 
                 RowBox[{"save", " ", "CGRs"}], " ", "*)"}], "\n", "\t\t\t", 
                RowBox[{"SetDirectory", "[", "workDir", "]"}], ";", "\n", 
@@ -503,7 +503,7 @@ Cell[BoxData[{
    3.665185981390625*^9, 3.66518598165625*^9}, 3.6651860728447266`*^9, {
    3.687838763681732*^9, 3.687838830735567*^9}, {3.687838952712544*^9, 
    3.6878389646092243`*^9}, 3.687839036525338*^9, {3.6878391690359173`*^9, 
-   3.687839244691244*^9}}]
+   3.687839244691244*^9}, 3.694232070157371*^9}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1623,35 +1623,35 @@ Cell[1000, 30, 9975, 202, 969, "Code",
 Cell[CellGroupData[{
 Cell[11012, 237, 625, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[11640, 247, 15495, 258, 683, "Code",
+Cell[11640, 247, 15512, 258, 683, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[27172, 510, 564, 8, 41, "Subsection",
+Cell[27189, 510, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[27739, 520, 19426, 334, 1169, "Code",
+Cell[27756, 520, 19426, 334, 1169, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[47202, 859, 564, 8, 41, "Subsection",
+Cell[47219, 859, 564, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10004.}],
-Cell[47769, 869, 15228, 256, 683, "Code",
+Cell[47786, 869, 15228, 256, 683, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10004.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[63034, 1130, 490, 7, 41, "Subsection",
+Cell[63051, 1130, 490, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10003.}],
-Cell[63527, 1139, 16287, 282, 719, "Code",
+Cell[63544, 1139, 16287, 282, 719, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10003.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[79851, 1426, 557, 8, 41, "Subsection",
+Cell[79868, 1426, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[80411, 1436, 8225, 159, 575, "Code",
+Cell[80428, 1436, 8225, 159, 575, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
