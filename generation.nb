@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     90432,       1654]
-NotebookOptionsPosition[     88669,       1598]
-NotebookOutlinePosition[     89061,       1615]
-CellTagsIndexPosition[     89018,       1612]
+NotebookDataLength[     90445,       1655]
+NotebookOptionsPosition[     88682,       1599]
+NotebookOutlinePosition[     89074,       1616]
+CellTagsIndexPosition[     89031,       1613]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1502,15 +1502,15 @@ nucleotide&rettype=gb&retmode=xml&id=\>\""}], ";"}], "\n", "\n",
                   RowBox[{"{", 
                    RowBox[{
                    "\"\<Description\>\"", ",", " ", "\"\<Accession\>\"", ",", 
-                    " ", "\"\<GenBankID\>\"", ",", " ", "\"\<Length\>\""}], 
-                   "}"}], "}"}]}], "]"}]}]}], ";", "\n", "\t\t", 
+                    " ", "\"\<Length\>\""}], "}"}], "}"}]}], "]"}]}]}], ";", 
+             "\n", "\t\t", 
              RowBox[{"taxonomy", " ", "=", " ", 
               RowBox[{"GetTaxonomy", "@", 
                RowBox[{"Import", "[", 
                 RowBox[{
                  RowBox[{"NCBIurl", " ", "<>", " ", 
                   RowBox[{"importData", "[", 
-                   RowBox[{"[", "3", "]"}], "]"}]}], ",", " ", "\"\<XML\>\"", 
+                   RowBox[{"[", "2", "]"}], "]"}]}], ",", " ", "\"\<XML\>\"", 
                  ",", " ", 
                  RowBox[{"\"\<ReadDTD\>\"", "\[Rule]", "False"}]}], "]"}]}]}],
               ";", "\n", "\n", "\t\t", 
@@ -1593,7 +1593,8 @@ nucleotide&rettype=gb&retmode=xml&id=\>\""}], ";"}], "\n", "\n",
    3.6337177838940516`*^9, 3.633717794907671*^9}, {3.6337180125234003`*^9, 
    3.6337180485594635`*^9}, {3.63389269179908*^9, 3.6338926984994917`*^9}, {
    3.6399247822961044`*^9, 3.6399247855097103`*^9}, {3.6465817145615234`*^9, 
-   3.646581719376953*^9}, {3.667651037905488*^9, 3.6676510467455006`*^9}}]
+   3.646581719376953*^9}, {3.667651037905488*^9, 3.6676510467455006`*^9}, {
+   3.696047543326422*^9, 3.696047548634296*^9}}]
 }, Closed]]
 },
 WindowSize->{1440, 818},
@@ -1651,7 +1652,7 @@ Cell[63544, 1139, 16287, 282, 719, "Code",
 Cell[CellGroupData[{
 Cell[79868, 1426, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[80428, 1436, 8225, 159, 575, "Code",
+Cell[80428, 1436, 8238, 160, 575, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     76926,       1534]
-NotebookOptionsPosition[     74928,       1469]
-NotebookOutlinePosition[     75486,       1491]
-CellTagsIndexPosition[     75443,       1488]
+NotebookDataLength[     76950,       1535]
+NotebookOptionsPosition[     74952,       1470]
+NotebookOutlinePosition[     75510,       1492]
+CellTagsIndexPosition[     75467,       1489]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -47,7 +47,7 @@ Cell[BoxData[
       RowBox[{"{", 
        RowBox[{
         RowBox[{"NotebookDirectory", "[", "]"}], ",", " ", "\"\<output\>\""}],
-        "}"}], "]"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+        "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
      RowBox[{
@@ -105,7 +105,7 @@ Cell[BoxData[
          RowBox[{"#", "&"}], ",", " ", "12", ",", " ", 
          RowBox[{"{", 
           RowBox[{"0", ",", " ", "1"}], "}"}]}], "]"}]}]}], ";"}], "*)"}], 
-   "\n", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", " ", 
     RowBox[{"taxonomic", " ", "group", " ", "split"}], " ", "*)"}], "\n", 
    RowBox[{"(*", 
@@ -149,8 +149,8 @@ Cell[BoxData[
              RowBox[{
              "\"\<ID\>\"", ",", " ", "\"\<Group\>\"", ",", " ", 
               "\"\<Organism\>\"", ",", " ", "\"\<Accession\>\"", ",", " ", 
-              "\"\<GenID\>\"", ",", " ", "\"\<Length (kb)\>\"", ",", " ", 
-              "\"\<Taxonomy\>\""}], "}"}]}]}], ";", "\n", "\n", "\t\t", 
+              "\"\<Length (kb)\>\"", ",", " ", "\"\<Taxonomy\>\""}], 
+             "}"}]}]}], ";", "\n", "\n", "\t\t", 
           RowBox[{"currPtData", " ", "=", " ", 
            RowBox[{"MouseAnnotation", "[", "]"}]}], ";", "\n", "\t\t", 
           RowBox[{"If", "[", 
@@ -236,7 +236,8 @@ Cell[BoxData[
    3.6623154923203125`*^9, 3.6623155068027344`*^9}, {3.662386296161765*^9, 
    3.6623863520610633`*^9}, {3.6625558542851562`*^9, 3.6625558680820312`*^9}, 
    3.665626639984375*^9, {3.6872256000423226`*^9, 3.6872256155567503`*^9}, {
-   3.688818793101053*^9, 3.6888187939278545`*^9}}]
+   3.688818793101053*^9, 3.6888187939278545`*^9}, {3.696047562327402*^9, 
+   3.6960475632119265`*^9}}]
 }, Closed]],
 
 Cell[CellGroupData[{
@@ -1493,45 +1494,45 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[579, 22, 418, 6, 49, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[1000, 30, 10171, 208, 808, "Code",
+Cell[1000, 30, 10195, 209, 808, "Code",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[11208, 243, 594, 8, 41, "Subsection",
+Cell[11232, 244, 594, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[11805, 253, 10891, 220, 773, "Code",
+Cell[11829, 254, 10891, 220, 773, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[22733, 478, 737, 10, 41, "Subsection",
+Cell[22757, 479, 737, 10, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[23473, 490, 8634, 175, 413, "Code",
+Cell[23497, 491, 8634, 175, 413, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[32144, 670, 482, 7, 41, "Subsection",
+Cell[32168, 671, 482, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[32629, 679, 19872, 339, 593, "Code",
+Cell[32653, 680, 19872, 339, 593, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[52538, 1023, 534, 7, 41, "Subsection",
+Cell[52562, 1024, 534, 7, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[53075, 1032, 11106, 234, 737, "Code",
+Cell[53099, 1033, 11106, 234, 737, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[64218, 1271, 622, 8, 41, "Subsection",
+Cell[64242, 1272, 622, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10002.}],
-Cell[64843, 1281, 10069, 185, 485, "Code",
+Cell[64867, 1282, 10069, 185, 485, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10002.},
  InitializationCell->False]
