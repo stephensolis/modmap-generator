@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     90445,       1655]
-NotebookOptionsPosition[     88682,       1599]
-NotebookOutlinePosition[     89074,       1616]
-CellTagsIndexPosition[     89031,       1613]
+NotebookDataLength[     91524,       1681]
+NotebookOptionsPosition[     89760,       1625]
+NotebookOutlinePosition[     90153,       1642]
+CellTagsIndexPosition[     90110,       1639]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1438,30 +1438,57 @@ Cell[BoxData[
  RowBox[{
   RowBox[{"(*", " ", 
    RowBox[{
-   "this", " ", "extracts", " ", "the", " ", "taxonomic", " ", 
-    "classification", " ", "string", " ", "from", " ", "an", " ", "NCBI", " ",
-     "GB", " ", "XML", " ", "document"}], " ", "*)"}], "\n", 
+   "this", " ", "fetches", " ", "the", " ", "taxonomic", " ", 
+    "classification", " ", "string", " ", "from", " ", "NCBI"}], " ", "*)"}], 
+  "\n", 
   RowBox[{
    RowBox[{
     RowBox[{
-     RowBox[{"GetTaxonomy", "[", "x_", "]"}], " ", ":=", " ", "\n", "\t", 
-     RowBox[{"First", "@", 
-      RowBox[{"Cases", "[", 
-       RowBox[{"x", ",", " ", 
-        RowBox[{
-         RowBox[{"XMLElement", "[", 
-          RowBox[{"\"\<GBSet\>\"", ",", "_", ",", " ", 
-           RowBox[{"{", 
-            RowBox[{"XMLElement", "[", 
-             RowBox[{"\"\<GBSeq\>\"", ",", "_", ",", " ", 
-              RowBox[{"{", 
-               RowBox[{"___", ",", 
-                RowBox[{"XMLElement", "[", 
-                 RowBox[{"\"\<GBSeq_taxonomy\>\"", ",", 
-                  RowBox[{"{", "}"}], ",", " ", 
-                  RowBox[{"{", "taxonomy_", "}"}]}], "]"}], ",", "___"}], 
-               "}"}]}], "]"}], "}"}]}], "]"}], " ", "\[RuleDelayed]", " ", 
-         "taxonomy"}], ",", " ", "Infinity"}], "]"}]}]}], ";"}], "\n", "\n", 
+     RowBox[{"FetchTaxonomy", "[", 
+      RowBox[{"id_", ",", " ", "length_", ",", " ", "retries_"}], "]"}], " ", 
+     ":=", "\n", "\t", 
+     RowBox[{"Quiet", "@", 
+      RowBox[{"Check", "[", "\n", "\t\t", 
+       RowBox[{
+        RowBox[{"First", "@", 
+         RowBox[{"StringCases", "[", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"ReadFirstChars", "[", 
+            RowBox[{
+             RowBox[{"NCBIurl", " ", "<>", " ", "id"}], ",", " ", "length"}], 
+            "]"}], ",", "\n", "\t\t\t", 
+           RowBox[{
+            RowBox[{
+            "\"\<<GBSeq_taxonomy>\>\"", "~~", "taxonomy__", "~~", 
+             "\"\<</GBSeq_taxonomy>\>\""}], " ", ":>", " ", "taxonomy"}]}], 
+          "\n", "\t\t", "]"}]}], "\n", "\t", ",", "\n", "\t\t", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"retries", " ", "==", " ", "0"}], ",", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"Print", "[", 
+            RowBox[{"\"\<Failed \>\"", " ", "<>", " ", "id"}], "]"}], ";"}], 
+          "\n", "\t\t", ",", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"Pause", "[", "1", "]"}], ";", "\n", "\t\t\t", 
+           RowBox[{"FetchTaxonomy", "[", 
+            RowBox[{"id", ",", " ", "length", ",", " ", 
+             RowBox[{"retries", "-", "1"}]}], "]"}]}]}], "\n", "\t\t", 
+         "]"}]}], "\n", "\t", "]"}]}]}], ";"}], "\n", "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "this", " ", "gets", " ", "the", " ", "first", " ", "n", " ", 
+     "characters", " ", "from", " ", "a", " ", "URL", " ", "or", " ", 
+     "file"}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ReadFirstChars", "[", 
+      RowBox[{"url_", ",", " ", "n_"}], "]"}], " ", ":=", "\n", "\t", 
+     RowBox[{"StringJoin", " ", "@@", " ", 
+      RowBox[{"ReadList", "[", 
+       RowBox[{
+        RowBox[{"OpenRead", "[", "url", "]"}], ",", " ", "\"\<Character\>\"", 
+        ",", " ", "n"}], "]"}]}]}], ";"}], "\n", "\n", 
    RowBox[{"(*", " ", 
     RowBox[{
     "the", " ", "URL", " ", "from", " ", "where", " ", "to", " ", "get", " ", 
@@ -1469,7 +1496,7 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
     "NCBIurl", " ", "=", " ", 
-     "\"\<http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=\
+     "\"\<https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=\
 nucleotide&rettype=gb&retmode=xml&id=\>\""}], ";"}], "\n", "\n", 
    RowBox[{
     RowBox[{"LaunchCPUKernels", "[", "]"}], ";"}], "\n", 
@@ -1505,15 +1532,11 @@ nucleotide&rettype=gb&retmode=xml&id=\>\""}], ";"}], "\n", "\n",
                     " ", "\"\<Length\>\""}], "}"}], "}"}]}], "]"}]}]}], ";", 
              "\n", "\t\t", 
              RowBox[{"taxonomy", " ", "=", " ", 
-              RowBox[{"GetTaxonomy", "@", 
-               RowBox[{"Import", "[", 
-                RowBox[{
-                 RowBox[{"NCBIurl", " ", "<>", " ", 
-                  RowBox[{"importData", "[", 
-                   RowBox[{"[", "2", "]"}], "]"}]}], ",", " ", "\"\<XML\>\"", 
-                 ",", " ", 
-                 RowBox[{"\"\<ReadDTD\>\"", "\[Rule]", "False"}]}], "]"}]}]}],
-              ";", "\n", "\n", "\t\t", 
+              RowBox[{"FetchTaxonomy", "[", 
+               RowBox[{
+                RowBox[{"importData", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], ",", " ", "10000", ",", " ", 
+                "20"}], "]"}]}], ";", "\n", "\n", "\t\t", 
              RowBox[{"Append", "[", 
               RowBox[{"importData", ",", " ", "taxonomy"}], "]"}]}], "\n", 
             "\t", ")"}], "&"}], ",", " ", "files"}], "]"}]}], ";"}], "\n", 
@@ -1594,11 +1617,14 @@ nucleotide&rettype=gb&retmode=xml&id=\>\""}], ";"}], "\n", "\n",
    3.6337180485594635`*^9}, {3.63389269179908*^9, 3.6338926984994917`*^9}, {
    3.6399247822961044`*^9, 3.6399247855097103`*^9}, {3.6465817145615234`*^9, 
    3.646581719376953*^9}, {3.667651037905488*^9, 3.6676510467455006`*^9}, {
-   3.696047543326422*^9, 3.696047548634296*^9}}]
+   3.696047543326422*^9, 3.696047548634296*^9}, {3.698408925744381*^9, 
+   3.6984089421470046`*^9}, {3.6984385801991577`*^9, 3.698438580245983*^9}, {
+   3.698443908881137*^9, 3.698443934520672*^9}, {3.6984872331267786`*^9, 
+   3.6984872335486584`*^9}}]
 }, Closed]]
 },
 WindowSize->{1440, 818},
-WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+WindowMargins->{{Automatic, 130}, {Automatic, 60}},
 ShowSelection->True,
 ShowGroupOpener->True,
 FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
@@ -1652,7 +1678,7 @@ Cell[63544, 1139, 16287, 282, 719, "Code",
 Cell[CellGroupData[{
 Cell[79868, 1426, 557, 8, 41, "Subsection",
  CellGroupingRules->{GroupTogetherGrouping, 10001.}],
-Cell[80428, 1436, 8238, 160, 575, "Code",
+Cell[80428, 1436, 9316, 186, 863, "Code",
  CellOpen->True,
  CellGroupingRules->{GroupTogetherGrouping, 10001.},
  InitializationCell->False]
