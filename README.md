@@ -1,5 +1,7 @@
-modmap-generator
-================
+modmap-generator-mma
+====================
+
+**Note**: you may wish to use [stephensolis/modmap-toolkit](https://github.com/stephensolis/modmap-toolkit) instead.
 
 This is a generator for Molecular Distance Maps, as seen in the following papers:
 
@@ -7,9 +9,9 @@ This is a generator for Molecular Distance Maps, as seen in the following papers
 - [An investigation into inter- and intragenomic variations of graphic genomic signatures](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-015-0655-4)
 - [Additive methods for genomic signatures](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1157-8)
 
-Some pre-generated Molecular Distance Maps may be seen [here](https://dl.dropboxusercontent.com/u/34456847/modmaps3D/index.html).
+Some pre-generated Molecular Distance Maps may be seen [here](https://rallis.github.io/MoDMaps3D/#menu1).
 
-It uses [FCGR](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC330698/) and supports 
+It uses [FCGR](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC330698/) and supports
 the following distances:
 
 - [Euclidean](http://en.wikipedia.org/wiki/Euclidean_distance)
@@ -26,10 +28,10 @@ Usage
 
 1. Create folders named fasta, work, and output.
 2. Put fasta files in the fasta folder.
-3. Run the notebook called generation.nb. It will place distance matrices and 
+3. Run the notebook called generation.nb. It will place distance matrices and
 	some metadata in the output folder, and temporary files in the work folder.
-4. Use the notebook called analysis.nb to work with the distance matrices. 
-	You may choose the groups for the plot by setting `taxaGroups` under 
+4. Use the notebook called analysis.nb to work with the distance matrices.
+	You may choose the groups for the plot by setting `taxaGroups` under
 	"Initialization + Settings".
 
 You may also run the test suite in the tests folder.

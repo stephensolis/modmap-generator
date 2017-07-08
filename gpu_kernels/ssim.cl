@@ -3,22 +3,22 @@ __constant float gaussian_kernel[11][11] = {{0.000003802917046317888,0.000017594
 //finds a ListCorrelate-element with gaussian_kernel and a single matrix
 inline float correlate_one(__local int img[26][26], int xIndex, int yIndex){
 	float result = 0;
-	
+
 	for (int i = 0; i < 11; ++i)
 		for (int j = 0; j < 11; ++j)
 			result += gaussian_kernel[i][j] * img[yIndex + i][xIndex + j];
-	
+
 	return result;
 }
 
 //finds a ListCorrelate-element with gaussian_kernel and the product of two matrices
 inline float correlate_two(__local int img1[26][26], __local int img2[26][26], int xIndex, int yIndex){
 	float result = 0;
-	
+
 	for (int i = 0; i < 11; ++i)
 		for (int j = 0; j < 11; ++j)
 			result += gaussian_kernel[i][j] * img1[yIndex + i][xIndex + j] * img2[yIndex + i][xIndex + j];
-	
+
 	return result;
 }
 
@@ -29,13 +29,13 @@ __kernel void ssim(__global const int *img1, __global const int *img2, __global 
 	int yOffset = get_local_size(1)*get_group_id(1);
 	int xIndex = get_local_id(0);
 	int yIndex = get_local_id(1);
-	
+
 	//step 1: cache the memory accesses
-	
+
 	//cache the elements used in the thread block - note: should use 16*16 blocks
 	__local int img1_cache[26][26];
 	__local int img2_cache[26][26];
-	
+
 	//most threads fetch 4 elements per image, in this pattern: x x
 	//															x x
 	if (xOffset + 2*xIndex + 1 < N && yOffset + 2*yIndex + 1 < N && //make sure we don't go out of bounds on the last block
@@ -47,27 +47,27 @@ __kernel void ssim(__global const int *img1, __global const int *img2, __global 
 			}
 		}
 	}
-	
+
 	barrier(CLK_LOCAL_MEM_FENCE); //wait to finish memory fetches
-	
+
 	//step 2: compute
-	
+
 	//we run a thread for each element of the input arrays - make sure we don't go out of bounds
 	if (xOffset+xIndex > N-11 || yOffset+yIndex > N-11)
 		return;
-	
+
 	//now do the computation
 	float m1 = correlate_one(img1_cache, xIndex, yIndex);
 	float m2 = correlate_one(img2_cache, xIndex, yIndex);
-	
+
 	float m1sq = m1*m1;
 	float m2sq = m2*m2;
 	float m1m2 = m1*m2;
-	
+
 	float sigma1sq = correlate_two(img1_cache, img1_cache, xIndex, yIndex) - m1sq;
 	float sigma2sq = correlate_two(img2_cache, img2_cache, xIndex, yIndex) - m2sq;
 	float sigma12 = correlate_two(img1_cache, img2_cache, xIndex, yIndex) - m1m2;
-	
+
 	float ssim = ((0.0001 + 2*m1m2)*(0.0009 + 2*sigma12)) / ((0.0001 + m1sq + m2sq)*(0.0009 + sigma1sq + sigma2sq));
 	out[(N-10)*(yOffset + yIndex) + (xOffset + xIndex)] = ssim;
 }

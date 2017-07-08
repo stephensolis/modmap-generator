@@ -2,24 +2,24 @@
 
 BeginPackage["CPUDistances`"]
 
-Descriptor::usage = 
+Descriptor::usage =
 	"Descriptor[img, winsizes, steps, histbins] gives the descriptor of a matrix, given the windowsizes, windowsteps and histogram bins"
-Descriptor::lengtherr = 
+Descriptor::lengtherr =
 	"winsizes and steps must have the same length"
 
-SSIM::usage = 
+SSIM::usage =
 	"SSIM[img1, img2] gives the structural similarity distance between two images"
-SSIMExact::usage = 
+SSIMExact::usage =
 	"SSIMExact[img1, img2] gives the structural similarity distance between two images, using a slower method which should be slightly more accurate"
 
-ApproxInfoDist::usage = 
+ApproxInfoDist::usage =
 	"ApproxInfoDist[vect1, vect2] gives the approximate information distance between two vectors"
 
 
 Begin["`Private`"]
 
 fastBinCounts[list_, bins_]:=
-	Module[{noZeroList = list+1, noZeroBins = bins+1}, 
+	Module[{noZeroList = list+1, noZeroBins = bins+1},
 		Total@Unitize@Clip[noZeroList, {#1, #2-1}, {0, 0}]& @@@ Partition[noZeroBins, 2, 1]
 	];
 
@@ -29,13 +29,13 @@ Descriptor[img_List?MatrixQ, winsizes_List, steps_List, histbins_List]:=
 			Message[Descriptor::lengtherr];
 			Return[$Failed];
 		];
-		
+
 		allwinds = (
 			winds = Partition[img, {#1, #1}, #2];
-			
+
 			Flatten@Map[fastBinCounts[Flatten[#], histbins]&, winds, {2}] / (#1^2)
 		)& @@@ Transpose[{winsizes, steps}];
-		
+
 		Return[Flatten[allwinds]];
 	];
 
@@ -55,20 +55,20 @@ SSIM = Compile[{{img1, _Real, 2}, {img2, _Real, 2}},
 			 {0.000003802917046317888,0.00001759448244809565,0.00006636107686176908,0.0001945573540794799,0.0004122408174475112,0.0005609936362550451,0.0004122408174475112,0.0001945573540794799,0.00006636107686176908,0.00001759448244809565,0.000003802917046317888}};
 		c1 = 0.01^2;
 		c2 = 0.03^2;
-		
+
 		m1 = ListCorrelate[w, img1];
 		m2 = ListCorrelate[w, img2];
-		
+
 		m1sq = m1^2;
 		m2sq = m2^2;
 		m1m2 = m1*m2;
-		
+
 		sigma1sq = ListCorrelate[w, img1^2] - m1sq;
 		sigma2sq = ListCorrelate[w, img2^2] - m2sq;
 		sigma12 = ListCorrelate[w, img1*img2] - m1m2;
-		
+
 		ssimmap = ((c1 + 2*m1m2)*(c2 + 2*sigma12)) / ((c1 + m1sq + m2sq)*(c2 + sigma1sq + sigma2sq));
-		
+
 		Mean[Mean[ssimmap]]
 	]
 , RuntimeOptions -> "Speed"];
@@ -78,29 +78,29 @@ SSIMExact[img1_List?MatrixQ, img2_List?MatrixQ]:=
 		w = GaussianMatrix[{5, 1.5}];
 		c1 = 0.01^2;
 		c2 = 0.03^2;
-		
+
 		m1 = ListCorrelate[w, img1];
 		m2 = ListCorrelate[w, img2];
-		
+
 		m1sq = m1^2;
 		m2sq = m2^2;
 		m1m2 = m1*m2;
-		
+
 		sigma1sq = ListCorrelate[w, img1^2] - m1sq;
 		sigma2sq = ListCorrelate[w, img2^2] - m2sq;
 		sigma12 = ListCorrelate[w, img1*img2] - m1m2;
-		
+
 		ssimmap = ((c1 + 2*m1m2)*(c2 + 2*sigma12)) / ((c1 + m1sq + m2sq)*(c2 + sigma1sq + sigma2sq));
-		
+
 		Return[Mean[Mean[ssimmap]]];
 	];
 
-ApproxInfoDist = Compile[{{vect1, _Real, 1}, {vect2, _Real, 1}}, 
-	Module[{x, y, xy}, 
+ApproxInfoDist = Compile[{{vect1, _Real, 1}, {vect2, _Real, 1}},
+	Module[{x, y, xy},
 		x = Total@Unitize[vect1];
 		y = Total@Unitize[vect2];
 		xy = Total@Unitize[vect1 + vect2];
-		
+
 		(2 xy - x - y)/xy
 	]
 , RuntimeOptions -> "Speed"];
