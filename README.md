@@ -1,7 +1,7 @@
-modmap-generator-mma
-====================
+modmap-generator
+================
 
-**Note**: you may wish to use [stephensolis/modmap-toolkit](https://github.com/stephensolis/modmap-toolkit) instead.
+**Note**: you probably want to use [kameris](https://github.com/stephensolis/kameris) instead.
 
 This is a generator for Molecular Distance Maps, as seen in the following papers:
 
